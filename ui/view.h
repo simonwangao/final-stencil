@@ -6,8 +6,7 @@
 #include <QTime>
 #include <QTimer>
 
-class View : public QGLWidget
-{
+class View : public QGLWidget {
     Q_OBJECT
 
 public:
