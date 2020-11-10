@@ -1,3 +1,3 @@
-# Final 
+# Final Project
 
-Readme goes here.
+Readme
