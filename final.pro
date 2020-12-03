@@ -22,18 +22,55 @@ win32 {
 }
 
 SOURCES += ui/mainwindow.cpp \
+    L_System/turtle.cpp \
     main.cpp \
     glew-1.10.0/src/glew.c \
     ui/view.cpp \
     ui/viewformat.cpp \
-    L_System/Utils.cpp
+    L_System/Utils.cpp \
+    gl/shaders/Shader.cpp \
+    gl/GLDebug.cpp \
+    gl/datatype/VBOAttribMarker.cpp \
+    gl/datatype/VBO.cpp \
+    gl/datatype/IBO.cpp \
+    gl/datatype/VAO.cpp \
+    gl/datatype/FBO.cpp \
+    gl/textures/Texture.cpp \
+    gl/textures/Texture2D.cpp \
+    gl/textures/TextureParameters.cpp \
+    gl/textures/TextureParametersBuilder.cpp \
+    gl/textures/RenderBuffer.cpp \
+    gl/textures/DepthBuffer.cpp \
+    gl/shaders/CS123Shader.cpp \
+    gl/util/FullScreenQuad.cpp \
+    shapes/Shape.cpp \
+    shapes/Cylinder.cpp
 
 HEADERS += ui/mainwindow.h \
     L_System/Utils.h \
+    L_System/turtle.h \
     ui_mainwindow.h \
     glew-1.10.0/include/GL/glew.h \
     ui/view.h \
-    ui/viewformat.h
+    ui/viewformat.h \
+    gl/shaders/Shader.h \
+    gl/GLDebug.h \
+    gl/shaders/ShaderAttribLocations.h \
+    gl/datatype/VBOAttribMarker.h \
+    gl/datatype/VBO.h \
+    gl/datatype/IBO.h \
+    gl/datatype/VAO.h \
+    gl/datatype/FBO.h \
+    gl/textures/Texture.h \
+    gl/textures/Texture2D.h \
+    gl/textures/TextureParameters.h \
+    gl/textures/TextureParametersBuilder.h \
+    gl/textures/RenderBuffer.h \
+    gl/textures/DepthBuffer.h \
+    gl/shaders/CS123Shader.h \
+    gl/util/FullScreenQuad.h \
+    shapes/Shape.h \
+    shapes/Cylinder.h
 
 FORMS += ui/mainwindow.ui
 INCLUDEPATH += glm ui glew-1.10.0/include
