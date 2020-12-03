@@ -1,6 +1,6 @@
 #include "CS123Shader.h"
 
-#include "CS123SceneData.h"
+#include "lib/CS123SceneData.h"
 #include "Settings.h"
 
 

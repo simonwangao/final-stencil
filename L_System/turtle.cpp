@@ -1,4 +1,5 @@
-﻿# include "L_System/turtle.h"
+﻿#include "L_System/turtle.h"
+#include "L_System/Utils.cpp"
 
 void Turtle::setUpRules() {
 

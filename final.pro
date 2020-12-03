@@ -22,6 +22,7 @@ win32 {
 }
 
 SOURCES += ui/mainwindow.cpp \
+    ui/Settings.cpp \
     L_System/turtle.cpp \
     main.cpp \
     glew-1.10.0/src/glew.c \
@@ -44,9 +45,12 @@ SOURCES += ui/mainwindow.cpp \
     gl/shaders/CS123Shader.cpp \
     gl/util/FullScreenQuad.cpp \
     shapes/Shape.cpp \
-    shapes/Cylinder.cpp
+    shapes/Cylinder.cpp \
+    lib/RGBA.cpp \
+    lib/ResourceLoader.cpp
 
 HEADERS += ui/mainwindow.h \
+    ui/Settings.h \
     L_System/Utils.h \
     L_System/turtle.h \
     ui_mainwindow.h \
@@ -70,7 +74,10 @@ HEADERS += ui/mainwindow.h \
     gl/shaders/CS123Shader.h \
     gl/util/FullScreenQuad.h \
     shapes/Shape.h \
-    shapes/Cylinder.h
+    shapes/Cylinder.h \
+    lib/RGBA.h \
+    lib/ResourceLoader.h \
+    lib/CS123SceneData.h
 
 FORMS += ui/mainwindow.ui
 INCLUDEPATH += glm ui glew-1.10.0/include

@@ -39,7 +39,6 @@ struct BranchFeats {
 
     BranchFeats(): l(0), alphaX(0), alphaY(0), alphaZ(0) {};
     BranchFeats(float len, float angleX, float angleY, float angleZ): l(len), alphaX(angleX), alphaY(angleY), alphaZ(angleZ) {};
-    ~BranchFeats();
 };
 
 // map of character to branch characteristics
