@@ -30,6 +30,8 @@ const float alpha_max = 60.; // The max branching angle allowed of a branch
 const float alpha_min = 15.; // The min branching angle allowed of a branch
 const float w = 4.;         // The width of the initial branch
 const float d = 0.707;      // The decrease of the width
+const int l_l = 0;          // Leafing levels of the tree
+const int l_n = 0;          // Leaf number per branch
 
 struct BranchFeats {
     float l; // length of branch
