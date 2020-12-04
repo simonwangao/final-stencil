@@ -6,8 +6,9 @@
 
 using namespace CS123::GL;
 
-Shape::Shape() :
-    m_VAO(nullptr)
+//Shape::Shape() :
+    //m_VAO(nullptr)
+Shape::Shape()
 {
     m_shapeType = -1;
     m_shapeParameter1 = 0;
@@ -20,11 +21,13 @@ Shape::~Shape()
 }
 
 void Shape::draw() {
+    /*
     if (m_VAO) {
         m_VAO->bind();
         m_VAO->draw();
         m_VAO->unbind();
     }
+    */
 }
 
 void Shape::buildVAO() {
@@ -35,7 +38,7 @@ void Shape::buildVAO() {
     markers.push_back(VBOAttribMarker(ShaderAttrib::POSITION, 3, 0));
     markers.push_back(VBOAttribMarker(ShaderAttrib::NORMAL, 3, 3*sizeof(float)));
     VBO vbo = VBO(m_vertexData.data(), m_vertexData.size(), markers);
-    m_VAO = std::make_unique<VAO>(vbo, numVertices);
+    //m_VAO = std::make_unique<VAO>(vbo, numVertices);
 }
 
 void Shape::setShapeType(int type) {
@@ -218,4 +221,8 @@ std::vector<GLfloat> Shape::getSectorVertexData(const std::vector<GLfloat>& vert
     }
 
     return result;
+}
+
+std::vector<GLfloat> Shape::getVertexData() {
+    return m_vertexData;
 }

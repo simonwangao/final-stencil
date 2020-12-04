@@ -44,6 +44,7 @@ public:
     float getShapeParameter3();
     virtual void setParams(int param1, int param2, float param3);
     virtual std::vector<GLfloat> getFaceVertexData(int param1, int param2);
+    std::vector<GLfloat> getVertexData();
 
 protected:
     /** builds the VAO, pretty much the same as from lab 1 */
@@ -60,7 +61,7 @@ protected:
                                              const glm::vec3& rAverageNormal);
 
     std::vector<GLfloat> m_vertexData;
-    std::unique_ptr<CS123::GL::VAO> m_VAO;
+    //std::unique_ptr<CS123::GL::VAO> m_VAO;
 
     // used for comparision with settings
     int m_shapeType;

@@ -22,6 +22,8 @@ win32 {
 }
 
 SOURCES += ui/mainwindow.cpp \
+    gl/openglshape.cpp \
+    shapes/drawer.cpp \
     ui/Settings.cpp \
     L_System/turtle.cpp \
     main.cpp \
@@ -50,6 +52,8 @@ SOURCES += ui/mainwindow.cpp \
     lib/ResourceLoader.cpp
 
 HEADERS += ui/mainwindow.h \
+    gl/openglshape.h \
+    shapes/drawer.h \
     ui/Settings.h \
     L_System/Utils.h \
     L_System/turtle.h \

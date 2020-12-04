@@ -39,6 +39,7 @@ public:
 
     // input is a "string" (vector of constants and parameters)
     void parse(const std::vector<std::pair<std::string, float>>& str);
+    std::vector<SegmentData> getSegmentData();
 
 private:
     glm::vec4 m_loc;        // location of the turtle
@@ -46,13 +47,13 @@ private:
     glm::mat4 m_matrix;     // the transform matrix to this step
     int m_depth;            // depth of the branch
 
-    string initial;
+    string m_initial;
 
     // map of character to branch characteristics
-    unordered_map<char, BranchFeats> charToBranch;
+    unordered_map<char, BranchFeats> m_charToBranch;
 
     // production rules
-    unordered_map<char, vector<char>> successors;
+    unordered_map<char, vector<char>> m_successors;
 
     // the stack used for branching e.g. [ ]
     // store location, direction and current matrix of the turtle

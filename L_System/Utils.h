@@ -32,6 +32,8 @@ const float w = 4.;         // The width of the initial branch
 const float d = 0.707;      // The decrease of the width
 const int l_l = 0;          // Leafing levels of the tree
 const int l_n = 0;          // Leaf number per branch
+const int PARAM1 = 40;      // used for shape primitive
+const int PARAM2 = 40;      // used for shape primitive
 
 struct BranchFeats {
     float l; // length of branch
@@ -49,13 +51,13 @@ unordered_map<char, BranchFeats> charToBranch;
 // production rules
 unordered_map<char, vector<char>> successors;
 
-static void addBranchChar(char character, BranchFeats characteristics);
-static void addProductionRule(char predecessor, vector<char> succs);
+void addBranchChar(char character, BranchFeats characteristics);
+void addProductionRule(char predecessor, vector<char> succs);
 
-static float randomLen();
-static float randomAngle();
+float randomLen();
+float randomAngle();
 
-static unordered_map<char, BranchFeats> createBranchTypes();
-static unordered_map<char, vector<char>> createProductionRules();
+unordered_map<char, BranchFeats> createBranchTypes();
+unordered_map<char, vector<char>> createProductionRules();
 
 #endif
