@@ -37,6 +37,7 @@ SOURCES += ui/mainwindow.cpp \
     ui/SupportCanvas3D.cpp \
     ui/view.cpp \
     ui/viewformat.cpp \
+    ui/Databinding.cpp \
     L_System/Utils.cpp \
     gl/shaders/Shader.cpp \
     gl/GLDebug.cpp \
@@ -83,6 +84,7 @@ HEADERS += ui/mainwindow.h \
     glew-1.10.0/include/GL/glew.h \
     ui/view.h \
     ui/viewformat.h \
+    ui/Databinding.h \
     gl/shaders/Shader.h \
     gl/GLDebug.h \
     gl/shaders/ShaderAttribLocations.h \
