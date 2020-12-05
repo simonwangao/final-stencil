@@ -22,6 +22,9 @@ win32 {
 }
 
 SOURCES += ui/mainwindow.cpp \
+    camera/CamtransCamera.cpp \
+    camera/OrbitingCamera.cpp \
+    camera/QuaternionCamera.cpp \
     gl/openglshape.cpp \
     shapes/drawer.cpp \
     ui/Settings.cpp \
@@ -52,6 +55,10 @@ SOURCES += ui/mainwindow.cpp \
     lib/ResourceLoader.cpp
 
 HEADERS += ui/mainwindow.h \
+    camera/Camera.h \
+    camera/CamtransCamera.h \
+    camera/OrbitingCamera.h \
+    camera/QuaternionCamera.h \
     gl/openglshape.h \
     shapes/drawer.h \
     ui/Settings.h \
