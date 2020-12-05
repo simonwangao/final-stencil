@@ -22,9 +22,15 @@ win32 {
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 SOURCES += ui/mainwindow.cpp \
     gl/openglshape.cpp \
     shapes/drawer.cpp \
+=======
+SOURCES += ui/Canvas2D.cpp \
+    ui/SupportCanvas2D.cpp \
+    ui/SupportCanvas3D.cpp \
+>>>>>>> Stashed changes
 =======
 SOURCES += ui/Canvas2D.cpp \
     ui/SupportCanvas2D.cpp \
@@ -63,9 +69,15 @@ SOURCES += ui/Canvas2D.cpp \
     lib/ResourceLoader.cpp
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 HEADERS += ui/mainwindow.h \
     gl/openglshape.h \
     shapes/drawer.h \
+=======
+HEADERS += ui/Canvas2D.h \
+    ui/SupportCanvas2D.h \
+    ui/SupportCanvas3D.h \
+>>>>>>> Stashed changes
 =======
 HEADERS += ui/Canvas2D.h \
     ui/SupportCanvas2D.h \
