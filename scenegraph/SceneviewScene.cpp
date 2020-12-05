@@ -19,9 +19,6 @@ SceneviewScene::SceneviewScene()
     loadNormalsShader();
     loadNormalsArrowShader();
 
-//    m_cone = std::make_unique<ConeShape>(settings.shapeParameter1, settings.shapeParameter2);
-//    m_cube = std::make_unique<CubeShape>(settings.shapeParameter1, settings.shapeParameter2);
-//    m_sphere = std::make_unique<SphereShape>(settings.shapeParameter1, settings.shapeParameter2);
     m_cylinder = std::make_unique<Cylinder>(settings.shapeParameter1, settings.shapeParameter2);
 }
 
@@ -36,22 +33,22 @@ void SceneviewScene::loadPhongShader() {
 }
 
 void SceneviewScene::loadWireframeShader() {
-    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/wireframe.vert");
-    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/wireframe.frag");
+    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/wireframe/wireframe.vert");
+    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/wireframe/wireframe.frag");
     m_wireframeShader = std::make_unique<Shader>(vertexSource, fragmentSource);
 }
 
 void SceneviewScene::loadNormalsShader() {
-    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/normals.vert");
-    std::string geometrySource = ResourceLoader::loadResourceFileToString(":/shaders/normals.gsh");
-    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/normals.frag");
+    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/normals/normals.vert");
+    std::string geometrySource = ResourceLoader::loadResourceFileToString(":/shaders/normals/normals.gsh");
+    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/normals/normals.frag");
     m_normalsShader = std::make_unique<Shader>(vertexSource, geometrySource, fragmentSource);
 }
 
 void SceneviewScene::loadNormalsArrowShader() {
-    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/normalsArrow.vert");
-    std::string geometrySource = ResourceLoader::loadResourceFileToString(":/shaders/normalsArrow.gsh");
-    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/normalsArrow.frag");
+    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/normals/normalsArrow.vert");
+    std::string geometrySource = ResourceLoader::loadResourceFileToString(":/shaders/normals/normalsArrow.gsh");
+    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/normals/normalsArrow.frag");
     m_normalsArrowShader = std::make_unique<Shader>(vertexSource, geometrySource, fragmentSource);
 }
 

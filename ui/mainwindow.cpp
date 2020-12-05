@@ -77,12 +77,6 @@ void MainWindow::dataBind() {
     m_bindings.push_back(_b); \
     assert(connect(_b, SIGNAL(dataChanged()), this, SLOT(settingsChanged()))); \
 }
-    QButtonGroup *brushButtonGroup = new QButtonGroup;
-    QButtonGroup *shapesButtonGroup = new QButtonGroup;
-    QButtonGroup *filterButtonGroup = new QButtonGroup;
-    m_buttonGroups.push_back(brushButtonGroup);
-    m_buttonGroups.push_back(shapesButtonGroup);
-    m_buttonGroups.push_back(filterButtonGroup);
 
     // Burning dock
     BIND(BoolBinding::bindCheckbox(ui->BurningButton, settings.burnTree))

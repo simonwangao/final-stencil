@@ -110,7 +110,15 @@ DEFINES += _USE_MATH_DEFINES
 DEFINES += TIXML_USE_STL
 DEFINES += GLM_SWIZZLE GLM_FORCE_RADIANS
 OTHER_FILES += shaders/shader.frag \
-    shaders/shader.vert
+    shaders/shader.vert \
+    shaders/wireframe/wireframe.vert \
+    shaders/wireframe/wireframe.frag \
+    shaders/normals/normals.vert \
+    shaders/normals/normals.gsh \
+    shaders/normals/normals.frag \
+    shaders/normals/normalsArrow.vert \
+    shaders/normals/normalsArrow.gsh \
+    shaders/normals/normalsArrow.frag \
 
 # Don't add the -pg flag unless you know what you are doing. It makes QThreadPool freeze on Mac OS X
 QMAKE_CXXFLAGS_RELEASE -= -O2

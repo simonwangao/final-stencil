@@ -5,10 +5,7 @@
 
 #include <memory>
 #include "shapes/Shape.h"
-//#include "shapes/ConeShape.h"
-//#include "shapes/CubeShape.h"
 #include "shapes/Cylinder.h"
-//#include "shapes/SphereShape.h"
 
 
 namespace CS123 { namespace GL {
@@ -65,10 +62,7 @@ private:
     std::unique_ptr<CS123::GL::Shader> m_normalsShader;
     std::unique_ptr<CS123::GL::Shader> m_normalsArrowShader;
 
-//    std::unique_ptr<SphereShape> m_sphere;
-//    std::unique_ptr<CubeShape> m_cube;
     std::unique_ptr<Cylinder> m_cylinder;
-//    std::unique_ptr<ConeShape> m_cone;
 
 };
 
