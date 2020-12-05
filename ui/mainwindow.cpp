@@ -1,4 +1,4 @@
-/*#include "mainwindow.h"
+#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "Databinding.h"
 #include "Settings.h"
@@ -9,6 +9,7 @@
 #include <QFileDialog>
 #include <QMessageBox>
 #include <QSettings>
+#include <QAction>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -22,7 +23,7 @@ MainWindow::MainWindow(QWidget *parent) :
     qglFormat.setProfile(QGLFormat::CoreProfile);
     qglFormat.setSampleBuffers(true);
     ui->setupUi(this);
-    QGridLayout *gridLayout = new QGridLayout(ui->centralWidget);
+    QGridLayout *gridLayout = new QGridLayout(ui->canvas3D);
     m_canvas3D = new SupportCanvas3D(qglFormat, this);
     gridLayout->addWidget(m_canvas3D, 0, 1);
 
@@ -44,22 +45,17 @@ MainWindow::MainWindow(QWidget *parent) :
     actions.push_back(ui->dock->toggleViewAction()); \
     actions.back()->setShortcut(QKeySequence(key));
 
-    SETUP_ACTION(,     "CTRL+1");
+    SETUP_ACTION(BurningTreeDock,     "CTRL+1");
+    SETUP_ACTION(camtransDock,      "CTRL+2");
 
-    ui->menuToolbars->addActions(actions);
+
+    //ui->menuToolbars->addActions(actions);
 #undef SETUP_ACTION
 
     dataBind();
 
     // Reset the contents of both canvas widgets (make a new 500x500 image for the 2D one)
-    fileNew();
-
-    // Make certain radio buttons switch to the 2D canvas when clicked.
-    QList<QRadioButton*> a;
-    a += ui->brushTypeLinear;
-
-    foreach (QRadioButton *rb, a)
-        connect(rb, SIGNAL(clicked()), this, SLOT(activateCanvas3D()));
+    //fileNew();
 
     show();
 
@@ -88,28 +84,8 @@ void MainWindow::dataBind() {
     m_buttonGroups.push_back(shapesButtonGroup);
     m_buttonGroups.push_back(filterButtonGroup);
 
-    BIND(ChoiceBinding::bindRadioButtons(
-            brushButtonGroup,
-            NUM_BRUSH_TYPES,
-            settings.brushType,
-            ui->brushTypeConstant,
-            ui->brushTypeLinear,
-            ui->brushTypeQuadratic,
-            ui->brushTypeSmudge,
-            ui->brushTypeSpecial1,
-            ui->brushTypeSpecial2))
-
-    BIND(IntBinding::bindSliderAndTextbox(
-        ui->brushRadiusSlider, ui->brushRadiusTextbox, settings.brushRadius, 0, 96))
-    BIND(UCharBinding::bindSliderAndTextbox(
-        ui->brushColorSliderRed, ui->brushColorTextboxRed, settings.brushColor.r, 0, 255))
-    BIND(UCharBinding::bindSliderAndTextbox(
-        ui->brushColorSliderGreen, ui->brushColorTextboxGreen, settings.brushColor.g, 0, 255))
-    BIND(UCharBinding::bindSliderAndTextbox(
-        ui->brushColorSliderBlue, ui->brushColorTextboxBlue, settings.brushColor.b, 0, 255))
-    BIND(UCharBinding::bindSliderAndTextbox(
-        ui->brushColorSliderAlpha, ui->brushColorTextboxAlpha, settings.brushColor.a, 0, 255))
-    BIND(BoolBinding::bindCheckbox(ui->brushAlphaBlendingCheckbox, settings.fixAlphaBlending))
+    // Burning dock
+    BIND(BoolBinding::bindCheckbox(ui->BurningButton, settings.burnTree))
 
 
     // Camtrans dock
@@ -128,7 +104,6 @@ void MainWindow::dataBind() {
               ui->cameraFarSlider, ui->cameraFarTextbox, settings.cameraFar, 0.1, 50))
     initializeCamtransFrustum(); // always set the viewing frustum to reasonable settings when we start the program
 
-    BIND(ChoiceBinding::bindTabs(ui->tabWidget, settings.currentTab))
 
 #undef BIND
 
@@ -174,17 +149,17 @@ void MainWindow::settingsChanged() {
 
 void MainWindow::setAllEnabled(bool enabled) {
     QList<QWidget *> widgets;
-    widgets += ui->brushDock;
+    widgets += ui->BurningTreeDock;
     widgets += ui->camtransDock;
 
     QList<QAction *> actions;
-    actions += ui->actionNew;
+    /*actions += ui->actionNew;
     actions += ui->actionOpen;
     actions += ui->actionSave;
     actions += ui->actionRevert;
     actions += ui->actionCopy3Dto2D;
     actions += ui->actionClear;
-    actions += ui->actionQuit;
+    actions += ui->actionQuit;*/
 
     foreach (QWidget *widget, widgets)
         widget->setEnabled(enabled);
@@ -250,8 +225,8 @@ void MainWindow::updateCameraHeightAngle() {
 void MainWindow::setCameraAxonometric() {
     m_canvas3D->setCameraAxonometric();
 }
-*/
 
+/*
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "view.h"
@@ -268,3 +243,4 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
+*/

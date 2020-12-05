@@ -140,6 +140,9 @@ struct Settings {
 
     int currentTab;
 
+    // Final
+    bool burnTree; // Enable or disable burning of trees
+
 };
 
 // The global Settings object, will be initialized by MainWindow
