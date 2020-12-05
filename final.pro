@@ -21,10 +21,21 @@ win32 {
     LIBS += -lopengl32 -lglu32
 }
 
+<<<<<<< Updated upstream
 SOURCES += ui/mainwindow.cpp \
     gl/openglshape.cpp \
     shapes/drawer.cpp \
+=======
+SOURCES += ui/Canvas2D.cpp \
+    ui/SupportCanvas2D.cpp \
+    ui/SupportCanvas3D.cpp \
+>>>>>>> Stashed changes
     ui/Settings.cpp \
+    ui/mainwindow.cpp \
+    ui/Databinding.cpp \
+    camera/OrbitingCamera.cpp \
+    camera/CamtransCamera.cpp \
+    camera/QuaternionCamera.cpp \
     L_System/turtle.cpp \
     main.cpp \
     glew-1.10.0/src/glew.c \
@@ -51,13 +62,23 @@ SOURCES += ui/mainwindow.cpp \
     lib/RGBA.cpp \
     lib/ResourceLoader.cpp
 
+<<<<<<< Updated upstream
 HEADERS += ui/mainwindow.h \
     gl/openglshape.h \
     shapes/drawer.h \
+=======
+HEADERS += ui/Canvas2D.h \
+    ui/SupportCanvas2D.h \
+    ui/SupportCanvas3D.h \
+>>>>>>> Stashed changes
     ui/Settings.h \
-    L_System/Utils.h \
-    L_System/turtle.h \
+    ui/mainwindow.h \
+    ui/Databinding.h \
     ui_mainwindow.h \
+    camera/Camera.h \
+    camera/OrbitingCamera.h \
+    camera/CamtransCamera.h \
+    camera/QuaternionCamera.h \
     glew-1.10.0/include/GL/glew.h \
     ui/view.h \
     ui/viewformat.h \

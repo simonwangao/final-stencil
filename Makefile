@@ -52,10 +52,21 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
+<<<<<<< Updated upstream
 SOURCES       = ui/mainwindow.cpp \
 		gl/openglshape.cpp \
 		shapes/drawer.cpp \
+=======
+SOURCES       = ui/Canvas2D.cpp \
+		ui/SupportCanvas2D.cpp \
+		ui/SupportCanvas3D.cpp \
+>>>>>>> Stashed changes
 		ui/Settings.cpp \
+		ui/mainwindow.cpp \
+		ui/Databinding.cpp \
+		camera/OrbitingCamera.cpp \
+		camera/CamtransCamera.cpp \
+		camera/QuaternionCamera.cpp \
 		L_System/turtle.cpp \
 		main.cpp \
 		glew-1.10.0/src/glew.c \
@@ -81,12 +92,27 @@ SOURCES       = ui/mainwindow.cpp \
 		shapes/Cylinder.cpp \
 		lib/RGBA.cpp \
 		lib/ResourceLoader.cpp qrc_resources.cpp \
+		moc_Canvas2D.cpp \
+		moc_SupportCanvas2D.cpp \
+		moc_SupportCanvas3D.cpp \
 		moc_mainwindow.cpp \
+		moc_Databinding.cpp \
 		moc_view.cpp
+<<<<<<< Updated upstream
 OBJECTS       = mainwindow.o \
 		openglshape.o \
 		drawer.o \
+=======
+OBJECTS       = Canvas2D.o \
+		SupportCanvas2D.o \
+		SupportCanvas3D.o \
+>>>>>>> Stashed changes
 		Settings.o \
+		mainwindow.o \
+		Databinding.o \
+		OrbitingCamera.o \
+		CamtransCamera.o \
+		QuaternionCamera.o \
 		turtle.o \
 		main.o \
 		glew.o \
@@ -113,7 +139,11 @@ OBJECTS       = mainwindow.o \
 		RGBA.o \
 		ResourceLoader.o \
 		qrc_resources.o \
+		moc_Canvas2D.o \
+		moc_SupportCanvas2D.o \
+		moc_SupportCanvas3D.o \
 		moc_mainwindow.o \
+		moc_Databinding.o \
 		moc_view.o
 DIST          = shaders/normals/normals.vert \
 		shaders/normals/normals.frag \
@@ -121,6 +151,7 @@ DIST          = shaders/normals/normals.vert \
 		shaders/normals/normalsArrow.gsh \
 		shaders/normals/normalsArrow.frag \
 		shaders/normals/normalsArrow.vert \
+<<<<<<< Updated upstream
 		../../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/spec_pre.prf \
 		../../../../Qt5.14.2/5.14.2/clang_64/mkspecs/qdevice.pri \
 		../../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/device_config.prf \
@@ -300,10 +331,196 @@ DIST          = shaders/normals/normals.vert \
 		final.pro ui/mainwindow.h \
 		gl/openglshape.h \
 		shapes/drawer.h \
+=======
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/spec_pre.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/qdevice.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/device_config.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/common/unix.conf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/common/mac.conf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/common/macx.conf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/common/sanitize.conf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/common/gcc-base.conf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/common/gcc-base-mac.conf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/common/clang.conf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/common/clang-mac.conf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/qconfig.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3danimation.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3danimation_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3dcore.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3dcore_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3dextras.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3dextras_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3dinput.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3dinput_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3dlogic.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3dlogic_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3dquick.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3dquick_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3dquickanimation.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3dquickanimation_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3dquickextras.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3dquickextras_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3dquickinput.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3dquickinput_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3dquickrender.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3dquickrender_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3dquickscene2d.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3dquickscene2d_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3drender.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_3drender_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_accessibility_support_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_bluetooth.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_bluetooth_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_bootstrap_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_clipboard_support_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_concurrent.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_concurrent_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_core.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_core_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_dbus.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_dbus_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_designer.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_designer_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_designercomponents_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_devicediscovery_support_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_edid_support_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_eventdispatcher_support_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_fb_support_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_fontdatabase_support_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_gamepad.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_gamepad_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_graphics_support_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_gui.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_gui_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_help.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_help_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_location.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_location_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_macextras.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_macextras_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_multimedia.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_multimedia_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_multimediawidgets.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_multimediawidgets_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_network.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_network_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_nfc.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_nfc_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_opengl.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_opengl_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_openglextensions.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_openglextensions_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_packetprotocol_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_platformcompositor_support_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_positioning.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_positioning_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_positioningquick.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_positioningquick_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_printsupport.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_printsupport_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_qml.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_qml_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_qmldebug_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_qmldevtools_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_qmlmodels.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_qmlmodels_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_qmltest.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_qmltest_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_qmlworkerscript.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_qmlworkerscript_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_qtmultimediaquicktools_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_quick.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_quick_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_quickcontrols2.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_quickcontrols2_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_quickparticles_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_quickshapes_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_quicktemplates2.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_quicktemplates2_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_quickwidgets.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_quickwidgets_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_remoteobjects.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_remoteobjects_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_repparser.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_repparser_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_scxml.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_scxml_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_sensors.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_sensors_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_serialbus.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_serialbus_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_serialport.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_serialport_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_service_support_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_sql.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_sql_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_svg.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_svg_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_testlib.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_testlib_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_texttospeech.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_texttospeech_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_theme_support_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_uiplugin.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_uitools.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_uitools_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_webchannel.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_webchannel_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_websockets.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_websockets_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_webview.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_webview_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_widgets.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_widgets_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_xml.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_xml_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_xmlpatterns.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/modules/qt_lib_xmlpatterns_private.pri \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/qt_functions.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/qt_config.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/macx-clang/qmake.conf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/exclusive_builds.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/mac/sdk.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/toolchain.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/mac/toolchain.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/default_pre.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/mac/default_pre.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/resolve_config.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/default_post.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/mac/default_post.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/mac/objective_c.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/qml_debug.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/mac/mac.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/warn_on.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/qt.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/resources_functions.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/resources.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/moc.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/unix/opengl.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/uic.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/unix/thread.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/qmake_use.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/file_copies.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/mac/rez.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/mac/asset_catalogs.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/testcase_targets.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/exceptions.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/yacc.prf \
+		../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/lex.prf \
+		final.pro ui/Canvas2D.h \
+		ui/SupportCanvas2D.h \
+		ui/SupportCanvas3D.h \
+>>>>>>> Stashed changes
 		ui/Settings.h \
-		L_System/Utils.h \
-		L_System/turtle.h \
+		ui/mainwindow.h \
+		ui/Databinding.h \
 		ui_mainwindow.h \
+		camera/Camera.h \
+		camera/OrbitingCamera.h \
+		camera/CamtransCamera.h \
+		camera/QuaternionCamera.h \
 		glew-1.10.0/include/GL/glew.h \
 		ui/view.h \
 		ui/viewformat.h \
@@ -327,10 +544,21 @@ DIST          = shaders/normals/normals.vert \
 		shapes/Cylinder.h \
 		lib/RGBA.h \
 		lib/ResourceLoader.h \
+<<<<<<< Updated upstream
 		lib/CS123SceneData.h ui/mainwindow.cpp \
 		gl/openglshape.cpp \
 		shapes/drawer.cpp \
+=======
+		lib/CS123SceneData.h ui/Canvas2D.cpp \
+		ui/SupportCanvas2D.cpp \
+		ui/SupportCanvas3D.cpp \
+>>>>>>> Stashed changes
 		ui/Settings.cpp \
+		ui/mainwindow.cpp \
+		ui/Databinding.cpp \
+		camera/OrbitingCamera.cpp \
+		camera/CamtransCamera.cpp \
+		camera/QuaternionCamera.cpp \
 		L_System/turtle.cpp \
 		main.cpp \
 		glew-1.10.0/src/glew.c \
@@ -775,9 +1003,15 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents resources.qrc $(DISTDIR)/
+<<<<<<< Updated upstream
 	$(COPY_FILE) --parents ../../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ui/mainwindow.h gl/openglshape.h shapes/drawer.h ui/Settings.h L_System/Utils.h L_System/turtle.h ui_mainwindow.h glew-1.10.0/include/GL/glew.h ui/view.h ui/viewformat.h gl/shaders/Shader.h gl/GLDebug.h gl/shaders/ShaderAttribLocations.h gl/datatype/VBOAttribMarker.h gl/datatype/VBO.h gl/datatype/IBO.h gl/datatype/VAO.h gl/datatype/FBO.h gl/textures/Texture.h gl/textures/Texture2D.h gl/textures/TextureParameters.h gl/textures/TextureParametersBuilder.h gl/textures/RenderBuffer.h gl/textures/DepthBuffer.h gl/shaders/CS123Shader.h gl/util/FullScreenQuad.h shapes/Shape.h shapes/Cylinder.h lib/RGBA.h lib/ResourceLoader.h lib/CS123SceneData.h $(DISTDIR)/
 	$(COPY_FILE) --parents ui/mainwindow.cpp gl/openglshape.cpp shapes/drawer.cpp ui/Settings.cpp L_System/turtle.cpp main.cpp glew-1.10.0/src/glew.c ui/view.cpp ui/viewformat.cpp L_System/Utils.cpp gl/shaders/Shader.cpp gl/GLDebug.cpp gl/datatype/VBOAttribMarker.cpp gl/datatype/VBO.cpp gl/datatype/IBO.cpp gl/datatype/VAO.cpp gl/datatype/FBO.cpp gl/textures/Texture.cpp gl/textures/Texture2D.cpp gl/textures/TextureParameters.cpp gl/textures/TextureParametersBuilder.cpp gl/textures/RenderBuffer.cpp gl/textures/DepthBuffer.cpp gl/shaders/CS123Shader.cpp gl/util/FullScreenQuad.cpp shapes/Shape.cpp shapes/Cylinder.cpp lib/RGBA.cpp lib/ResourceLoader.cpp $(DISTDIR)/
+=======
+	$(COPY_FILE) --parents ../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ui/Canvas2D.h ui/SupportCanvas2D.h ui/SupportCanvas3D.h ui/Settings.h ui/mainwindow.h ui/Databinding.h ui_mainwindow.h camera/Camera.h camera/OrbitingCamera.h camera/CamtransCamera.h camera/QuaternionCamera.h glew-1.10.0/include/GL/glew.h ui/view.h ui/viewformat.h gl/shaders/Shader.h gl/GLDebug.h gl/shaders/ShaderAttribLocations.h gl/datatype/VBOAttribMarker.h gl/datatype/VBO.h gl/datatype/IBO.h gl/datatype/VAO.h gl/datatype/FBO.h gl/textures/Texture.h gl/textures/Texture2D.h gl/textures/TextureParameters.h gl/textures/TextureParametersBuilder.h gl/textures/RenderBuffer.h gl/textures/DepthBuffer.h gl/shaders/CS123Shader.h gl/util/FullScreenQuad.h shapes/Shape.h shapes/Cylinder.h lib/RGBA.h lib/ResourceLoader.h lib/CS123SceneData.h $(DISTDIR)/
+	$(COPY_FILE) --parents ui/Canvas2D.cpp ui/SupportCanvas2D.cpp ui/SupportCanvas3D.cpp ui/Settings.cpp ui/mainwindow.cpp ui/Databinding.cpp camera/OrbitingCamera.cpp camera/CamtransCamera.cpp camera/QuaternionCamera.cpp L_System/turtle.cpp main.cpp glew-1.10.0/src/glew.c ui/view.cpp ui/viewformat.cpp gl/shaders/Shader.cpp gl/GLDebug.cpp gl/datatype/VBOAttribMarker.cpp gl/datatype/VBO.cpp gl/datatype/IBO.cpp gl/datatype/VAO.cpp gl/datatype/FBO.cpp gl/textures/Texture.cpp gl/textures/Texture2D.cpp gl/textures/TextureParameters.cpp gl/textures/TextureParametersBuilder.cpp gl/textures/RenderBuffer.cpp gl/textures/DepthBuffer.cpp gl/shaders/CS123Shader.cpp gl/util/FullScreenQuad.cpp shapes/Shape.cpp shapes/Cylinder.cpp lib/RGBA.cpp lib/ResourceLoader.cpp $(DISTDIR)/
+>>>>>>> Stashed changes
 	$(COPY_FILE) --parents ui/mainwindow.ui $(DISTDIR)/
 
 
@@ -819,8 +1053,9 @@ compiler_moc_predefs_clean:
 moc_predefs.h: ../../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/data/dummy.cpp
 	/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++ -pipe -stdlib=libc++ -std=c++14 -g -g -std=gnu++1y $(EXPORT_ARCH_ARGS) -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk -mmacosx-version-min=10.13 -Wextra -Waddress -Wchar-subscripts -Wformat -Wmain -Wmissing-braces -Wparentheses -Wreorder -Wreturn-type -Wsequence-point -Wsign-compare -Wstrict-overflow=1 -Wswitch -Wtrigraphs -Wuninitialized -Wunused-label -Wunused-variable -Wvolatile-register-var -Wno-extra -dM -E -o moc_predefs.h ../../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_mainwindow.cpp moc_view.cpp
+compiler_moc_header_make_all: moc_Canvas2D.cpp moc_SupportCanvas2D.cpp moc_SupportCanvas3D.cpp moc_mainwindow.cpp moc_Databinding.cpp moc_view.cpp
 compiler_moc_header_clean:
+<<<<<<< Updated upstream
 	-$(DEL_FILE) moc_mainwindow.cpp moc_view.cpp
 moc_mainwindow.cpp: ui/mainwindow.h \
 		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
@@ -995,6 +1230,768 @@ Settings.o: ui/Settings.cpp ui/Settings.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Settings.o ui/Settings.cpp
 
 turtle.o: L_System/turtle.cpp L_System/turtle.h \
+=======
+	-$(DEL_FILE) moc_Canvas2D.cpp moc_SupportCanvas2D.cpp moc_SupportCanvas3D.cpp moc_mainwindow.cpp moc_Databinding.cpp moc_view.cpp
+moc_Canvas2D.cpp: ui/Canvas2D.h \
+		ui/SupportCanvas2D.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		moc_predefs.h \
+		../../../Qt5.14.2/5.14.2/clang_64/bin/moc
+	/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/bin/moc $(DEFINES) --include /Users/monicaroy/course/cs1230/final-stencil/moc_predefs.h -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/mkspecs/macx-clang -I/Users/monicaroy/course/cs1230/final-stencil -I/Users/monicaroy/course/cs1230/final-stencil/glm -I/Users/monicaroy/course/cs1230/final-stencil/ui -I/Users/monicaroy/course/cs1230/final-stencil/glew-1.10.0/include -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtXml.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib ui/Canvas2D.h -o moc_Canvas2D.cpp
+
+moc_SupportCanvas2D.cpp: ui/SupportCanvas2D.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		moc_predefs.h \
+		../../../Qt5.14.2/5.14.2/clang_64/bin/moc
+	/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/bin/moc $(DEFINES) --include /Users/monicaroy/course/cs1230/final-stencil/moc_predefs.h -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/mkspecs/macx-clang -I/Users/monicaroy/course/cs1230/final-stencil -I/Users/monicaroy/course/cs1230/final-stencil/glm -I/Users/monicaroy/course/cs1230/final-stencil/ui -I/Users/monicaroy/course/cs1230/final-stencil/glew-1.10.0/include -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtXml.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib ui/SupportCanvas2D.h -o moc_SupportCanvas2D.cpp
+
+moc_SupportCanvas3D.cpp: ui/SupportCanvas3D.h \
+		glew-1.10.0/include/GL/glew.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/QGLWidget \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/qgl.h \
+>>>>>>> Stashed changes
+		glm/glm.hpp \
+		glm/detail/_fixes.hpp \
+		glm/fwd.hpp \
+		glm/detail/type_int.hpp \
+		glm/detail/setup.hpp \
+		glm/detail/type_float.hpp \
+		glm/detail/type_vec.hpp \
+		glm/detail/precision.hpp \
+		glm/detail/type_mat.hpp \
+		glm/vec2.hpp \
+		glm/detail/type_vec2.hpp \
+		glm/detail/_swizzle.hpp \
+		glm/detail/_swizzle_func.hpp \
+		glm/detail/type_vec2.inl \
+		glm/vec3.hpp \
+		glm/detail/type_vec3.hpp \
+		glm/detail/type_vec3.inl \
+		glm/vec4.hpp \
+		glm/detail/type_vec4.hpp \
+		glm/detail/type_vec4.inl \
+		glm/mat2x2.hpp \
+		glm/detail/type_mat2x2.hpp \
+		glm/detail/type_mat2x2.inl \
+		glm/mat2x3.hpp \
+		glm/detail/type_mat2x3.hpp \
+		glm/detail/type_mat2x3.inl \
+		glm/mat2x4.hpp \
+		glm/detail/type_mat2x4.hpp \
+		glm/detail/type_mat2x4.inl \
+		glm/mat3x2.hpp \
+		glm/detail/type_mat3x2.hpp \
+		glm/detail/type_mat3x2.inl \
+		glm/mat3x3.hpp \
+		glm/detail/type_mat3x3.hpp \
+		glm/detail/type_mat3x3.inl \
+		glm/mat3x4.hpp \
+		glm/detail/type_mat3x4.hpp \
+		glm/detail/type_mat3x4.inl \
+		glm/mat4x2.hpp \
+		glm/detail/type_mat4x2.hpp \
+		glm/detail/type_mat4x2.inl \
+		glm/mat4x3.hpp \
+		glm/detail/type_mat4x3.hpp \
+		glm/detail/type_mat4x3.inl \
+		glm/mat4x4.hpp \
+		glm/detail/type_mat4x4.hpp \
+		glm/detail/type_mat4x4.inl \
+		glm/trigonometric.hpp \
+		glm/detail/func_trigonometric.hpp \
+		glm/detail/func_trigonometric.inl \
+		glm/detail/_vectorize.hpp \
+		glm/detail/type_vec1.hpp \
+		glm/detail/type_vec1.inl \
+		glm/exponential.hpp \
+		glm/detail/func_exponential.hpp \
+		glm/detail/func_exponential.inl \
+		glm/detail/func_vector_relational.hpp \
+		glm/detail/func_vector_relational.inl \
+		glm/common.hpp \
+		glm/detail/func_common.hpp \
+		glm/detail/func_common.inl \
+		glm/packing.hpp \
+		glm/detail/func_packing.hpp \
+		glm/detail/func_packing.inl \
+		glm/detail/type_half.hpp \
+		glm/detail/type_half.inl \
+		glm/geometric.hpp \
+		glm/detail/func_geometric.hpp \
+		glm/detail/func_geometric.inl \
+		glm/matrix.hpp \
+		glm/detail/func_matrix.hpp \
+		glm/detail/func_matrix.inl \
+		glm/vector_relational.hpp \
+		glm/integer.hpp \
+		glm/detail/func_integer.hpp \
+		glm/detail/func_integer.inl \
+<<<<<<< Updated upstream
+		L_System/Utils.h \
+		glm/gtx/transform.hpp \
+		glm/gtc/matrix_transform.hpp \
+		glm/gtc/matrix_transform.inl \
+		glm/gtx/transform.inl
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o turtle.o L_System/turtle.cpp
+
+main.o: main.cpp ../../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QApplication \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
+		ui/mainwindow.h \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
+=======
+		moc_predefs.h \
+		../../../Qt5.14.2/5.14.2/clang_64/bin/moc
+	/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/bin/moc $(DEFINES) --include /Users/monicaroy/course/cs1230/final-stencil/moc_predefs.h -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/mkspecs/macx-clang -I/Users/monicaroy/course/cs1230/final-stencil -I/Users/monicaroy/course/cs1230/final-stencil/glm -I/Users/monicaroy/course/cs1230/final-stencil/ui -I/Users/monicaroy/course/cs1230/final-stencil/glew-1.10.0/include -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtXml.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib ui/SupportCanvas3D.h -o moc_SupportCanvas3D.cpp
+
+moc_mainwindow.cpp: ui/mainwindow.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QButtonGroup \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qbuttongroup.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		moc_predefs.h \
+		../../../Qt5.14.2/5.14.2/clang_64/bin/moc
+	/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/bin/moc $(DEFINES) --include /Users/monicaroy/course/cs1230/final-stencil/moc_predefs.h -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/mkspecs/macx-clang -I/Users/monicaroy/course/cs1230/final-stencil -I/Users/monicaroy/course/cs1230/final-stencil/glm -I/Users/monicaroy/course/cs1230/final-stencil/ui -I/Users/monicaroy/course/cs1230/final-stencil/glew-1.10.0/include -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtXml.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib ui/mainwindow.h -o moc_mainwindow.cpp
+>>>>>>> Stashed changes
+
+moc_Databinding.cpp: ui/Databinding.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QVariant \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qvariant.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QSlider \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qslider.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QButtonGroup \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qbuttongroup.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QRadioButton \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qradiobutton.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QDockWidget \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qdockwidget.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QTabWidget \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qtabwidget.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QDial \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qdial.h \
+		moc_predefs.h \
+		../../../Qt5.14.2/5.14.2/clang_64/bin/moc
+	/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/bin/moc $(DEFINES) --include /Users/monicaroy/course/cs1230/final-stencil/moc_predefs.h -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/mkspecs/macx-clang -I/Users/monicaroy/course/cs1230/final-stencil -I/Users/monicaroy/course/cs1230/final-stencil/glm -I/Users/monicaroy/course/cs1230/final-stencil/ui -I/Users/monicaroy/course/cs1230/final-stencil/glew-1.10.0/include -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtXml.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib ui/Databinding.h -o moc_Databinding.cpp
+
+moc_view.cpp: ui/view.h \
+		glew-1.10.0/include/GL/glew.h \
+<<<<<<< Updated upstream
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/qgl.h \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QTime \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		ui/viewformat.h \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/QGLFormat \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QApplication \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/qevent.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o view.o ui/view.cpp
+
+viewformat.o: ui/viewformat.cpp ui/viewformat.h \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/QGLFormat \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/qgl.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o viewformat.o ui/viewformat.cpp
+
+Utils.o: L_System/Utils.cpp L_System/Utils.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Utils.o L_System/Utils.cpp
+
+Shader.o: gl/shaders/Shader.cpp gl/shaders/Shader.h \
+=======
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/qgl.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QTime \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		moc_predefs.h \
+		../../../Qt5.14.2/5.14.2/clang_64/bin/moc
+	/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/bin/moc $(DEFINES) --include /Users/monicaroy/course/cs1230/final-stencil/moc_predefs.h -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/mkspecs/macx-clang -I/Users/monicaroy/course/cs1230/final-stencil -I/Users/monicaroy/course/cs1230/final-stencil/glm -I/Users/monicaroy/course/cs1230/final-stencil/ui -I/Users/monicaroy/course/cs1230/final-stencil/glew-1.10.0/include -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtXml.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib ui/view.h -o moc_view.cpp
+
+compiler_moc_objc_header_make_all:
+compiler_moc_objc_header_clean:
+compiler_moc_source_make_all:
+compiler_moc_source_clean:
+compiler_uic_make_all: ui_mainwindow.h
+compiler_uic_clean:
+	-$(DEL_FILE) ui_mainwindow.h
+ui_mainwindow.h: ui/mainwindow.ui \
+		../../../Qt5.14.2/5.14.2/clang_64/bin/uic \
+		ui/Canvas2D.h \
+		ui/SupportCanvas2D.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h
+	/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/bin/uic ui/mainwindow.ui -o ui_mainwindow.h
+
+compiler_rez_source_make_all:
+compiler_rez_source_clean:
+compiler_yacc_decl_make_all:
+compiler_yacc_decl_clean:
+compiler_yacc_impl_make_all:
+compiler_yacc_impl_clean:
+compiler_lex_make_all:
+compiler_lex_clean:
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean compiler_uic_clean 
+
+####### Compile
+
+Canvas2D.o: ui/Canvas2D.cpp ui/Canvas2D.h \
+		ui/SupportCanvas2D.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		ui/Settings.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		lib/RGBA.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QCoreApplication \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qcoreapplication.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/qpainter.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Canvas2D.o ui/Canvas2D.cpp
+
+SupportCanvas2D.o: ui/SupportCanvas2D.cpp ui/SupportCanvas2D.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QString \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		lib/RGBA.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SupportCanvas2D.o ui/SupportCanvas2D.cpp
+
+SupportCanvas3D.o: ui/SupportCanvas3D.cpp ui/SupportCanvas3D.h \
+>>>>>>> Stashed changes
+		glew-1.10.0/include/GL/glew.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/QGLWidget \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/qgl.h \
+		glm/glm.hpp \
+		glm/detail/_fixes.hpp \
+		glm/fwd.hpp \
+		glm/detail/type_int.hpp \
+		glm/detail/setup.hpp \
+		glm/detail/type_float.hpp \
+		glm/detail/type_vec.hpp \
+		glm/detail/precision.hpp \
+		glm/detail/type_mat.hpp \
+		glm/vec2.hpp \
+		glm/detail/type_vec2.hpp \
+		glm/detail/_swizzle.hpp \
+		glm/detail/_swizzle_func.hpp \
+		glm/detail/type_vec2.inl \
+		glm/vec3.hpp \
+		glm/detail/type_vec3.hpp \
+		glm/detail/type_vec3.inl \
+		glm/vec4.hpp \
+		glm/detail/type_vec4.hpp \
+		glm/detail/type_vec4.inl \
+		glm/mat2x2.hpp \
+		glm/detail/type_mat2x2.hpp \
+		glm/detail/type_mat2x2.inl \
+		glm/mat2x3.hpp \
+		glm/detail/type_mat2x3.hpp \
+		glm/detail/type_mat2x3.inl \
+		glm/mat2x4.hpp \
+		glm/detail/type_mat2x4.hpp \
+		glm/detail/type_mat2x4.inl \
+		glm/mat3x2.hpp \
+		glm/detail/type_mat3x2.hpp \
+		glm/detail/type_mat3x2.inl \
+		glm/mat3x3.hpp \
+		glm/detail/type_mat3x3.hpp \
+		glm/detail/type_mat3x3.inl \
+		glm/mat3x4.hpp \
+		glm/detail/type_mat3x4.hpp \
+		glm/detail/type_mat3x4.inl \
+		glm/mat4x2.hpp \
+		glm/detail/type_mat4x2.hpp \
+		glm/detail/type_mat4x2.inl \
+		glm/mat4x3.hpp \
+		glm/detail/type_mat4x3.hpp \
+		glm/detail/type_mat4x3.inl \
+		glm/mat4x4.hpp \
+		glm/detail/type_mat4x4.hpp \
+		glm/detail/type_mat4x4.inl \
+		glm/trigonometric.hpp \
+		glm/detail/func_trigonometric.hpp \
+		glm/detail/func_trigonometric.inl \
+		glm/detail/_vectorize.hpp \
+		glm/detail/type_vec1.hpp \
+		glm/detail/type_vec1.inl \
+		glm/exponential.hpp \
+		glm/detail/func_exponential.hpp \
+		glm/detail/func_exponential.inl \
+		glm/detail/func_vector_relational.hpp \
+		glm/detail/func_vector_relational.inl \
+		glm/common.hpp \
+		glm/detail/func_common.hpp \
+		glm/detail/func_common.inl \
+		glm/packing.hpp \
+		glm/detail/func_packing.hpp \
+		glm/detail/func_packing.inl \
+		glm/detail/type_half.hpp \
+		glm/detail/type_half.inl \
+		glm/geometric.hpp \
+		glm/detail/func_geometric.hpp \
+		glm/detail/func_geometric.inl \
+		glm/matrix.hpp \
+		glm/detail/func_matrix.hpp \
+		glm/detail/func_matrix.inl \
+		glm/vector_relational.hpp \
+		glm/integer.hpp \
+		glm/detail/func_integer.hpp \
+		glm/detail/func_integer.inl \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QApplication \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
+		lib/RGBA.h \
+		ui/Settings.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		gl/GLDebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SupportCanvas3D.o ui/SupportCanvas3D.cpp
+
+Settings.o: ui/Settings.cpp ui/Settings.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		lib/RGBA.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QSettings \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qsettings.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Settings.o ui/Settings.cpp
+
+mainwindow.o: ui/mainwindow.cpp ui/mainwindow.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QButtonGroup \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qbuttongroup.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		ui_mainwindow.h \
+		ui/view.h \
+		glew-1.10.0/include/GL/glew.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/qgl.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QTime \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		ui/Databinding.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QVariant \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qvariant.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QSlider \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qslider.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QRadioButton \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qradiobutton.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QDockWidget \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qdockwidget.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QTabWidget \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qtabwidget.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QDial \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qdial.h \
+		ui/SupportCanvas3D.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/QGLWidget \
+		glm/glm.hpp \
+		glm/detail/_fixes.hpp \
+		glm/fwd.hpp \
+		glm/detail/type_int.hpp \
+		glm/detail/setup.hpp \
+		glm/detail/type_float.hpp \
+		glm/detail/type_vec.hpp \
+		glm/detail/precision.hpp \
+		glm/detail/type_mat.hpp \
+		glm/vec2.hpp \
+		glm/detail/type_vec2.hpp \
+		glm/detail/_swizzle.hpp \
+		glm/detail/_swizzle_func.hpp \
+		glm/detail/type_vec2.inl \
+		glm/vec3.hpp \
+		glm/detail/type_vec3.hpp \
+		glm/detail/type_vec3.inl \
+		glm/vec4.hpp \
+		glm/detail/type_vec4.hpp \
+		glm/detail/type_vec4.inl \
+		glm/mat2x2.hpp \
+		glm/detail/type_mat2x2.hpp \
+		glm/detail/type_mat2x2.inl \
+		glm/mat2x3.hpp \
+		glm/detail/type_mat2x3.hpp \
+		glm/detail/type_mat2x3.inl \
+		glm/mat2x4.hpp \
+		glm/detail/type_mat2x4.hpp \
+		glm/detail/type_mat2x4.inl \
+		glm/mat3x2.hpp \
+		glm/detail/type_mat3x2.hpp \
+		glm/detail/type_mat3x2.inl \
+		glm/mat3x3.hpp \
+		glm/detail/type_mat3x3.hpp \
+		glm/detail/type_mat3x3.inl \
+		glm/mat3x4.hpp \
+		glm/detail/type_mat3x4.hpp \
+		glm/detail/type_mat3x4.inl \
+		glm/mat4x2.hpp \
+		glm/detail/type_mat4x2.hpp \
+		glm/detail/type_mat4x2.inl \
+		glm/mat4x3.hpp \
+		glm/detail/type_mat4x3.hpp \
+		glm/detail/type_mat4x3.inl \
+		glm/mat4x4.hpp \
+		glm/detail/type_mat4x4.hpp \
+		glm/detail/type_mat4x4.inl \
+		glm/trigonometric.hpp \
+		glm/detail/func_trigonometric.hpp \
+		glm/detail/func_trigonometric.inl \
+		glm/detail/_vectorize.hpp \
+		glm/detail/type_vec1.hpp \
+		glm/detail/type_vec1.inl \
+		glm/exponential.hpp \
+		glm/detail/func_exponential.hpp \
+		glm/detail/func_exponential.inl \
+		glm/detail/func_vector_relational.hpp \
+		glm/detail/func_vector_relational.inl \
+		glm/common.hpp \
+		glm/detail/func_common.hpp \
+		glm/detail/func_common.inl \
+		glm/packing.hpp \
+		glm/detail/func_packing.hpp \
+		glm/detail/func_packing.inl \
+		glm/detail/type_half.hpp \
+		glm/detail/type_half.inl \
+		glm/geometric.hpp \
+		glm/detail/func_geometric.hpp \
+		glm/detail/func_geometric.inl \
+		glm/matrix.hpp \
+		glm/detail/func_matrix.hpp \
+		glm/detail/func_matrix.inl \
+		glm/vector_relational.hpp \
+		glm/integer.hpp \
+		glm/detail/func_integer.hpp \
+		glm/detail/func_integer.inl \
+<<<<<<< Updated upstream
+		lib/CS123SceneData.h \
+		ui/Settings.h \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+=======
+		camera/CamtransCamera.h \
+		camera/Camera.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qmessagebox.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ui/mainwindow.cpp
+
+Databinding.o: ui/Databinding.cpp ui/Databinding.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QVariant \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qvariant.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QSlider \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qslider.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QLineEdit \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QCheckBox \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qcheckbox.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QButtonGroup \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qbuttongroup.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QRadioButton \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qradiobutton.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QDockWidget \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qdockwidget.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QTabWidget \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qtabwidget.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QDial \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qdial.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Databinding.o ui/Databinding.cpp
+
+OrbitingCamera.o: camera/OrbitingCamera.cpp glm/gtc/matrix_transform.hpp \
+		glm/mat4x4.hpp \
+		glm/detail/type_mat4x4.hpp \
+		glm/fwd.hpp \
+		glm/detail/type_int.hpp \
+		glm/detail/setup.hpp \
+		glm/detail/type_float.hpp \
+		glm/detail/type_vec.hpp \
+		glm/detail/precision.hpp \
+		glm/detail/type_mat.hpp \
+		glm/detail/type_vec4.hpp \
+		glm/detail/_swizzle.hpp \
+		glm/detail/_swizzle_func.hpp \
+		glm/detail/type_vec4.inl \
+		glm/detail/type_mat4x4.inl \
+		glm/vec2.hpp \
+		glm/detail/type_vec2.hpp \
+		glm/detail/type_vec2.inl \
+		glm/vec3.hpp \
+		glm/detail/type_vec3.hpp \
+		glm/detail/type_vec3.inl \
+		glm/vec4.hpp \
+		glm/gtc/matrix_transform.inl \
+		glm/geometric.hpp \
+		glm/detail/func_geometric.hpp \
+		glm/detail/func_geometric.inl \
+		glm/detail/func_exponential.hpp \
+		glm/detail/type_vec1.hpp \
+		glm/detail/type_vec1.inl \
+		glm/detail/func_exponential.inl \
+		glm/detail/func_vector_relational.hpp \
+		glm/detail/func_vector_relational.inl \
+		glm/detail/_vectorize.hpp \
+		glm/detail/func_common.hpp \
+		glm/detail/_fixes.hpp \
+		glm/detail/func_common.inl \
+		glm/trigonometric.hpp \
+		glm/detail/func_trigonometric.hpp \
+		glm/detail/func_trigonometric.inl \
+		glm/matrix.hpp \
+		glm/detail/func_matrix.hpp \
+		glm/mat2x2.hpp \
+		glm/detail/type_mat2x2.hpp \
+		glm/detail/type_mat2x2.inl \
+		glm/mat2x3.hpp \
+		glm/detail/type_mat2x3.hpp \
+		glm/detail/type_mat2x3.inl \
+		glm/mat2x4.hpp \
+		glm/detail/type_mat2x4.hpp \
+		glm/detail/type_mat2x4.inl \
+		glm/mat3x2.hpp \
+		glm/detail/type_mat3x2.hpp \
+		glm/detail/type_mat3x2.inl \
+		glm/mat3x3.hpp \
+		glm/detail/type_mat3x3.hpp \
+		glm/detail/type_mat3x3.inl \
+		glm/mat3x4.hpp \
+		glm/detail/type_mat3x4.hpp \
+		glm/detail/type_mat3x4.inl \
+		glm/mat4x2.hpp \
+		glm/detail/type_mat4x2.hpp \
+		glm/detail/type_mat4x2.inl \
+		glm/mat4x3.hpp \
+		glm/detail/type_mat4x3.hpp \
+		glm/detail/type_mat4x3.inl \
+		glm/detail/func_matrix.inl \
+		glm/gtx/transform.hpp \
+		glm/glm.hpp \
+		glm/exponential.hpp \
+		glm/common.hpp \
+		glm/packing.hpp \
+		glm/detail/func_packing.hpp \
+		glm/detail/func_packing.inl \
+		glm/detail/type_half.hpp \
+		glm/detail/type_half.inl \
+		glm/vector_relational.hpp \
+		glm/integer.hpp \
+		glm/detail/func_integer.hpp \
+		glm/detail/func_integer.inl \
+		glm/gtx/transform.inl \
+		camera/OrbitingCamera.h \
+		camera/Camera.h \
+		ui/Settings.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		lib/RGBA.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o OrbitingCamera.o camera/OrbitingCamera.cpp
+
+CamtransCamera.o: camera/CamtransCamera.cpp camera/CamtransCamera.h \
+		camera/Camera.h \
+		glm/glm.hpp \
+		glm/detail/_fixes.hpp \
+		glm/fwd.hpp \
+		glm/detail/type_int.hpp \
+		glm/detail/setup.hpp \
+		glm/detail/type_float.hpp \
+		glm/detail/type_vec.hpp \
+		glm/detail/precision.hpp \
+		glm/detail/type_mat.hpp \
+		glm/vec2.hpp \
+		glm/detail/type_vec2.hpp \
+		glm/detail/_swizzle.hpp \
+		glm/detail/_swizzle_func.hpp \
+		glm/detail/type_vec2.inl \
+		glm/vec3.hpp \
+		glm/detail/type_vec3.hpp \
+		glm/detail/type_vec3.inl \
+		glm/vec4.hpp \
+		glm/detail/type_vec4.hpp \
+		glm/detail/type_vec4.inl \
+		glm/mat2x2.hpp \
+		glm/detail/type_mat2x2.hpp \
+		glm/detail/type_mat2x2.inl \
+		glm/mat2x3.hpp \
+		glm/detail/type_mat2x3.hpp \
+		glm/detail/type_mat2x3.inl \
+		glm/mat2x4.hpp \
+		glm/detail/type_mat2x4.hpp \
+		glm/detail/type_mat2x4.inl \
+		glm/mat3x2.hpp \
+		glm/detail/type_mat3x2.hpp \
+		glm/detail/type_mat3x2.inl \
+		glm/mat3x3.hpp \
+		glm/detail/type_mat3x3.hpp \
+		glm/detail/type_mat3x3.inl \
+		glm/mat3x4.hpp \
+		glm/detail/type_mat3x4.hpp \
+		glm/detail/type_mat3x4.inl \
+		glm/mat4x2.hpp \
+		glm/detail/type_mat4x2.hpp \
+		glm/detail/type_mat4x2.inl \
+		glm/mat4x3.hpp \
+		glm/detail/type_mat4x3.hpp \
+		glm/detail/type_mat4x3.inl \
+		glm/mat4x4.hpp \
+		glm/detail/type_mat4x4.hpp \
+		glm/detail/type_mat4x4.inl \
+		glm/trigonometric.hpp \
+		glm/detail/func_trigonometric.hpp \
+		glm/detail/func_trigonometric.inl \
+		glm/detail/_vectorize.hpp \
+		glm/detail/type_vec1.hpp \
+		glm/detail/type_vec1.inl \
+		glm/exponential.hpp \
+		glm/detail/func_exponential.hpp \
+		glm/detail/func_exponential.inl \
+		glm/detail/func_vector_relational.hpp \
+		glm/detail/func_vector_relational.inl \
+		glm/common.hpp \
+		glm/detail/func_common.hpp \
+		glm/detail/func_common.inl \
+		glm/packing.hpp \
+		glm/detail/func_packing.hpp \
+		glm/detail/func_packing.inl \
+		glm/detail/type_half.hpp \
+		glm/detail/type_half.inl \
+		glm/geometric.hpp \
+		glm/detail/func_geometric.hpp \
+		glm/detail/func_geometric.inl \
+		glm/matrix.hpp \
+		glm/detail/func_matrix.hpp \
+		glm/detail/func_matrix.inl \
+		glm/vector_relational.hpp \
+		glm/integer.hpp \
+		glm/detail/func_integer.hpp \
+		glm/detail/func_integer.inl \
+		ui/Settings.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		lib/RGBA.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CamtransCamera.o camera/CamtransCamera.cpp
+
+QuaternionCamera.o: camera/QuaternionCamera.cpp camera/QuaternionCamera.h \
+		camera/Camera.h \
+		glm/glm.hpp \
+		glm/detail/_fixes.hpp \
+		glm/fwd.hpp \
+		glm/detail/type_int.hpp \
+		glm/detail/setup.hpp \
+		glm/detail/type_float.hpp \
+		glm/detail/type_vec.hpp \
+		glm/detail/precision.hpp \
+		glm/detail/type_mat.hpp \
+		glm/vec2.hpp \
+		glm/detail/type_vec2.hpp \
+		glm/detail/_swizzle.hpp \
+		glm/detail/_swizzle_func.hpp \
+		glm/detail/type_vec2.inl \
+		glm/vec3.hpp \
+		glm/detail/type_vec3.hpp \
+		glm/detail/type_vec3.inl \
+		glm/vec4.hpp \
+		glm/detail/type_vec4.hpp \
+		glm/detail/type_vec4.inl \
+		glm/mat2x2.hpp \
+		glm/detail/type_mat2x2.hpp \
+		glm/detail/type_mat2x2.inl \
+		glm/mat2x3.hpp \
+		glm/detail/type_mat2x3.hpp \
+		glm/detail/type_mat2x3.inl \
+		glm/mat2x4.hpp \
+		glm/detail/type_mat2x4.hpp \
+		glm/detail/type_mat2x4.inl \
+		glm/mat3x2.hpp \
+		glm/detail/type_mat3x2.hpp \
+		glm/detail/type_mat3x2.inl \
+		glm/mat3x3.hpp \
+		glm/detail/type_mat3x3.hpp \
+		glm/detail/type_mat3x3.inl \
+		glm/mat3x4.hpp \
+		glm/detail/type_mat3x4.hpp \
+		glm/detail/type_mat3x4.inl \
+		glm/mat4x2.hpp \
+		glm/detail/type_mat4x2.hpp \
+		glm/detail/type_mat4x2.inl \
+		glm/mat4x3.hpp \
+		glm/detail/type_mat4x3.hpp \
+		glm/detail/type_mat4x3.inl \
+		glm/mat4x4.hpp \
+		glm/detail/type_mat4x4.hpp \
+		glm/detail/type_mat4x4.inl \
+		glm/trigonometric.hpp \
+		glm/detail/func_trigonometric.hpp \
+		glm/detail/func_trigonometric.inl \
+		glm/detail/_vectorize.hpp \
+		glm/detail/type_vec1.hpp \
+		glm/detail/type_vec1.inl \
+		glm/exponential.hpp \
+		glm/detail/func_exponential.hpp \
+		glm/detail/func_exponential.inl \
+		glm/detail/func_vector_relational.hpp \
+		glm/detail/func_vector_relational.inl \
+		glm/common.hpp \
+		glm/detail/func_common.hpp \
+		glm/detail/func_common.inl \
+		glm/packing.hpp \
+		glm/detail/func_packing.hpp \
+		glm/detail/func_packing.inl \
+		glm/detail/type_half.hpp \
+		glm/detail/type_half.inl \
+		glm/geometric.hpp \
+		glm/detail/func_geometric.hpp \
+		glm/detail/func_geometric.inl \
+		glm/matrix.hpp \
+		glm/detail/func_matrix.hpp \
+		glm/detail/func_matrix.inl \
+		glm/vector_relational.hpp \
+		glm/integer.hpp \
+		glm/detail/func_integer.hpp \
+		glm/detail/func_integer.inl \
+		glm/gtc/quaternion.hpp \
+		glm/gtc/constants.hpp \
+		glm/gtc/constants.inl \
+		glm/gtc/quaternion.inl \
+		glm/gtx/quaternion.hpp \
+		glm/gtx/norm.hpp \
+		glm/gtx/norm.inl \
+		glm/gtx/quaternion.inl \
+		glm/gtc/matrix_transform.hpp \
+		glm/gtc/matrix_transform.inl \
+		glm/gtx/transform.hpp \
+		glm/gtx/transform.inl
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o QuaternionCamera.o camera/QuaternionCamera.cpp
+
+turtle.o: L_System/turtle.cpp L_System/turtle.h \
 		glm/glm.hpp \
 		glm/detail/_fixes.hpp \
 		glm/fwd.hpp \
@@ -1072,17 +2069,16 @@ turtle.o: L_System/turtle.cpp L_System/turtle.h \
 		glm/detail/func_integer.hpp \
 		glm/detail/func_integer.inl \
 		L_System/Utils.h \
-		glm/gtx/transform.hpp \
-		glm/gtc/matrix_transform.hpp \
-		glm/gtc/matrix_transform.inl \
-		glm/gtx/transform.inl
+		L_System/Utils.cpp
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o turtle.o L_System/turtle.cpp
 
-main.o: main.cpp ../../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QApplication \
-		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
+main.o: main.cpp ../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QApplication \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
 		ui/mainwindow.h \
-		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
-		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QButtonGroup \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qbuttongroup.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 glew.o: glew-1.10.0/src/glew.c glew-1.10.0/include/GL/glew.h \
@@ -1092,26 +2088,23 @@ glew.o: glew-1.10.0/src/glew.c glew-1.10.0/include/GL/glew.h \
 
 view.o: ui/view.cpp ui/view.h \
 		glew-1.10.0/include/GL/glew.h \
-		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/qgl.h \
-		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QTime \
-		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
-		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QTimer \
-		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/qgl.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QTime \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		ui/viewformat.h \
-		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/QGLFormat \
-		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QApplication \
-		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
-		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
-		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/qevent.h
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/QGLFormat \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QApplication \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/qevent.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o view.o ui/view.cpp
 
 viewformat.o: ui/viewformat.cpp ui/viewformat.h \
-		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/QGLFormat \
-		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/qgl.h
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/QGLFormat \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/qgl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o viewformat.o ui/viewformat.cpp
-
-Utils.o: L_System/Utils.cpp L_System/Utils.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Utils.o L_System/Utils.cpp
 
 Shader.o: gl/shaders/Shader.cpp gl/shaders/Shader.h \
 		glew-1.10.0/include/GL/glew.h \
@@ -1348,8 +2341,9 @@ CS123Shader.o: gl/shaders/CS123Shader.cpp gl/shaders/CS123Shader.h \
 		glm/detail/func_integer.inl \
 		lib/CS123SceneData.h \
 		ui/Settings.h \
-		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QObject \
-		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+>>>>>>> Stashed changes
 		lib/RGBA.h \
 		gl/GLDebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o CS123Shader.o gl/shaders/CS123Shader.cpp
@@ -1543,8 +2537,20 @@ ResourceLoader.o: lib/ResourceLoader.cpp lib/ResourceLoader.h \
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp
 
+moc_Canvas2D.o: moc_Canvas2D.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Canvas2D.o moc_Canvas2D.cpp
+
+moc_SupportCanvas2D.o: moc_SupportCanvas2D.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_SupportCanvas2D.o moc_SupportCanvas2D.cpp
+
+moc_SupportCanvas3D.o: moc_SupportCanvas3D.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_SupportCanvas3D.o moc_SupportCanvas3D.cpp
+
 moc_mainwindow.o: moc_mainwindow.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_mainwindow.o moc_mainwindow.cpp
+
+moc_Databinding.o: moc_Databinding.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_Databinding.o moc_Databinding.cpp
 
 moc_view.o: moc_view.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_view.o moc_view.cpp
