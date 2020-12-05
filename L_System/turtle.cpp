@@ -13,8 +13,8 @@ Turtle::~Turtle(){
 
 void Turtle::setUpRules() {
 
-    m_charToBranch = createBranchTypes();
-    m_successors = createProductionRules();
+    createBranchTypes(m_charToBranch);
+    createProductionRules(m_successors);
     m_initial = "";
 
     for (int i = 0; i < l_t; i++) {

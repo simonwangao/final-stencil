@@ -1,7 +1,6 @@
 ﻿#include "shapes/drawer.h"
 #include "lib/ResourceLoader.h"
 #include "glm/gtx/transform.hpp"
-#include "L_System/Utils.h"
 
 Drawer::Drawer() {
 }

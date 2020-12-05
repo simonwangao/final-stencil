@@ -45,19 +45,13 @@ struct BranchFeats {
     BranchFeats(float len, float angleX, float angleY, float angleZ): l(len), alphaX(angleX), alphaY(angleY), alphaZ(angleZ) {};
 };
 
-// map of character to branch characteristics
-unordered_map<char, BranchFeats> charToBranch;
-
-// production rules
-unordered_map<char, vector<char>> successors;
-
-void addBranchChar(char character, BranchFeats characteristics);
+void addBranchChar(char character, BranchFeats characteristics, unordered_map<char, BranchFeats> charToBranch);
 void addProductionRule(char predecessor, vector<char> succs);
 
 float randomLen();
 float randomAngle();
 
-unordered_map<char, BranchFeats> createBranchTypes();
-unordered_map<char, vector<char>> createProductionRules();
+void createBranchTypes(unordered_map<char, BranchFeats> charToBranch);
+void createProductionRules(unordered_map<char, vector<char>> successors);
 
 #endif
