@@ -60,11 +60,6 @@ SOURCES += ui/mainwindow.cpp \
     lib/ResourceLoader.cpp
 
 HEADERS += ui/mainwindow.h \
-    ../projects-connorjohnson98/scenegraph/OpenGLScene.h \
-    ../projects-connorjohnson98/scenegraph/RayScene.h \
-    ../projects-connorjohnson98/scenegraph/Scene.h \
-    ../projects-connorjohnson98/scenegraph/SceneviewScene.h \
-    ../projects-connorjohnson98/scenegraph/ShapesScene.h \
     camera/Camera.h \
     camera/CamtransCamera.h \
     camera/OrbitingCamera.h \
