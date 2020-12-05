@@ -26,11 +26,15 @@ SOURCES += ui/mainwindow.cpp \
     camera/OrbitingCamera.cpp \
     camera/QuaternionCamera.cpp \
     gl/openglshape.cpp \
+    scenegraph/OpenGLScene.cpp \
+    scenegraph/Scene.cpp \
+    scenegraph/SceneviewScene.cpp \
     shapes/drawer.cpp \
     ui/Settings.cpp \
     L_System/turtle.cpp \
     main.cpp \
     glew-1.10.0/src/glew.c \
+    ui/SupportCanvas3D.cpp \
     ui/view.cpp \
     ui/viewformat.cpp \
     L_System/Utils.cpp \
@@ -55,15 +59,26 @@ SOURCES += ui/mainwindow.cpp \
     lib/ResourceLoader.cpp
 
 HEADERS += ui/mainwindow.h \
+    ../projects-connorjohnson98/scenegraph/OpenGLScene.h \
+    ../projects-connorjohnson98/scenegraph/RayScene.h \
+    ../projects-connorjohnson98/scenegraph/Scene.h \
+    ../projects-connorjohnson98/scenegraph/SceneviewScene.h \
+    ../projects-connorjohnson98/scenegraph/ShapesScene.h \
     camera/Camera.h \
     camera/CamtransCamera.h \
     camera/OrbitingCamera.h \
     camera/QuaternionCamera.h \
     gl/openglshape.h \
+    scenegraph/OpenGLScene.h \
+    scenegraph/RayScene.h \
+    scenegraph/Scene.h \
+    scenegraph/SceneviewScene.h \
+    scenegraph/ShapesScene.h \
     shapes/drawer.h \
     ui/Settings.h \
     L_System/Utils.h \
     L_System/turtle.h \
+    ui/SupportCanvas3D.h \
     ui_mainwindow.h \
     glew-1.10.0/include/GL/glew.h \
     ui/view.h \
