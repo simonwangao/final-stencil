@@ -48,6 +48,7 @@ vector<pair<string, float>> Turtle::interpretChar(char pred, vector<char> succs)
     for (int i = 0; i < num_succs; i++) {
         output.push_back({lbracket, 0});
         vector<pair<string, float>> subResult = interpretChar(succs[i], {});
+        output.reserve(subResult.size());
         output.insert(output.end(), subResult.begin(), subResult.end());
         output.push_back({rbracket, 0});
     }
