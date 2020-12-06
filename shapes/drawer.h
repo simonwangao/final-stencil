@@ -46,6 +46,7 @@ protected:
 
     static std::vector<GLfloat> vertexTimesMatrix(const glm::mat4& matrix, const std::vector<GLfloat>& vertexData);
     void loadPhongShader();
+    void createLights();
     void setSceneUniforms(SupportCanvas3D *context);
     void setLights();
 

@@ -6,6 +6,7 @@ using namespace CS123::GL;
 
 Drawer::Drawer() {
     loadPhongShader();
+    createLights();
 }
 
 Drawer::~Drawer() {
@@ -15,6 +16,21 @@ void Drawer::loadPhongShader() {
     std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/shader.vert");
     std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/shader.frag");
     m_phongShader = std::make_unique<CS123Shader>(vertexSource, fragmentSource);
+}
+
+void Drawer::createLights() {
+    m_light_data = {};
+
+    CS123SceneLightData ptLight1;
+    ptLight1.id = 0;
+    ptLight1.pos = glm::vec4(3, 3, 3, 1);
+
+    // these two are not used yet but we can use if we implement phong's on our own ... not the sceneview way
+    ptLight1.color = glm::vec4(1, 1, 1, 1);
+    ptLight1.function = glm::vec3();
+
+    m_light_data.push_back(ptLight1);
+
 }
 
 std::vector<GLfloat> Drawer::vertexTimesMatrix(const glm::mat4& matrix, const std::vector<GLfloat>& vertexData) {
