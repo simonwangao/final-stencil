@@ -6,6 +6,8 @@ Turtle::Turtle() {
     m_direction = glm::vec4(0., 1., 0., 0.);
     m_loc[3] = 1.;
     m_depth = 0;
+
+    setUpRules();
 }
 
 Turtle::~Turtle(){
