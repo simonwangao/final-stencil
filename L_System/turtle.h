@@ -13,6 +13,7 @@
 using std::string;
 using std::unordered_map;
 using std::vector;
+using std::pair;
 
 struct SegmentData {
     glm::vec4 startLoc;     // start location of the segment
@@ -37,8 +38,10 @@ public:
     void setUpRules();
     string createTreePattern(string predecessor);
 
+    vector<pair<string, float>> interpretString(string pattern);
+
     // input is a "string" (vector of constants and parameters)
-    void parse(const std::vector<std::pair<std::string, float>>& str);
+    void parse(const vector<pair<string, float>>& str);
     std::vector<SegmentData> getSegmentData();
 
 private:
