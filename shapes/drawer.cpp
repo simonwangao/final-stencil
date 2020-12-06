@@ -2,10 +2,19 @@
 #include "lib/ResourceLoader.h"
 #include "glm/gtx/transform.hpp"
 
+using namespace CS123::GL;
+
 Drawer::Drawer() {
+    loadPhongShader();
 }
 
 Drawer::~Drawer() {
+}
+
+void Drawer::loadPhongShader() {
+    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/shader.vert");
+    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/shader.frag");
+    m_phongShader = std::make_unique<CS123Shader>(vertexSource, fragmentSource);
 }
 
 std::vector<GLfloat> Drawer::vertexTimesMatrix(const glm::mat4& matrix, const std::vector<GLfloat>& vertexData) {
@@ -31,47 +40,62 @@ std::vector<GLfloat> Drawer::vertexTimesMatrix(const glm::mat4& matrix, const st
     return result;
 }
 
-void Drawer::draw(const std::vector<SegmentData>& segmentData) {
-    // Set the color to set the screen when the color buffer is cleared.scale
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+void Drawer::render(SupportCanvas3D *context, const std::vector<SegmentData>& data) {
+    setClearColor();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // Creates the shader program that will be used for drawing.
-    m_program = ResourceLoader::createShaderProgram(":/shaders/shader.vert", ":/shaders/shader.frag");
+    m_phongShader->bind();
+    setSceneUniforms(context);
+    setLights();
+    draw(data); // prime function here
+    glBindTexture(GL_TEXTURE_2D, 0);
+    m_phongShader->unbind();
+}
+
+void Drawer::setSceneUniforms(SupportCanvas3D *context) {
+    Camera *camera = context->getCamera();
+    m_phongShader->setUniform("useLighting", true);
+    m_phongShader->setUniform("useArrowOffsets", false);
+    m_phongShader->setUniform("p" , camera->getProjectionMatrix());
+    m_phongShader->setUniform("v", camera->getViewMatrix());
+}
+
+void Drawer::setLights()
+{
+    for (auto light : this->m_light_data)
+        m_phongShader->setLight(light);
+}
+
+void Drawer::draw(const std::vector<SegmentData>& segmentData) {
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     // create the tessellation of the cylinder
-    Cylinder cylinder = Cylinder();
-    cylinder.setParams(PARAM1, PARAM2, 0);
-
-    std::vector<GLfloat> objectSpaceData = cylinder.getVertexData();
-    std::vector<GLfloat> result;
+    std::unique_ptr<Shape> shapePtr = std::make_unique<Cylinder>(PARAM1, PARAM2);
 
     for (SegmentData data : segmentData) {
         // already finished the rotation and translation,
         // need to do the scaling here
         // note that need to do the translation from center of the bottom circle
         // to the center of the cylinder
-        glm::mat4 m(1.); // identity matrix
+        glm::mat4 mat(1.); // identity matrix
         // scaling
-        float diameter = 1 * glm::pow(d, (float)data.depth);
-        m = glm::scale(glm::vec3(diameter, diameter, data.length)) * m;
-        m = glm::translate(glm::vec3(0., data.length / 2., 0.)) * m;
-        m = data.matrix * m;
+        float diameter = START_DIAMETER * glm::pow(d, (float)data.depth);
+        mat = glm::scale(glm::vec3(diameter, data.length, diameter)) * mat;
+        mat = glm::translate(glm::vec3(0., data.length / 2., 0.)) * mat; // move "to the ground" (y >= 0)
+        mat = data.matrix * mat;
 
-        // get world space vertex and normal data
-        std::vector<GLfloat> worldSpaceData = vertexTimesMatrix(m, objectSpaceData);
-        result.insert(result.end(), worldSpaceData.begin(), worldSpaceData.end());
+        // set up the material here ?
+        CS123SceneMaterial material;
+        /*
+         *
+         */
+        m_phongShader->applyMaterial(material);
+
+        // set as model matrix (transforming on GPU)
+        m_phongShader->setUniform("m", mat);
+
+        shapePtr->draw();
     }
 
-
-    // draw the world space sylinders, which is the tree
-    m_shape = std::make_unique<OpenGLShape>();
-    const int numFloatsPerVertex = 6;
-    m_shape->setVertexData(&result[0], result.size(), VBO::GEOMETRY_LAYOUT::LAYOUT_TRIANGLES, result.size() / numFloatsPerVertex);
-    m_shape->setAttribute(0, 3, 0, VBOAttribMarker::DATA_TYPE::FLOAT, false);
-    m_shape->buildVAO();
-
-    glEnable(GL_DEPTH_TEST);
-
-    //
-
+    return ;
 }

@@ -42,7 +42,7 @@ void Cylinder::setParams(int param1, int param2, float param3) {
     std::vector<GLfloat> faces = getFaceVertexData(m_param1, m_param2);
     m_vertexData.insert(m_vertexData.end(), faces.begin(), faces.end());
 
-    //buildVAO();
+    buildVAO();
 }
 
 std::vector<GLfloat> Cylinder::getFaceVertexData(int param1, int param2) {

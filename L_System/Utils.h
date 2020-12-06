@@ -23,17 +23,18 @@ const string lbracket = "[";   // Push the current state of the turtle to stack
 const string rbracket = "]";   // Pop the current state of the turtle from stack
 
 // parameters
-const int l_t = 4;          // Branch levels of the tree
-const float l_max = 10.;     // The max length allowed of a branch
-const float l_min = 0.;     // The min length allowed of a branch
-const float alpha_max = 60.; // The max branching angle allowed of a branch
-const float alpha_min = 15.; // The min branching angle allowed of a branch
-const float w = 4.;         // The width of the initial branch
-const float d = 0.707;      // The decrease of the width
-const int l_l = 0;          // Leafing levels of the tree
-const int l_n = 0;          // Leaf number per branch
-const int PARAM1 = 40;      // used for shape primitive
-const int PARAM2 = 40;      // used for shape primitive
+const int l_t = 4;                  // Branch levels of the tree
+const float l_max = 10.;            // The max length allowed of a branch
+const float l_min = 0.;             // The min length allowed of a branch
+const float alpha_max = 60.;        // The max branching angle allowed of a branch
+const float alpha_min = 15.;        // The min branching angle allowed of a branch
+const float w = 4.;                 // The width of the initial branch
+const float d = 0.707;              // The decrease of the width
+const int l_l = 0;                  // Leafing levels of the tree
+const int l_n = 0;                  // Leaf number per branch
+const int PARAM1 = 40;              // used for shape primitive
+const int PARAM2 = 40;              // used for shape primitive
+const float START_DIAMETER = 1.;    // starting diameter of the cylinder
 
 struct BranchFeats {
     float l; // length of branch

@@ -61,7 +61,7 @@ protected:
                                              const glm::vec3& rAverageNormal);
 
     std::vector<GLfloat> m_vertexData;
-    //std::unique_ptr<CS123::GL::VAO> m_VAO;
+    std::unique_ptr<CS123::GL::VAO> m_VAO;
 
     // used for comparision with settings
     int m_shapeType;
