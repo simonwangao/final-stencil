@@ -20,6 +20,7 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QVBoxLayout>
@@ -80,6 +81,7 @@ public:
     QLabel *cameraRotationLabelRoll;
     QPushButton *resetUpVector;
     QLabel *label;
+    QMenuBar *menuBar;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -387,6 +389,10 @@ public:
         label->setWordWrap(true);
         camtransDock->setWidget(camtransDockContents);
         MainWindow->addDockWidget(Qt::LeftDockWidgetArea, camtransDock);
+        menuBar = new QMenuBar(MainWindow);
+        menuBar->setObjectName(QString::fromUtf8("menuBar"));
+        menuBar->setGeometry(QRect(0, 0, 800, 22));
+        MainWindow->setMenuBar(menuBar);
 
         retranslateUi(MainWindow);
 

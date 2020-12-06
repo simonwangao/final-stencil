@@ -50,6 +50,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
 
     //ui->menuToolbars->addActions(actions);
+    tabifyDockWidget(ui->BurningTreeDock, ui->camtransDock);
+    //tabifyDockWidget(ui->brushDock, ui->shapesDock);
+    //tabifyDockWidget(ui->brushDock, ui->camtransDock);
+    //tabifyDockWidget(ui->brushDock, ui->rayDock);
+    ui->BurningTreeDock->raise();
 #undef SETUP_ACTION
 
     dataBind();
