@@ -112,7 +112,7 @@ void SupportCanvas3D::paintGL() {
     float ratio = static_cast<QGuiApplication *>(QCoreApplication::instance())->devicePixelRatio();
     glViewport(0, 0, width() * ratio, height() * ratio);
     getCamera()->setAspectRatio(static_cast<float>(width()) / static_cast<float>(height()));
-    m_currentScene->render(this);
+    //m_currentScene->render(this);
 }
 
 void SupportCanvas3D::settingsChanged() {

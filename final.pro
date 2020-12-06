@@ -112,7 +112,6 @@ DEFINES += GLM_SWIZZLE GLM_FORCE_RADIANS
 OTHER_FILES += shaders/shader.frag \
     shaders/shader.vert \
     shaders/wireframe/wireframe.vert \
-    shaders/wireframe/wireframe.frag \
     shaders/normals/normals.vert \
     shaders/normals/normals.gsh \
     shaders/normals/normals.frag \
@@ -147,4 +146,6 @@ DISTFILES += \
     shaders/normals/normals.gsh \
     shaders/normals/normalsArrow.gsh \
     shaders/normals/normalsArrow.frag \
-    shaders/normals/normalsArrow.vert
+    shaders/normals/normalsArrow.vert \
+    shaders/wireframe/wireframe.frag \
+    shaders/wireframe/wireframe.vert

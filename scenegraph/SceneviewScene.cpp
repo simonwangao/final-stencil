@@ -33,22 +33,22 @@ void SceneviewScene::loadPhongShader() {
 }
 
 void SceneviewScene::loadWireframeShader() {
-    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/wireframe/wireframe.vert");
-    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/wireframe/wireframe.frag");
+    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/wireframe.vert");
+    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/wireframe.frag");
     m_wireframeShader = std::make_unique<Shader>(vertexSource, fragmentSource);
 }
 
 void SceneviewScene::loadNormalsShader() {
-    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/normals/normals.vert");
-    std::string geometrySource = ResourceLoader::loadResourceFileToString(":/shaders/normals/normals.gsh");
-    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/normals/normals.frag");
+    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/normals.vert");
+    std::string geometrySource = ResourceLoader::loadResourceFileToString(":/shaders/normals.gsh");
+    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/normals.frag");
     m_normalsShader = std::make_unique<Shader>(vertexSource, geometrySource, fragmentSource);
 }
 
 void SceneviewScene::loadNormalsArrowShader() {
-    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/normals/normalsArrow.vert");
-    std::string geometrySource = ResourceLoader::loadResourceFileToString(":/shaders/normals/normalsArrow.gsh");
-    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/normals/normalsArrow.frag");
+    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/normalsArrow.vert");
+    std::string geometrySource = ResourceLoader::loadResourceFileToString(":/shaders/normalsArrow.gsh");
+    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/normalsArrow.frag");
     m_normalsArrowShader = std::make_unique<Shader>(vertexSource, geometrySource, fragmentSource);
 }
 
