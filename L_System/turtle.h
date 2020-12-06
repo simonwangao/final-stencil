@@ -36,9 +36,10 @@ public:
     ~Turtle();
 
     void setUpRules();
-    string createTreePattern(string predecessor);
+    string createTreePattern();
 
-    vector<pair<string, float>> interpretString(string pattern);
+    vector<pair<string, float>> interpretChar(char pred, vector<char> succs);
+    vector<pair<string, float>> interpretString();
 
     // input is a "string" (vector of constants and parameters)
     void parse(const vector<pair<string, float>>& str);

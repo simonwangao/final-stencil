@@ -15,38 +15,56 @@ void Turtle::setUpRules() {
 
     createBranchTypes(m_charToBranch);
     createProductionRules(m_successors);
-    m_initial = "";
+    m_initial = createTreePattern();
 
-    for (int i = 0; i < l_t; i++) {
-        if (i % 3) {
-            m_initial.append("b");
-        } else {
-           m_initial.append("a");
-        }
-    }
+
 }
 
-string Turtle::createTreePattern(string predecessor) {
+string Turtle::createTreePattern() {
 
     string newPattern = "";
 
-    // replaced based on probability
     for (int i = 0; i < l_t; i++) {
-
-        char curr = predecessor[i];
-        vector<char> options = m_successors[curr];
-        int index = rand() % options.size();
-        char next = options[index];
-
-        newPattern.push_back(next);
+        if (i % 3) {
+            newPattern.append("b");
+        } else {
+           newPattern.append("a");
+        }
     }
 
     // return changed string
     return newPattern;
 }
 
-vector<pair<string, float>> interpretString(string pattern) {
+vector<pair<string, float>> Turtle::interpretChar(char pred, vector<char> succs) {
     vector<pair<string, float>> output;
+    BranchFeats vals = m_charToBranch[pred];
+    output.push_back({plus, vals.alphaY});
+    output.push_back({left, vals.alphaX});
+    output.push_back({down, vals.alphaZ});
+    output.push_back({F, vals.l});
+
+    int num_succs = succs.size();
+    for (int i = 0; i < num_succs; i++) {
+        output.push_back({lbracket, 0});
+        vector<pair<string, float>> subResult = interpretChar(succs[i], {});
+        output.insert(output.end(), subResult.begin(), subResult.end());
+        output.push_back({rbracket, 0});
+    }
+
+    return output;
+}
+
+vector<pair<string, float>> Turtle::interpretString() {
+    int num_chars = m_initial.size();
+    vector<pair<string, float>> output;
+
+    for (int i = 0; i < num_chars; i++) {
+        char curr = m_initial[i];
+        vector<pair<string, float>> charOutput = interpretChar(curr, m_successors[curr]);
+        output.reserve(charOutput.size());
+        output.insert(output.end(), charOutput.begin(), charOutput.end());
+    }
 
     return output;
 }
