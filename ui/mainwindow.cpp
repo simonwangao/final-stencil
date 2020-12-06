@@ -5,6 +5,8 @@
 #include "SupportCanvas3D.h"
 #include "scenegraph/SceneviewScene.h"
 #include "camera/CamtransCamera.h"
+#include "L_System/turtle.h"
+#include "shapes/drawer.h"
 #include <math.h>
 #include <QFileDialog>
 #include <QMessageBox>
@@ -223,6 +225,18 @@ void MainWindow::updateCameraHeightAngle() {
 
 void MainWindow::setCameraAxonometric() {
     m_canvas3D->setCameraAxonometric();
+}
+
+void MainWindow::renderTrees() {
+
+    m_canvas3D->update();
+    QApplication::processEvents();
+
+    Turtle newTree = Turtle();
+    newTree.parse(newTree.interpretString());
+
+    Drawer renderer = new Drawer();
+    renderer.render(m_canvas3D, newTree.getSegmentData());
 }
 
 /*

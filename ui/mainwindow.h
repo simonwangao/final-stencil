@@ -74,6 +74,8 @@ public slots:
     void updateCameraClip();
     void updateCameraHeightAngle();
     void setCameraAxonometric();
+
+    void renderTrees();
 };
 
 /*
