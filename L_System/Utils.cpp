@@ -36,7 +36,9 @@ float randomAngle() {
 }
 
 
-void createBranchTypes(unordered_map<char, BranchFeats> charToBranch) {
+unordered_map<char, BranchFeats> createBranchTypes() {
+    unordered_map<char, BranchFeats> charToBranch;
+
     float len1 = randomLen();
     float angleX = randomAngle();
     float angleY = randomAngle();
@@ -48,9 +50,15 @@ void createBranchTypes(unordered_map<char, BranchFeats> charToBranch) {
     float angle2Y = randomAngle();
     float angle2Z = randomAngle();
     addBranchChar('b', BranchFeats(len2, angle2X, angle2Y, angle2Z), charToBranch);
+
+    return charToBranch;
 }
 
-void createProductionRules(unordered_map<char, vector<char>> successors) {
+unordered_map<char, vector<char>> createProductionRules() {
+    unordered_map<char, vector<char>> successors;
+
     addProductionRule('a', {'a', 'b', 'a'}, successors);
     addProductionRule('b', {'b', 'a'}, successors);
+
+    return successors;
 }

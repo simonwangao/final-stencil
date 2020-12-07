@@ -1,5 +1,6 @@
 ﻿#include "L_System/turtle.h"
 #include "glm/gtx/transform.hpp"
+#include <iostream>
 
 Turtle::Turtle() {
     m_loc = glm::vec4(0.);
@@ -15,8 +16,8 @@ Turtle::~Turtle(){
 
 void Turtle::setUpRules() {
 
-    createBranchTypes(m_charToBranch);
-    createProductionRules(m_successors);
+    m_charToBranch = createBranchTypes();
+    m_successors = createProductionRules();
     m_initial = createTreePattern();
 
 
@@ -90,6 +91,8 @@ void Turtle::parse(const std::vector<std::pair<std::string, float>>& str) {
 
     for (auto pair : str) {
         std::string command = pair.first;
+
+        std::cout << pair.second << std::endl;
         if (command == F) {
             // move forward
             // new segment, need to put in the list

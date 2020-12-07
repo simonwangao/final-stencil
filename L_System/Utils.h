@@ -52,7 +52,7 @@ void addProductionRule(char predecessor, vector<char> succs);
 float randomLen();
 float randomAngle();
 
-void createBranchTypes(unordered_map<char, BranchFeats> charToBranch);
-void createProductionRules(unordered_map<char, vector<char>> successors);
+unordered_map<char, BranchFeats> createBranchTypes();
+unordered_map<char, vector<char>> createProductionRules();
 
 #endif
