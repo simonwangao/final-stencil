@@ -13,6 +13,9 @@ Drawer::Drawer() {
     m_global_data.ka = 0.5;
     m_global_data.kd = 0.5;
     m_global_data.ks = 0.5;
+
+    // change later
+    setData(std::vector<SegmentData>());
 }
 
 
@@ -20,7 +23,14 @@ Drawer::~Drawer() {
 }
 
 void Drawer::setData(const std::vector<SegmentData>& data) {
-    m_data = data;
+    //m_data = data;
+    SegmentData d;
+    d.matrix = glm::mat4(1.);
+    d.depth = 1;
+    d.length = 1.;
+    d.startLoc = glm::vec4(0., 0., 0., 1.);
+    d.direction = glm::vec4(0., 1., 0., 0.);
+    m_data.push_back(d);
 }
 
 void Drawer::loadPhongShader() {
@@ -113,9 +123,11 @@ void Drawer::draw(const std::vector<SegmentData>& segmentData) {
 
         // set up the material here ?
         CS123SceneMaterial material;
-        /*
-         *
-         */
+
+        material.cAmbient = glm::vec4(0.1, 0.1, 0.1, 1.);
+        material.cDiffuse = glm::vec4(1., 1., 1., 1.);
+        material.cSpecular = glm::vec4(0., 0., 0., 1.);
+
         m_phongShader->applyMaterial(material);
 
         // set as model matrix (transforming on GPU)
