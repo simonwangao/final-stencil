@@ -33,12 +33,14 @@ public:
     Drawer();
     ~Drawer();
 
-    void render(SupportCanvas3D *context, const std::vector<SegmentData>& data);
-    void draw(const std::vector<SegmentData>& data);
+    void setData(const std::vector<SegmentData>& data);
+    void render(SupportCanvas3D *context);
+    void draw(const std::vector<SegmentData>& data); 
 
 protected:
     /** ID for the shader program. */
     GLuint m_program;
+    std::vector<SegmentData> m_data;
     std::unique_ptr<OpenGLShape> m_shape;
     std::unique_ptr<CS123::GL::CS123Shader> m_phongShader;
     int m_shapeParameter1;

@@ -235,8 +235,9 @@ void MainWindow::renderTrees() {
     Turtle newTree = Turtle();
     newTree.parse(newTree.interpretString());
 
-    Drawer renderer = new Drawer();
-    renderer.render(m_canvas3D, newTree.getSegmentData());
+    Drawer *renderer = new Drawer();
+    renderer->setData(newTree.getSegmentData());
+    renderer->render(m_canvas3D);
 }
 
 /*

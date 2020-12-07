@@ -5,6 +5,7 @@
 using namespace CS123::GL;
 
 Drawer::Drawer() {
+
     loadPhongShader();
     createLights();
 
@@ -14,7 +15,12 @@ Drawer::Drawer() {
     m_global_data.ks = 0.5;
 }
 
+
 Drawer::~Drawer() {
+}
+
+void Drawer::setData(const std::vector<SegmentData>& data) {
+    m_data = data;
 }
 
 void Drawer::loadPhongShader() {
@@ -61,14 +67,14 @@ std::vector<GLfloat> Drawer::vertexTimesMatrix(const glm::mat4& matrix, const st
     return result;
 }
 
-void Drawer::render(SupportCanvas3D *context, const std::vector<SegmentData>& data) {
+void Drawer::render(SupportCanvas3D *context) {
     setClearColor();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     m_phongShader->bind();
     setSceneUniforms(context);
     setLights();
-    draw(data); // prime function here
+    draw(m_data); // prime function here
     glBindTexture(GL_TEXTURE_2D, 0);
     m_phongShader->unbind();
 }

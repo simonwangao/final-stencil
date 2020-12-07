@@ -1144,6 +1144,15 @@ mainwindow.o: ui/mainwindow.cpp ui/mainwindow.h \
 		shapes/Cylinder.h \
 		camera/CamtransCamera.h \
 		camera/Camera.h \
+		L_System/turtle.h \
+		L_System/Utils.h \
+		shapes/drawer.h \
+		/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/OpenGL.framework/Headers/glu.h \
+		gl/shaders/CS123Shader.h \
+		gl/shaders/Shader.h \
+		gl/openglshape.h \
+		gl/datatype/VBO.h \
+		gl/datatype/VBOAttribMarker.h \
 		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
 		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
 		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
