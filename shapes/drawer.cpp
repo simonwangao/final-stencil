@@ -24,13 +24,16 @@ Drawer::~Drawer() {
 
 void Drawer::setData(const std::vector<SegmentData>& data) {
     //m_data = data;
-    SegmentData d;
-    d.matrix = glm::mat4(1.);
-    d.depth = 1;
-    d.length = 1.;
-    d.startLoc = glm::vec4(0., 0., 0., 1.);
-    d.direction = glm::vec4(0., 1., 0., 0.);
-    m_data.push_back(d);
+
+    Turtle turtle;
+    vector<pair<string, float>> v;
+    v.push_back(std::make_pair(F, 1.));
+    v.push_back(std::make_pair(left, 30.));
+    v.push_back(std::make_pair(F, .5));
+
+    turtle.parse(v);
+
+    m_data = turtle.getSegmentData();
 }
 
 void Drawer::loadPhongShader() {
@@ -124,9 +127,13 @@ void Drawer::draw(const std::vector<SegmentData>& segmentData) {
         // set up the material here ?
         CS123SceneMaterial material;
 
-        material.cAmbient = glm::vec4(0.1, 0.1, 0.1, 1.);
+
+        material.cAmbient = glm::vec4(0.3, 0.3, 0.2, 1.);
         material.cDiffuse = glm::vec4(1., 1., 1., 1.);
         material.cSpecular = glm::vec4(0., 0., 0., 1.);
+        material.cAmbient *= m_global_data.ka;
+        material.cDiffuse *= m_global_data.kd;
+
 
         m_phongShader->applyMaterial(material);
 

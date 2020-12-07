@@ -34,7 +34,7 @@ const int l_l = 0;                  // Leafing levels of the tree
 const int l_n = 0;                  // Leaf number per branch
 const int PARAM1 = 40;              // used for shape primitive
 const int PARAM2 = 40;              // used for shape primitive
-const float START_DIAMETER = 1.;    // starting diameter of the cylinder
+const float START_DIAMETER = .3;    // starting diameter of the cylinder
 
 struct BranchFeats {
     float l; // length of branch

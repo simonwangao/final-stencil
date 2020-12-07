@@ -129,37 +129,56 @@ void Turtle::parse(const std::vector<std::pair<std::string, float>>& str) {
 
         } else if (command == plus) {
             // no need to change location and depth
-            glm::mat4 rotator = glm::rotate(pair.second * (float)M_PI / 180.f, glm::vec3(0, 1, 0));
+            // translate back to origin and then translate back
+            glm::mat4 back2origin = glm::translate(-m_loc.xyz());
+
+            glm::mat4 rotator = glm::inverse(back2origin) * glm::rotate(pair.second * (float)M_PI / 180.f, glm::vec3(0, 1, 0)) * back2origin;
             m_direction = rotator * m_direction;
             m_matrix = rotator * m_matrix;
 
+
         } else if (command == minus) {
             // no need to change location and depth
-            glm::mat4 rotator = glm::rotate(pair.second * (float)M_PI / 180.f, glm::vec3(0, -1, 0));
+            // translate back to origin and then translate back
+            glm::mat4 back2origin = glm::translate(-m_loc.xyz());
+
+            glm::mat4 rotator = glm::inverse(back2origin) * glm::rotate(pair.second * (float)M_PI / 180.f, glm::vec3(0, -1, 0)) * back2origin;
             m_direction = rotator * m_direction;
             m_matrix = rotator * m_matrix;
 
         } else if (command == down) {
             // no need to change location and depth
-            glm::mat4 rotator = glm::rotate(pair.second * (float)M_PI / 180.f, glm::vec3(1, 0, 0));
+            // translate back to origin and then translate back
+            glm::mat4 back2origin = glm::translate(-m_loc.xyz());
+
+            glm::mat4 rotator = glm::inverse(back2origin) * glm::rotate(pair.second * (float)M_PI / 180.f, glm::vec3(1, 0, 0)) * back2origin;
             m_direction = rotator * m_direction;
             m_matrix = rotator * m_matrix;
 
         } else if (command == up) {
             // no need to change location and depth
-            glm::mat4 rotator = glm::rotate(pair.second * (float)M_PI / 180.f, glm::vec3(-1, 0, 0));
+            // translate back to origin and then translate back
+            glm::mat4 back2origin = glm::translate(-m_loc.xyz());
+
+            glm::mat4 rotator = glm::inverse(back2origin) * glm::rotate(pair.second * (float)M_PI / 180.f, glm::vec3(-1, 0, 0)) * back2origin;
             m_direction = rotator * m_direction;
             m_matrix = rotator * m_matrix;
 
         } else if (command == left) {
             // no need to change location and depth
-            glm::mat4 rotator = glm::rotate(pair.second * (float)M_PI / 180.f, glm::vec3(0, 0, 1));
+            // translate back to origin and then translate back
+            glm::mat4 back2origin = glm::translate(-m_loc.xyz());
+
+            glm::mat4 rotator = glm::inverse(back2origin) * glm::rotate(pair.second * (float)M_PI / 180.f, glm::vec3(0, 0, 1)) * back2origin;
             m_direction = rotator * m_direction;
             m_matrix = rotator * m_matrix;
 
         } else if (command == right) {
             // no need to change location and depth
-            glm::mat4 rotator = glm::rotate(pair.second * (float)M_PI / 180.f, glm::vec3(0, 0, -1));
+            // translate back to origin and then translate back
+            glm::mat4 back2origin = glm::translate(-m_loc.xyz());
+
+            glm::mat4 rotator = glm::inverse(back2origin) * glm::rotate(pair.second * (float)M_PI / 180.f, glm::vec3(0, 0, -1)) * back2origin;
             m_direction = rotator * m_direction;
             m_matrix = rotator * m_matrix;
 
