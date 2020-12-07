@@ -227,18 +227,7 @@ void MainWindow::setCameraAxonometric() {
     m_canvas3D->setCameraAxonometric();
 }
 
-void MainWindow::renderTrees() {
 
-    m_canvas3D->update();
-    QApplication::processEvents();
-
-    Turtle newTree = Turtle();
-    newTree.parse(newTree.interpretString());
-
-    Drawer *renderer = new Drawer();
-    renderer->setData(newTree.getSegmentData());
-    renderer->render(m_canvas3D);
-}
 
 /*
 #include "mainwindow.h"

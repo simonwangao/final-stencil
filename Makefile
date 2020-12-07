@@ -964,6 +964,24 @@ moc_SupportCanvas3D.cpp: ui/SupportCanvas3D.h \
 		glm/integer.hpp \
 		glm/detail/func_integer.hpp \
 		glm/detail/func_integer.inl \
+		shapes/drawer.h \
+		/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/OpenGL.framework/Headers/glu.h \
+		camera/Camera.h \
+		scenegraph/OpenGLScene.h \
+		scenegraph/Scene.h \
+		lib/CS123SceneData.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/QImage \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/qimage.h \
+		shapes/Shape.h \
+		shapes/Cylinder.h \
+		gl/shaders/CS123Shader.h \
+		gl/shaders/Shader.h \
+		gl/openglshape.h \
+		gl/datatype/VBO.h \
+		gl/datatype/VBOAttribMarker.h \
+		L_System/turtle.h \
+		L_System/Utils.h \
+		ui/SupportCanvas3D.h \
 		moc_predefs.h \
 		../../../Qt5.14.2/5.14.2/clang_64/bin/moc
 	/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/bin/moc $(DEFINES) --include /Users/monicaroy/course/cs1230/final-stencil/moc_predefs.h -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/mkspecs/macx-clang -I/Users/monicaroy/course/cs1230/final-stencil -I/Users/monicaroy/course/cs1230/final-stencil/glm -I/Users/monicaroy/course/cs1230/final-stencil/ui -I/Users/monicaroy/course/cs1230/final-stencil/glew-1.10.0/include -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtXml.framework/Headers -I/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include/c++/v1 -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/12.0.0/include -I/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/usr/include -I/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include -F/Users/monicaroy/Qt5.14.2/5.14.2/clang_64/lib ui/SupportCanvas3D.h -o moc_SupportCanvas3D.cpp
@@ -1134,7 +1152,9 @@ mainwindow.o: ui/mainwindow.cpp ui/mainwindow.h \
 		glm/integer.hpp \
 		glm/detail/func_integer.hpp \
 		glm/detail/func_integer.inl \
-		scenegraph/SceneviewScene.h \
+		shapes/drawer.h \
+		/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/OpenGL.framework/Headers/glu.h \
+		camera/Camera.h \
 		scenegraph/OpenGLScene.h \
 		scenegraph/Scene.h \
 		lib/CS123SceneData.h \
@@ -1142,17 +1162,15 @@ mainwindow.o: ui/mainwindow.cpp ui/mainwindow.h \
 		../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/qimage.h \
 		shapes/Shape.h \
 		shapes/Cylinder.h \
-		camera/CamtransCamera.h \
-		camera/Camera.h \
-		L_System/turtle.h \
-		L_System/Utils.h \
-		shapes/drawer.h \
-		/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/OpenGL.framework/Headers/glu.h \
 		gl/shaders/CS123Shader.h \
 		gl/shaders/Shader.h \
 		gl/openglshape.h \
 		gl/datatype/VBO.h \
 		gl/datatype/VBOAttribMarker.h \
+		L_System/turtle.h \
+		L_System/Utils.h \
+		scenegraph/SceneviewScene.h \
+		camera/CamtransCamera.h \
 		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
 		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
 		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QMessageBox \
@@ -1702,9 +1720,16 @@ SceneviewScene.o: scenegraph/SceneviewScene.cpp scenegraph/SceneviewScene.h \
 		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		lib/RGBA.h \
 		ui/SupportCanvas3D.h \
-		lib/ResourceLoader.h \
+		shapes/drawer.h \
+		/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/OpenGL.framework/Headers/glu.h \
 		gl/shaders/CS123Shader.h \
-		gl/shaders/Shader.h
+		gl/shaders/Shader.h \
+		gl/openglshape.h \
+		gl/datatype/VBO.h \
+		gl/datatype/VBOAttribMarker.h \
+		L_System/turtle.h \
+		L_System/Utils.h \
+		lib/ResourceLoader.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SceneviewScene.o scenegraph/SceneviewScene.cpp
 
 drawer.o: shapes/drawer.cpp shapes/drawer.h \
@@ -1999,6 +2024,23 @@ SupportCanvas3D.o: ui/SupportCanvas3D.cpp ui/SupportCanvas3D.h \
 		glm/integer.hpp \
 		glm/detail/func_integer.hpp \
 		glm/detail/func_integer.inl \
+		shapes/drawer.h \
+		/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX11.0.sdk/System/Library/Frameworks/OpenGL.framework/Headers/glu.h \
+		camera/Camera.h \
+		scenegraph/OpenGLScene.h \
+		scenegraph/Scene.h \
+		lib/CS123SceneData.h \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/QImage \
+		../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/qimage.h \
+		shapes/Shape.h \
+		shapes/Cylinder.h \
+		gl/shaders/CS123Shader.h \
+		gl/shaders/Shader.h \
+		gl/openglshape.h \
+		gl/datatype/VBO.h \
+		gl/datatype/VBOAttribMarker.h \
+		L_System/turtle.h \
+		L_System/Utils.h \
 		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
 		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
 		../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
@@ -2009,16 +2051,8 @@ SupportCanvas3D.o: ui/SupportCanvas3D.cpp ui/SupportCanvas3D.h \
 		../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qapplication.h \
 		lib/RGBA.h \
 		camera/CamtransCamera.h \
-		camera/Camera.h \
 		camera/OrbitingCamera.h \
 		scenegraph/SceneviewScene.h \
-		scenegraph/OpenGLScene.h \
-		scenegraph/Scene.h \
-		lib/CS123SceneData.h \
-		../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/QImage \
-		../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/qimage.h \
-		shapes/Shape.h \
-		shapes/Cylinder.h \
 		ui/Settings.h \
 		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \

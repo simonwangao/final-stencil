@@ -134,7 +134,14 @@ void SupportCanvas3D::setSceneFromSettings() {
             break;
         case SCENEMODE_DRAWER:
             // delete in de-constructor
+            //m_currentScene = new Drawer();
+
+            Turtle newTree = Turtle();
+            newTree.parse(newTree.interpretString());
+
             m_currentScene = new Drawer();
+            ((Drawer*) m_currentScene)->setData(newTree.getSegmentData());
+
             break;
     }
     m_settingsDirty = false;
@@ -143,6 +150,19 @@ void SupportCanvas3D::setSceneFromSettings() {
 void SupportCanvas3D::setSceneToSceneview() {
     assert(m_sceneviewScene.get());
     m_currentScene = m_sceneviewScene.get();
+}
+
+void SupportCanvas3D::renderTrees() {
+
+    //m_canvas3D->update();
+    QApplication::processEvents();
+
+    Turtle newTree = Turtle();
+    newTree.parse(newTree.interpretString());
+
+    Drawer *renderer = new Drawer();
+    renderer->setData(newTree.getSegmentData());
+    //renderer->render(m_canvas3D);
 }
 
 void SupportCanvas3D::copyPixels(int width, int height, RGBA *data) {
