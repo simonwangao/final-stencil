@@ -28,8 +28,14 @@ void Drawer::setData(const std::vector<SegmentData>& data) {
     Turtle turtle;
     vector<pair<string, float>> v;
     v.push_back(std::make_pair(F, 1.));
+    v.push_back(std::make_pair(lbracket, 0.));
     v.push_back(std::make_pair(left, 30.));
-    v.push_back(std::make_pair(F, .5));
+    v.push_back(std::make_pair(F, .8));
+    v.push_back(std::make_pair(rbracket, 0.));
+    v.push_back(std::make_pair(lbracket, 0.));
+    v.push_back(std::make_pair(right, 30.));
+    v.push_back(std::make_pair(F, .8));
+    v.push_back(std::make_pair(rbracket, 0.));
 
     turtle.parse(v);
 
