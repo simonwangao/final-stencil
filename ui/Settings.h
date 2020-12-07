@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file    Settings.h
  *
  * This file contains various settings and enumerations that you will need to use in the various
@@ -56,7 +56,8 @@ enum UITab {
 // Enumeration values for the currently selected scene type
 enum SceneMode {
     SCENEMODE_SHAPES,
-    SCENEMODE_SCENEVIEW
+    SCENEMODE_SCENEVIEW,
+    SCENEMODE_DRAWER
 };
 
 // Enumeration values for the currently selected camera type

@@ -1,4 +1,4 @@
-#ifndef SUPPORTCANVAS3D_H
+﻿#ifndef SUPPORTCANVAS3D_H
 #define SUPPORTCANVAS3D_H
 
 #include <memory>
@@ -7,6 +7,7 @@
 #include <QGLWidget>
 
 #include "glm/glm.hpp"
+#include "shapes/drawer.h"
 
 class RGBA;
 class Camera;

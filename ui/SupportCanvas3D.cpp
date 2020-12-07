@@ -1,4 +1,4 @@
-#include "ui/SupportCanvas3D.h"
+﻿#include "ui/SupportCanvas3D.h"
 
 #include <QFileDialog>
 #include <QMouseEvent>
@@ -25,6 +25,8 @@ SupportCanvas3D::SupportCanvas3D(QGLFormat format, QWidget *parent) : QGLWidget(
 
 SupportCanvas3D::~SupportCanvas3D()
 {
+    if (m_currentScene != nullptr)
+        delete m_currentScene;
 }
 
 Camera *SupportCanvas3D::getCamera() {
@@ -112,7 +114,7 @@ void SupportCanvas3D::paintGL() {
     float ratio = static_cast<QGuiApplication *>(QCoreApplication::instance())->devicePixelRatio();
     glViewport(0, 0, width() * ratio, height() * ratio);
     getCamera()->setAspectRatio(static_cast<float>(width()) / static_cast<float>(height()));
-    //m_currentScene->render(this);
+    m_currentScene->render(this);
 }
 
 void SupportCanvas3D::settingsChanged() {
@@ -129,6 +131,10 @@ void SupportCanvas3D::setSceneFromSettings() {
     switch(settings.getSceneMode()) {
         case SCENEMODE_SCENEVIEW:
             setSceneToSceneview();
+            break;
+        case SCENEMODE_DRAWER:
+            // delete in de-constructor
+            m_currentScene = new Drawer();
             break;
     }
     m_settingsDirty = false;

@@ -24,8 +24,8 @@ void Drawer::setData(const std::vector<SegmentData>& data) {
 }
 
 void Drawer::loadPhongShader() {
-    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/shader.vert");
-    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/shader.frag");
+    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/default.vert");
+    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/default.frag");
     m_phongShader = std::make_unique<CS123Shader>(vertexSource, fragmentSource);
 }
 

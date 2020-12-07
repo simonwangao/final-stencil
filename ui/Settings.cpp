@@ -1,4 +1,4 @@
-/*!
+﻿/*!
 
  Settings.h
  CS123 Support Code
@@ -136,10 +136,13 @@ void Settings::saveSettings() {
 }
 
 int Settings::getSceneMode() {
+    /*
     if (this->useSceneviewScene)
         return SCENEMODE_SCENEVIEW;
     else
         return SCENEMODE_SHAPES;
+    */
+    return SCENEMODE_DRAWER;
 }
 
 int Settings::getCameraMode() {
