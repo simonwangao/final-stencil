@@ -1,7 +1,7 @@
 ﻿#include "L_System/Utils.h"
 #include <iostream>
 
-void addBranchChar(char character, BranchFeats characteristics, unordered_map<char, BranchFeats> charToBranch) {
+void addBranchChar(char character, BranchFeats characteristics, unordered_map<char, BranchFeats>& charToBranch) {
     if (charToBranch.count(character) > 0) {
         string str = "overriding previous branch characteristics for character ";
         std::cout << str.append(&character) << std::endl;
@@ -9,7 +9,7 @@ void addBranchChar(char character, BranchFeats characteristics, unordered_map<ch
     charToBranch[character] = characteristics;
 }
 
-void addProductionRule(char predecessor, vector<char> succs, unordered_map<char, vector<char>> successors) {
+void addProductionRule(char predecessor, vector<char> succs, unordered_map<char, vector<char>>& successors) {
     if (successors.count(predecessor) > 0) {
         string str = "overriding previous production rule for character ";
         std::cout << str.append(&predecessor) << std::endl;

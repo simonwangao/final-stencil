@@ -46,8 +46,8 @@ struct BranchFeats {
     BranchFeats(float len, float angleX, float angleY, float angleZ): l(len), alphaX(angleX), alphaY(angleY), alphaZ(angleZ) {};
 };
 
-void addBranchChar(char character, BranchFeats characteristics, unordered_map<char, BranchFeats> charToBranch);
-void addProductionRule(char predecessor, vector<char> succs);
+void addBranchChar(char character, BranchFeats characteristics, unordered_map<char, BranchFeats>& charToBranch);
+void addProductionRule(char predecessor, vector<char> succs, unordered_map<char, vector<char>>& successors);
 
 float randomLen();
 float randomAngle();
