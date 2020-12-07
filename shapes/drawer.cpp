@@ -10,7 +10,7 @@ Drawer::Drawer() {
     createLights();
 
     // setting up global data
-    m_global_data.ka = 0.5;
+    m_global_data.ka = 0.8;
     m_global_data.kd = 0.5;
     m_global_data.ks = 0.5;
 
