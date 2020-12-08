@@ -33,7 +33,7 @@ Drawer::~Drawer() {
 void Drawer::setData(const std::vector<SegmentData>& data) {
     m_data = data;
 
-    Turtle turtle;
+    /*Turtle turtle;
     vector<pair<string, float>> v;
     v.push_back(std::make_pair(F, 1.));
     v.push_back(std::make_pair(lbracket, 0.));
@@ -47,7 +47,7 @@ void Drawer::setData(const std::vector<SegmentData>& data) {
 
     turtle.parse(v);
 
-    m_data = turtle.getSegmentData();
+    m_data = turtle.getSegmentData();*/
 }
 
 void Drawer::loadPhongShader() {
