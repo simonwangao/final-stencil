@@ -4,6 +4,8 @@ uniform float firstPass;
 uniform sampler2D prevPos;
 uniform sampler2D prevVel;
 uniform int numParticles;
+uniform mat4 p;
+uniform mat4 v;
 
 // output from quad.vert
 in vec2 uv;
@@ -43,11 +45,11 @@ vec2 calculateInitialVelocity(int index) {
 
 vec4 initPosition(int index) {
     const vec3 spawn = vec3(0);
-    return vec4(spawn, calculateLifetime(index));
+    return vec4(p * v * spawn, calculateLifetime(index));
 }
 
 vec4 initVelocity(int index) {
-    return vec4(calculateInitialVelocity(index), 0, 0);
+    return vec4(p * v * calculateInitialVelocity(index), 0, 0);
 }
 
 vec4 updatePosition(int index) {

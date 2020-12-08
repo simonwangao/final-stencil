@@ -7,7 +7,7 @@
 using namespace CS123::GL;
 
 Drawer::Drawer() :
-    m_numParticles(1000), m_evenPass(true), m_firstPass(true),
+    m_numParticles(50), m_evenPass(true), m_firstPass(true),
     m_particlesFBO1(nullptr), m_particlesFBO2(nullptr)
 {
 
@@ -117,7 +117,8 @@ void Drawer::render(SupportCanvas3D *context) {
     glBindTexture(GL_TEXTURE_2D, 0);
     m_phongShader->unbind();
 
-//    renderParticles();
+    renderParticles(context);
+    context->update();
 }
 
 void Drawer::setSceneUniforms(SupportCanvas3D *context) {
@@ -126,6 +127,9 @@ void Drawer::setSceneUniforms(SupportCanvas3D *context) {
     m_phongShader->setUniform("useArrowOffsets", false);
     m_phongShader->setUniform("p" , camera->getProjectionMatrix());
     m_phongShader->setUniform("v", camera->getViewMatrix());
+
+    m_particleUpdateProgram->setUniform("p", camera->getProjectionMatrix());
+    m_particleUpdateProgram->setUniform("v", camera->getViewMatrix());
 }
 
 void Drawer::setLights()
@@ -201,12 +205,13 @@ void Drawer::initializeParticleShaders() {
     std::cout << "Max FBO size: " << maxRenderBufferSize << std::endl;
 }
 
-void Drawer::renderParticles() {
+void Drawer::renderParticles(SupportCanvas3D * context) {
     auto prevFBO = m_evenPass ? m_particlesFBO1 : m_particlesFBO2;
     auto nextFBO = m_evenPass ? m_particlesFBO2 : m_particlesFBO1;
     float firstPass = m_firstPass ? 1.0f : 0.0f;
 
     // TODO [Task 14] Move the particles from prevFBO to nextFBO while updating them
+    glActiveTexture(GL_TEXTURE0);
     nextFBO->bind();
     m_particleUpdateProgram->bind();
     glActiveTexture(GL_TEXTURE0);
@@ -223,11 +228,9 @@ void Drawer::renderParticles() {
 
     // TODO [Task 17] Draw the particles from nextFBO
     nextFBO->unbind();
-    glClear(GL_COLOR_BUFFER_BIT);
-    glClear(GL_DEPTH_BUFFER_BIT);
 
     m_particleDrawProgram->bind();
-    // setParticleViewport();
+    setParticleViewport(context);
 
     glActiveTexture(GL_TEXTURE0);
     nextFBO->getColorAttachment(0).bind();
@@ -246,4 +249,11 @@ void Drawer::renderParticles() {
 
     m_firstPass = false;
     m_evenPass = !m_evenPass;
+}
+
+void Drawer::setParticleViewport(SupportCanvas3D *context) {
+    int maxDim = std::max(context->width(), context->height());
+    int x = (context->width() - maxDim) / 2.0f;
+    int y = (context->height() - maxDim) / 2.0f;
+    glViewport(x, y, maxDim, maxDim);
 }

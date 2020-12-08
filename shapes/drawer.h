@@ -49,6 +49,8 @@ protected:
     int m_shapeParameter2;
 
 private:
+    int m_width;
+    int m_height;
     std::unique_ptr<OpenGLShape> m_quad;
     GLuint m_particlesVAO;
     int m_numParticles;
@@ -66,8 +68,9 @@ private:
     void createLights();
     void setSceneUniforms(SupportCanvas3D *context);
     void setLights();
-    void renderParticles();
+    void renderParticles(SupportCanvas3D *context);
     void initializeParticleShaders();
+    void setParticleViewport(SupportCanvas3D * context);
 
 };
 
