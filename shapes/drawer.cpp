@@ -23,7 +23,7 @@ Drawer::Drawer() :
     m_global_data.ks = 0.5;
 
     // change later
-    //setData(std::vector<SegmentData>());
+    setData(std::vector<SegmentData>());
 }
 
 
@@ -33,7 +33,6 @@ Drawer::~Drawer() {
 void Drawer::setData(const std::vector<SegmentData>& data) {
     m_data = data;
 
-    /*
     Turtle turtle;
     vector<pair<string, float>> v;
     v.push_back(std::make_pair(F, 1.));
@@ -49,7 +48,6 @@ void Drawer::setData(const std::vector<SegmentData>& data) {
     turtle.parse(v);
 
     m_data = turtle.getSegmentData();
-    */
 }
 
 void Drawer::loadPhongShader() {
@@ -110,15 +108,16 @@ std::vector<GLfloat> Drawer::vertexTimesMatrix(const glm::mat4& matrix, const st
 
 void Drawer::render(SupportCanvas3D *context) {
     setClearColor();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-//    m_phongShader->bind();
+    m_phongShader->bind();
     setSceneUniforms(context);
-//    setLights();
-//    draw(m_data); // prime function here
-//    glBindTexture(GL_TEXTURE_2D, 0);
-//    m_phongShader->unbind();
+    setLights();
+    draw(m_data); // prime function here
+    glBindTexture(GL_TEXTURE_2D, 0);
+    m_phongShader->unbind();
 
-    renderParticles();
+//    renderParticles();
 }
 
 void Drawer::setSceneUniforms(SupportCanvas3D *context) {
