@@ -64,6 +64,8 @@ MainWindow::MainWindow(QWidget *parent) :
     // Reset the contents of both canvas widgets (make a new 500x500 image for the 2D one)
     //fileNew();
 
+    ui->BurningTreeDock->show();
+    ui->camtransDock->show();
     show();
 
 }
