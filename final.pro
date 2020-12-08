@@ -147,5 +147,9 @@ DISTFILES += \
     shaders/normals/normalsArrow.gsh \
     shaders/normals/normalsArrow.frag \
     shaders/normals/normalsArrow.vert \
+    shaders/particles/particles_draw.frag \
+    shaders/particles/particles_draw.vert \
+    shaders/particles/particles_update.frag \
+    shaders/particles/quad.vert \
     shaders/wireframe/wireframe.frag \
     shaders/wireframe/wireframe.vert

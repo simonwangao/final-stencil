@@ -10,5 +10,9 @@
         <file alias="normalsArrow.vert">shaders/normals/normalsArrow.vert</file>
         <file alias="wireframe.frag">shaders/wireframe/wireframe.frag</file>
         <file alias="wireframe.vert">shaders/wireframe/wireframe.vert</file>
+        <file alias="particles_draw.frag">shaders/particles/particles_draw.frag</file>
+        <file alias="particles_draw.vert">shaders/particles/particles_draw.vert</file>
+        <file alias="particles_update.frag">shaders/particles/particles_update.frag</file>
+        <file alias="quad.vert">shaders/particles/quad.vert</file>
     </qresource>
 </RCC>

@@ -16,9 +16,11 @@
 #include "shapes/Shape.h"
 #include "shapes/Cylinder.h"
 #include "gl/shaders/CS123Shader.h"
+#include "gl/shaders/ShaderAttribLocations.h"
 #include "gl/openglshape.h"
 #include "L_System/turtle.h"
 #include "ui/SupportCanvas3D.h"
+#include "gl/datatype/FBO.h"
 
 namespace CS123 { namespace GL {
 
@@ -46,11 +48,25 @@ protected:
     int m_shapeParameter1;
     int m_shapeParameter2;
 
+    std::unique_ptr<OpenGLShape> m_quad;
+    GLuint m_particlesVAO;
+    int m_numParticles;
+    std::unique_ptr<CS123::GL::Shader> m_particleUpdateProgram;
+    std::unique_ptr<CS123::GL::Shader> m_particleDrawProgram;
+    bool m_evenPass;
+    bool m_firstPass;
+    std::shared_ptr<FBO> m_particlesFBO1;
+    std::shared_ptr<FBO> m_particlesFBO2;
+
     static std::vector<GLfloat> vertexTimesMatrix(const glm::mat4& matrix, const std::vector<GLfloat>& vertexData);
     void loadPhongShader();
+    void loadParticleUpdateShader();
+    void loadParticleDrawShader();
     void createLights();
     void setSceneUniforms(SupportCanvas3D *context);
     void setLights();
+    void renderParticles();
+    void initializeParticleShaders();
 
 };
 
