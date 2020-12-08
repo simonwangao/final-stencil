@@ -3,6 +3,7 @@
 #include "glm/gtx/transform.hpp"
 #include <iostream>
 #include "gl/textures/Texture2D.h"
+#include "Settings.h"
 
 using namespace CS123::GL;
 
@@ -117,8 +118,10 @@ void Drawer::render(SupportCanvas3D *context) {
     glBindTexture(GL_TEXTURE_2D, 0);
     m_phongShader->unbind();
 
-    renderParticles(context);
-    context->update();
+    if (settings.burnTree) {
+        renderParticles(context);
+        context->update();
+    }
 }
 
 void Drawer::setSceneUniforms(SupportCanvas3D *context) {

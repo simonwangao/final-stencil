@@ -44,12 +44,12 @@ vec2 calculateInitialVelocity(int index) {
 }
 
 vec4 initPosition(int index) {
-    const vec3 spawn = vec3(0);
-    return vec4(p * v * spawn, calculateLifetime(index));
+    const vec4 spawn = vec4(0);
+    return p * v * vec4(vec3(spawn), calculateLifetime(index));
 }
 
 vec4 initVelocity(int index) {
-    return vec4(p * v * calculateInitialVelocity(index), 0, 0);
+    return p * v * vec4(calculateInitialVelocity(index), 0, 0);
 }
 
 vec4 updatePosition(int index) {
@@ -63,7 +63,7 @@ vec4 updatePosition(int index) {
 }
 
 vec4 updateVelocity(int index) {
-    const float G = -0.1;
+    const float G = 0.1;
     // TODO [Task 16]
     // - sample prevVel at uv
     // - only force is gravity in y direction.  Add G * dt.
