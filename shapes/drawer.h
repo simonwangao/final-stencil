@@ -37,7 +37,7 @@ public:
 
     void setData(const std::vector<SegmentData>& data);
     void render(SupportCanvas3D *context);
-    void draw(const std::vector<SegmentData>& data); 
+    void draw(const std::vector<SegmentData>& data);
 
 protected:
     /** ID for the shader program. */
@@ -48,6 +48,7 @@ protected:
     int m_shapeParameter1;
     int m_shapeParameter2;
 
+private:
     std::unique_ptr<OpenGLShape> m_quad;
     GLuint m_particlesVAO;
     int m_numParticles;
