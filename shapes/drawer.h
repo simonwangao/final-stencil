@@ -56,15 +56,20 @@ private:
     int m_numParticles;
     std::unique_ptr<CS123::GL::Shader> m_particleUpdateProgram;
     std::unique_ptr<CS123::GL::Shader> m_particleDrawProgram;
+    std::unique_ptr<CS123::GL::Shader> m_skyBoxShader;
     bool m_evenPass;
     bool m_firstPass;
     std::shared_ptr<FBO> m_particlesFBO1;
     std::shared_ptr<FBO> m_particlesFBO2;
+    std::unique_ptr<OpenGLShape> m_skybox_cube;
+    std::vector<std::string> m_textures_faces;
+    unsigned int m_cubemapTexture;
 
     static std::vector<GLfloat> vertexTimesMatrix(const glm::mat4& matrix, const std::vector<GLfloat>& vertexData);
     void loadPhongShader();
     void loadParticleUpdateShader();
     void loadParticleDrawShader();
+    void loadSkyBoxShader();
     void createLights();
     void setTreeSceneUniforms(SupportCanvas3D *context);
     void setParticleSceneUniforms(SupportCanvas3D *context);
@@ -73,6 +78,57 @@ private:
     void initializeParticleShaders();
     void setParticleViewport(SupportCanvas3D * context);
 
+    void initializeSkybox();
+    unsigned int loadCubemap(const vector<std::string>& faces);
+
+    int m_count = 0;
 };
+
+static float skyboxVertices[] = {
+    // positions
+    -1.0f,  1.0f, -1.0f,
+         -1.0f, -1.0f, -1.0f,
+          1.0f, -1.0f, -1.0f,
+          1.0f, -1.0f, -1.0f,
+          1.0f,  1.0f, -1.0f,
+         -1.0f,  1.0f, -1.0f,
+
+         -1.0f, -1.0f,  1.0f,
+         -1.0f, -1.0f, -1.0f,
+         -1.0f,  1.0f, -1.0f,
+         -1.0f,  1.0f, -1.0f,
+         -1.0f,  1.0f,  1.0f,
+         -1.0f, -1.0f,  1.0f,
+
+          1.0f, -1.0f, -1.0f,
+          1.0f, -1.0f,  1.0f,
+          1.0f,  1.0f,  1.0f,
+          1.0f,  1.0f,  1.0f,
+          1.0f,  1.0f, -1.0f,
+          1.0f, -1.0f, -1.0f,
+
+         -1.0f, -1.0f,  1.0f,
+         -1.0f,  1.0f,  1.0f,
+          1.0f,  1.0f,  1.0f,
+          1.0f,  1.0f,  1.0f,
+          1.0f, -1.0f,  1.0f,
+         -1.0f, -1.0f,  1.0f,
+
+         -1.0f,  1.0f, -1.0f,
+          1.0f,  1.0f, -1.0f,
+          1.0f,  1.0f,  1.0f,
+          1.0f,  1.0f,  1.0f,
+         -1.0f,  1.0f,  1.0f,
+         -1.0f,  1.0f, -1.0f,
+
+         -1.0f, -1.0f, -1.0f,
+         -1.0f, -1.0f,  1.0f,
+          1.0f, -1.0f, -1.0f,
+          1.0f, -1.0f, -1.0f,
+         -1.0f, -1.0f,  1.0f,
+          1.0f, -1.0f,  1.0f
+};
+
+
 
 #endif // DRAWER_H

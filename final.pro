@@ -100,7 +100,8 @@ HEADERS += ui/mainwindow.h \
     shapes/Cylinder.h \
     lib/RGBA.h \
     lib/ResourceLoader.h \
-    lib/CS123SceneData.h
+    lib/CS123SceneData.h \
+    lib/common.h
 
 FORMS += ui/mainwindow.ui
 INCLUDEPATH += glm ui glew-1.10.0/include
@@ -118,6 +119,8 @@ OTHER_FILES += shaders/shader.frag \
     shaders/normals/normalsArrow.vert \
     shaders/normals/normalsArrow.gsh \
     shaders/normals/normalsArrow.frag \
+    shaders/skybox.frag \
+    shaders/skybox.vert
 
 # Don't add the -pg flag unless you know what you are doing. It makes QThreadPool freeze on Mac OS X
 QMAKE_CXXFLAGS_RELEASE -= -O2
@@ -152,4 +155,6 @@ DISTFILES += \
     shaders/particles/particles_update.frag \
     shaders/particles/quad.vert \
     shaders/wireframe/wireframe.frag \
-    shaders/wireframe/wireframe.vert
+    shaders/wireframe/wireframe.vert \
+    shaders/skybox.frag \
+    shaders/skybox.vert

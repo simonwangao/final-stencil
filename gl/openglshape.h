@@ -36,6 +36,8 @@ public:
     /** Draw the initialized geometry. */
     void draw();
 
+    GLuint getHandle();
+
 private:
     GLfloat *m_data;                            /// vector of floats containing the vertex data.
     GLsizeiptr m_size;                          /// size of the data array, in bytes.

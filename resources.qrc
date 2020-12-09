@@ -14,5 +14,15 @@
         <file alias="particles_draw.vert">shaders/particles/particles_draw.vert</file>
         <file alias="particles_update.frag">shaders/particles/particles_update.frag</file>
         <file alias="quad.vert">shaders/particles/quad.vert</file>
+        <file alias="skybox.frag">shaders/skybox.frag</file>
+        <file alias="skybox.vert">shaders/skybox.vert</file>
+    </qresource>
+    <qresource prefix="/skybox">
+        <file>images/negx.jpg</file>
+        <file>images/negy.jpg</file>
+        <file>images/negz.jpg</file>
+        <file>images/posx.jpg</file>
+        <file>images/posy.jpg</file>
+        <file>images/posz.jpg</file>
     </qresource>
 </RCC>

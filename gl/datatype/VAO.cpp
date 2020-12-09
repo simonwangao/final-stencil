@@ -1,4 +1,4 @@
-#include "VAO.h"
+﻿#include "VAO.h"
 
 #include "VBO.h"
 #include "IBO.h"
@@ -88,6 +88,10 @@ void VAO::bind() {
 
 void VAO::unbind() {
     glBindVertexArray(0);
+}
+
+GLuint VAO::getHandle() {
+    return m_handle;
 }
 
 }}

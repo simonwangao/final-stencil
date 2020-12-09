@@ -16,7 +16,11 @@ Drawer::Drawer() :
     loadPhongShader();
     loadParticleUpdateShader();
     loadParticleDrawShader();
+<<<<<<< HEAD
     CS123::GL::checkError();
+=======
+    loadSkyBoxShader();
+>>>>>>> b4b864b7e585841c62c6b0567bcebacbed260670
     initializeParticleShaders();
     createLights();
 
@@ -25,8 +29,7 @@ Drawer::Drawer() :
     m_global_data.kd = 0.5;
     m_global_data.ks = 0.5;
 
-    // change later
-    setData(std::vector<SegmentData>());
+    m_count = 0;
 }
 
 
@@ -35,22 +38,6 @@ Drawer::~Drawer() {
 
 void Drawer::setData(const std::vector<SegmentData>& data) {
     m_data = data;
-
-    /*Turtle turtle;
-    vector<pair<string, float>> v;
-    v.push_back(std::make_pair(F, 1.));
-    v.push_back(std::make_pair(lbracket, 0.));
-    v.push_back(std::make_pair(left, 30.));
-    v.push_back(std::make_pair(F, .8));
-    v.push_back(std::make_pair(rbracket, 0.));
-    v.push_back(std::make_pair(lbracket, 0.));
-    v.push_back(std::make_pair(right, 30.));
-    v.push_back(std::make_pair(F, .8));
-    v.push_back(std::make_pair(rbracket, 0.));
-
-    turtle.parse(v);
-
-    m_data = turtle.getSegmentData();*/
 }
 
 void Drawer::loadPhongShader() {
@@ -69,6 +56,28 @@ void Drawer::loadParticleDrawShader() {
     std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/particles_draw.vert");
     std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/particles_draw.frag");
     m_particleDrawProgram = std::make_unique<Shader>(vertexSource, fragmentSource);
+}
+
+void Drawer::loadSkyBoxShader() {
+    std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/skybox.vert");
+    std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/skybox.frag");
+    m_skyBoxShader = std::make_unique<CS123Shader>(vertexSource, fragmentSource);
+
+    // load images
+    m_textures_faces.push_back(":/skybox/images/posx.jpg");
+    m_textures_faces.push_back(":/skybox/images/negx.jpg");
+    m_textures_faces.push_back(":/skybox/images/posy.jpg");
+    m_textures_faces.push_back(":/skybox/images/negy.jpg");
+    m_textures_faces.push_back(":/skybox/images/posz.jpg");
+    m_textures_faces.push_back(":/skybox/images/negz.jpg");
+
+    m_cubemapTexture = loadCubemap(m_textures_faces);
+
+    m_skybox_cube = std::make_unique<OpenGLShape>();
+    m_skybox_cube->setVertexData(&skyboxVertices[0], sizeof(skyboxVertices) / sizeof(float), VBO::GEOMETRY_LAYOUT::LAYOUT_TRIANGLES, 36);
+    m_skybox_cube->setAttribute(ShaderAttrib::POSITION, 3, 0, VBOAttribMarker::DATA_TYPE::FLOAT, false);
+    //m_skybox_cube->setAttribute(ShaderAttrib::NORMAL, 3, 3*sizeof(GLfloat), VBOAttribMarker::DATA_TYPE::FLOAT, false);
+    m_skybox_cube->buildVAO();
 }
 
 void Drawer::createLights() {
@@ -113,6 +122,13 @@ void Drawer::render(SupportCanvas3D *context) {
     setClearColor();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+    // draw skybox
+    m_skyBoxShader->bind();
+    setSceneUniforms(context);
+    //setLights();
+    initializeSkybox();
+    m_skyBoxShader->unbind();
+
     m_phongShader->bind();
     setTreeSceneUniforms(context);
     setLights();
@@ -120,9 +136,13 @@ void Drawer::render(SupportCanvas3D *context) {
     glBindTexture(GL_TEXTURE_2D, 0);
     m_phongShader->unbind();
 
+<<<<<<< HEAD
     m_particleDrawProgram->bind();
     setParticleSceneUniforms(context);
     m_particleUpdateProgram->unbind();
+=======
+
+>>>>>>> b4b864b7e585841c62c6b0567bcebacbed260670
     glDisable(GL_CULL_FACE);
     if (settings.burnTree) {
         renderParticles(context);
@@ -142,6 +162,9 @@ void Drawer::setParticleSceneUniforms(SupportCanvas3D *context) {
     Camera *camera = context->getCamera();
     m_particleDrawProgram->setUniform("p", camera->getProjectionMatrix());
     m_particleDrawProgram->setUniform("v", camera->getViewMatrix());
+
+    m_skyBoxShader->setUniform("projection" , camera->getProjectionMatrix());
+    m_skyBoxShader->setUniform("view", camera->getViewMatrix());
 }
 
 void Drawer::setLights()
@@ -260,4 +283,64 @@ void Drawer::renderParticles(SupportCanvas3D * context) {
 
 void Drawer::setParticleViewport(SupportCanvas3D *context) {
     glViewport(0, 0, context->width() * context->m_ratio, context->height() * context->m_ratio);
+}
+
+void Drawer::initializeSkybox() {
+    glDepthMask(GL_FALSE);
+
+    GLuint VAO = m_skybox_cube->getHandle();
+    GLuint VBO;
+    //glGenVertexArrays(1, &VAO);
+
+    glBindVertexArray(VAO);
+    glGenBuffers(1, &VBO);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(skyboxVertices) / sizeof(float), skyboxVertices, GL_STATIC_DRAW);
+    glVertexPointer(3, GL_FLOAT, 0, (GLvoid*) NULL);
+    glEnableClientState(GL_VERTEX_ARRAY);
+    glEnableClientState(GL_COLOR_ARRAY);
+
+    glBindTexture(GL_TEXTURE_CUBE_MAP, m_cubemapTexture);
+
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+
+    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
+    glDisableClientState(GL_COLOR_ARRAY);
+    glDisableClientState(GL_VERTEX_ARRAY);
+
+    // Disable the VBO
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glBindVertexArray(0);
+    glDepthMask(GL_TRUE);
+}
+
+unsigned int Drawer::loadCubemap(const vector<std::string>& faces) {
+    unsigned int textureID;
+    glGenTextures(1, &textureID);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+
+    int width, height;
+    unsigned char *data;
+    for(unsigned int i = 0; i < faces.size(); i++)
+    {
+        QImage image;
+        image.load(QString(faces[i].c_str()));
+        //image = image.mirrored(false, true);
+        data = image.bits();
+        width = image.width();
+        height = image.height();
+
+        glTexImage2D(
+            GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
+            0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data
+        );
+    }
+
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
+
+    return textureID;
 }
