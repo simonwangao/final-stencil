@@ -296,7 +296,7 @@ void Drawer::initializeSkybox() {
 
     glBindTexture(GL_TEXTURE_CUBE_MAP, m_cubemapTexture);
 
-    glDrawArrays(GL_TRIANGLES, 0, 12);
+    glDrawArrays(GL_TRIANGLES, 0, 36);
 
     glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
     glDisableClientState(GL_COLOR_ARRAY);
