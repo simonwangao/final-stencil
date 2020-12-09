@@ -1,4 +1,4 @@
-#ifndef VAO_H
+﻿#ifndef VAO_H
 #define VAO_H
 
 #include <memory>
@@ -27,6 +27,8 @@ public:
     void draw(int count);
     DRAW_METHOD drawMethod();
     void unbind();
+
+    GLuint getHandle();
 
 private:
     std::unique_ptr<VBO> m_VBO;

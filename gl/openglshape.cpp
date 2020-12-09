@@ -55,3 +55,7 @@ void OpenGLShape::draw() {
         m_VAO->unbind();
     }
 }
+
+GLuint OpenGLShape::getHandle() {
+    return m_VAO->getHandle();
+}

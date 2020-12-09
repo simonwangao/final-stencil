@@ -61,7 +61,9 @@ private:
     bool m_firstPass;
     std::shared_ptr<FBO> m_particlesFBO1;
     std::shared_ptr<FBO> m_particlesFBO2;
-    std::unique_ptr<OpenGLShape> skybox_cube;
+    std::unique_ptr<OpenGLShape> m_skybox_cube;
+    std::vector<std::string> m_textures_faces;
+    unsigned int m_cubemapTexture;
 
     static std::vector<GLfloat> vertexTimesMatrix(const glm::mat4& matrix, const std::vector<GLfloat>& vertexData);
     void loadPhongShader();
@@ -84,46 +86,46 @@ private:
 static float skyboxVertices[] = {
     // positions
     -1.0f,  1.0f, -1.0f,
-    -1.0f, -1.0f, -1.0f,
-     1.0f, -1.0f, -1.0f,
-     1.0f, -1.0f, -1.0f,
-     1.0f,  1.0f, -1.0f,
-    -1.0f,  1.0f, -1.0f,
+         -1.0f, -1.0f, -1.0f,
+          1.0f, -1.0f, -1.0f,
+          1.0f, -1.0f, -1.0f,
+          1.0f,  1.0f, -1.0f,
+         -1.0f,  1.0f, -1.0f,
 
-    -1.0f, -1.0f,  1.0f,
-    -1.0f, -1.0f, -1.0f,
-    -1.0f,  1.0f, -1.0f,
-    -1.0f,  1.0f, -1.0f,
-    -1.0f,  1.0f,  1.0f,
-    -1.0f, -1.0f,  1.0f,
+         -1.0f, -1.0f,  1.0f,
+         -1.0f, -1.0f, -1.0f,
+         -1.0f,  1.0f, -1.0f,
+         -1.0f,  1.0f, -1.0f,
+         -1.0f,  1.0f,  1.0f,
+         -1.0f, -1.0f,  1.0f,
 
-     1.0f, -1.0f, -1.0f,
-     1.0f, -1.0f,  1.0f,
-     1.0f,  1.0f,  1.0f,
-     1.0f,  1.0f,  1.0f,
-     1.0f,  1.0f, -1.0f,
-     1.0f, -1.0f, -1.0f,
+          1.0f, -1.0f, -1.0f,
+          1.0f, -1.0f,  1.0f,
+          1.0f,  1.0f,  1.0f,
+          1.0f,  1.0f,  1.0f,
+          1.0f,  1.0f, -1.0f,
+          1.0f, -1.0f, -1.0f,
 
-    -1.0f, -1.0f,  1.0f,
-    -1.0f,  1.0f,  1.0f,
-     1.0f,  1.0f,  1.0f,
-     1.0f,  1.0f,  1.0f,
-     1.0f, -1.0f,  1.0f,
-    -1.0f, -1.0f,  1.0f,
+         -1.0f, -1.0f,  1.0f,
+         -1.0f,  1.0f,  1.0f,
+          1.0f,  1.0f,  1.0f,
+          1.0f,  1.0f,  1.0f,
+          1.0f, -1.0f,  1.0f,
+         -1.0f, -1.0f,  1.0f,
 
-    -1.0f,  1.0f, -1.0f,
-     1.0f,  1.0f, -1.0f,
-     1.0f,  1.0f,  1.0f,
-     1.0f,  1.0f,  1.0f,
-    -1.0f,  1.0f,  1.0f,
-    -1.0f,  1.0f, -1.0f,
+         -1.0f,  1.0f, -1.0f,
+          1.0f,  1.0f, -1.0f,
+          1.0f,  1.0f,  1.0f,
+          1.0f,  1.0f,  1.0f,
+         -1.0f,  1.0f,  1.0f,
+         -1.0f,  1.0f, -1.0f,
 
-    -1.0f, -1.0f, -1.0f,
-    -1.0f, -1.0f,  1.0f,
-     1.0f, -1.0f, -1.0f,
-     1.0f, -1.0f, -1.0f,
-    -1.0f, -1.0f,  1.0f,
-     1.0f, -1.0f,  1.0f
+         -1.0f, -1.0f, -1.0f,
+         -1.0f, -1.0f,  1.0f,
+          1.0f, -1.0f, -1.0f,
+          1.0f, -1.0f, -1.0f,
+         -1.0f, -1.0f,  1.0f,
+          1.0f, -1.0f,  1.0f
 };
 
 

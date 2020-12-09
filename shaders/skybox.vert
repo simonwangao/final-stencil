@@ -7,9 +7,9 @@ layout (location = 0) in vec3 position;
 
 out vec3 pos_object;
 
-const float scale = 20;
+const float scale = 12.;
 
 void main() {
-     pos_object = position;
+     pos_object = vec3(-position.x, position.yz);;
      gl_Position = projection * view * vec4(position * scale, 1);
 }

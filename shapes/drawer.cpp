@@ -59,6 +59,22 @@ void Drawer::loadSkyBoxShader() {
     std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/skybox.vert");
     std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/skybox.frag");
     m_skyBoxShader = std::make_unique<CS123Shader>(vertexSource, fragmentSource);
+
+    // load images
+    m_textures_faces.push_back(":/skybox/images/posx.jpg");
+    m_textures_faces.push_back(":/skybox/images/negx.jpg");
+    m_textures_faces.push_back(":/skybox/images/posy.jpg");
+    m_textures_faces.push_back(":/skybox/images/negy.jpg");
+    m_textures_faces.push_back(":/skybox/images/posz.jpg");
+    m_textures_faces.push_back(":/skybox/images/negz.jpg");
+
+    m_cubemapTexture = loadCubemap(m_textures_faces);
+
+    m_skybox_cube = std::make_unique<OpenGLShape>();
+    m_skybox_cube->setVertexData(&skyboxVertices[0], sizeof(skyboxVertices) / sizeof(float), VBO::GEOMETRY_LAYOUT::LAYOUT_TRIANGLES, 36);
+    m_skybox_cube->setAttribute(ShaderAttrib::POSITION, 3, 0, VBOAttribMarker::DATA_TYPE::FLOAT, false);
+    //m_skybox_cube->setAttribute(ShaderAttrib::NORMAL, 3, 3*sizeof(GLfloat), VBOAttribMarker::DATA_TYPE::FLOAT, false);
+    m_skybox_cube->buildVAO();
 }
 
 void Drawer::createLights() {
@@ -106,7 +122,7 @@ void Drawer::render(SupportCanvas3D *context) {
     // draw skybox
     m_skyBoxShader->bind();
     setSceneUniforms(context);
-    setLights();
+    //setLights();
     initializeSkybox();
     m_skyBoxShader->unbind();
 
@@ -264,24 +280,11 @@ void Drawer::setParticleViewport(SupportCanvas3D *context) {
 }
 
 void Drawer::initializeSkybox() {
-    // load images
-    std::vector<std::string> textures_faces;
-    textures_faces.push_back(":/skybox/images/posx.jpg");
-    textures_faces.push_back(":/skybox/images/negx.jpg");
-    textures_faces.push_back(":/skybox/images/posy.jpg");
-    textures_faces.push_back(":/skybox/images/negy.jpg");
-    textures_faces.push_back(":/skybox/images/posz.jpg");
-    textures_faces.push_back(":/skybox/images/negz.jpg");
-
-    unsigned int cubemapTexture = loadCubemap(textures_faces);
-
     glDepthMask(GL_FALSE);
 
-    // bind VAO
-    /*
-    GLuint VAO;
+    GLuint VAO = m_skybox_cube->getHandle();
     GLuint VBO;
-    glGenVertexArrays(1, &VAO);
+    //glGenVertexArrays(1, &VAO);
 
     glBindVertexArray(VAO);
     glGenBuffers(1, &VBO);
@@ -291,32 +294,18 @@ void Drawer::initializeSkybox() {
     glEnableClientState(GL_VERTEX_ARRAY);
     glEnableClientState(GL_COLOR_ARRAY);
 
-    glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
-    glDrawArrays(GL_TRIANGLES, 0, 36);
-    glDepthMask(GL_TRUE);
+    glBindTexture(GL_TEXTURE_CUBE_MAP, m_cubemapTexture);
 
-    glDisableClientState(GL_VERTEX_ARRAY);
+    glDrawArrays(GL_TRIANGLES, 0, 12);
+
+    glBindTexture(GL_TEXTURE_CUBE_MAP, 0);
     glDisableClientState(GL_COLOR_ARRAY);
+    glDisableClientState(GL_VERTEX_ARRAY);
 
     // Disable the VBO
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
-    */
-
-    if (m_count == 0) {
-        m_count += 1;
-        skybox_cube = std::make_unique<OpenGLShape>();
-        skybox_cube->setVertexData(&skyboxVertices[0], sizeof(skyboxVertices) / sizeof(float), VBO::GEOMETRY_LAYOUT::LAYOUT_TRIANGLES, 36);
-        skybox_cube->setAttribute(ShaderAttrib::POSITION, 3, 0, VBOAttribMarker::DATA_TYPE::FLOAT, false);
-        skybox_cube->setAttribute(ShaderAttrib::NORMAL, 3, 3*sizeof(GLfloat), VBOAttribMarker::DATA_TYPE::FLOAT, false);
-        skybox_cube->buildVAO();
-    }
-
-    m_skyBoxShader->bind();
-    glCullFace(GL_FRONT);
-    skybox_cube->draw();
-    glCullFace(GL_BACK);
-    m_skyBoxShader->unbind();
+    glDepthMask(GL_TRUE);
 }
 
 unsigned int Drawer::loadCubemap(const vector<std::string>& faces) {
@@ -330,7 +319,7 @@ unsigned int Drawer::loadCubemap(const vector<std::string>& faces) {
     {
         QImage image;
         image.load(QString(faces[i].c_str()));
-        image = image.mirrored(false, true);
+        //image = image.mirrored(false, true);
         data = image.bits();
         width = image.width();
         height = image.height();
