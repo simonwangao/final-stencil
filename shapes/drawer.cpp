@@ -16,11 +16,8 @@ Drawer::Drawer() :
     loadPhongShader();
     loadParticleUpdateShader();
     loadParticleDrawShader();
-<<<<<<< HEAD
     CS123::GL::checkError();
-=======
     loadSkyBoxShader();
->>>>>>> b4b864b7e585841c62c6b0567bcebacbed260670
     initializeParticleShaders();
     createLights();
 
@@ -124,7 +121,7 @@ void Drawer::render(SupportCanvas3D *context) {
 
     // draw skybox
     m_skyBoxShader->bind();
-    setSceneUniforms(context);
+    setTreeSceneUniforms(context);
     //setLights();
     initializeSkybox();
     m_skyBoxShader->unbind();
@@ -136,13 +133,10 @@ void Drawer::render(SupportCanvas3D *context) {
     glBindTexture(GL_TEXTURE_2D, 0);
     m_phongShader->unbind();
 
-<<<<<<< HEAD
     m_particleDrawProgram->bind();
     setParticleSceneUniforms(context);
     m_particleUpdateProgram->unbind();
-=======
 
->>>>>>> b4b864b7e585841c62c6b0567bcebacbed260670
     glDisable(GL_CULL_FACE);
     if (settings.burnTree) {
         renderParticles(context);

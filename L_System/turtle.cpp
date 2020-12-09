@@ -92,11 +92,8 @@ void Turtle::parse(const std::vector<std::pair<std::string, float>>& str) {
     for (auto pair : str) {
         std::string command = pair.first;
 
-<<<<<<< HEAD
 //        std::cout << pair.second << std::endl;
-=======
         //std::cout << pair.second << std::endl;
->>>>>>> b4b864b7e585841c62c6b0567bcebacbed260670
         if (command == F) {
             // move forward
             // new segment, need to put in the list

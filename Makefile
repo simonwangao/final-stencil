@@ -147,6 +147,8 @@ DIST          = shaders/normals/normals.vert \
 		shaders/particles/quad.vert \
 		shaders/wireframe/wireframe.frag \
 		shaders/wireframe/wireframe.vert \
+		shaders/skybox.frag \
+		shaders/skybox.vert \
 		../../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/spec_pre.prf \
 		../../../../Qt5.14.2/5.14.2/clang_64/mkspecs/qdevice.pri \
 		../../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/device_config.prf \
@@ -365,7 +367,8 @@ DIST          = shaders/normals/normals.vert \
 		shapes/Cylinder.h \
 		lib/RGBA.h \
 		lib/ResourceLoader.h \
-		lib/CS123SceneData.h ui/mainwindow.cpp \
+		lib/CS123SceneData.h \
+		lib/common.h ui/mainwindow.cpp \
 		camera/CamtransCamera.cpp \
 		camera/OrbitingCamera.cpp \
 		camera/QuaternionCamera.cpp \
@@ -824,7 +827,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ui/mainwindow.h camera/Camera.h camera/CamtransCamera.h camera/OrbitingCamera.h camera/QuaternionCamera.h gl/openglshape.h scenegraph/OpenGLScene.h scenegraph/RayScene.h scenegraph/Scene.h scenegraph/SceneviewScene.h scenegraph/ShapesScene.h shapes/drawer.h ui/Settings.h L_System/Utils.h L_System/turtle.h ui/SupportCanvas3D.h ui_mainwindow.h glew-1.10.0/include/GL/glew.h ui/view.h ui/viewformat.h ui/Databinding.h gl/shaders/Shader.h gl/GLDebug.h gl/shaders/ShaderAttribLocations.h gl/datatype/VBOAttribMarker.h gl/datatype/VBO.h gl/datatype/IBO.h gl/datatype/VAO.h gl/datatype/FBO.h gl/textures/Texture.h gl/textures/Texture2D.h gl/textures/TextureParameters.h gl/textures/TextureParametersBuilder.h gl/textures/RenderBuffer.h gl/textures/DepthBuffer.h gl/shaders/CS123Shader.h gl/util/FullScreenQuad.h shapes/Shape.h shapes/Cylinder.h lib/RGBA.h lib/ResourceLoader.h lib/CS123SceneData.h $(DISTDIR)/
+	$(COPY_FILE) --parents ui/mainwindow.h camera/Camera.h camera/CamtransCamera.h camera/OrbitingCamera.h camera/QuaternionCamera.h gl/openglshape.h scenegraph/OpenGLScene.h scenegraph/RayScene.h scenegraph/Scene.h scenegraph/SceneviewScene.h scenegraph/ShapesScene.h shapes/drawer.h ui/Settings.h L_System/Utils.h L_System/turtle.h ui/SupportCanvas3D.h ui_mainwindow.h glew-1.10.0/include/GL/glew.h ui/view.h ui/viewformat.h ui/Databinding.h gl/shaders/Shader.h gl/GLDebug.h gl/shaders/ShaderAttribLocations.h gl/datatype/VBOAttribMarker.h gl/datatype/VBO.h gl/datatype/IBO.h gl/datatype/VAO.h gl/datatype/FBO.h gl/textures/Texture.h gl/textures/Texture2D.h gl/textures/TextureParameters.h gl/textures/TextureParametersBuilder.h gl/textures/RenderBuffer.h gl/textures/DepthBuffer.h gl/shaders/CS123Shader.h gl/util/FullScreenQuad.h shapes/Shape.h shapes/Cylinder.h lib/RGBA.h lib/ResourceLoader.h lib/CS123SceneData.h lib/common.h $(DISTDIR)/
 	$(COPY_FILE) --parents ui/mainwindow.cpp camera/CamtransCamera.cpp camera/OrbitingCamera.cpp camera/QuaternionCamera.cpp gl/openglshape.cpp scenegraph/OpenGLScene.cpp scenegraph/Scene.cpp scenegraph/SceneviewScene.cpp shapes/drawer.cpp ui/Settings.cpp L_System/turtle.cpp main.cpp glew-1.10.0/src/glew.c ui/SupportCanvas3D.cpp ui/view.cpp ui/viewformat.cpp ui/Databinding.cpp L_System/Utils.cpp gl/shaders/Shader.cpp gl/GLDebug.cpp gl/datatype/VBOAttribMarker.cpp gl/datatype/VBO.cpp gl/datatype/IBO.cpp gl/datatype/VAO.cpp gl/datatype/FBO.cpp gl/textures/Texture.cpp gl/textures/Texture2D.cpp gl/textures/TextureParameters.cpp gl/textures/TextureParametersBuilder.cpp gl/textures/RenderBuffer.cpp gl/textures/DepthBuffer.cpp gl/shaders/CS123Shader.cpp gl/util/FullScreenQuad.cpp shapes/Shape.cpp shapes/Cylinder.cpp lib/RGBA.cpp lib/ResourceLoader.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ui/mainwindow.ui $(DISTDIR)/
 
@@ -860,6 +863,7 @@ qrc_resources.cpp: resources.qrc \
 		shaders/normals/normals.frag \
 		shaders/wireframe/wireframe.frag \
 		shaders/shader.frag \
+		shaders/skybox.vert \
 		shaders/particles/particles_update.frag \
 		shaders/particles/particles_draw.vert \
 		shaders/normals/normalsArrow.frag \
@@ -869,8 +873,15 @@ qrc_resources.cpp: resources.qrc \
 		shaders/wireframe/wireframe.vert \
 		shaders/particles/quad.vert \
 		shaders/shader.vert \
+		shaders/skybox.frag \
 		shaders/normals/normalsArrow.vert \
-		shaders/particles/particles_draw.frag
+		shaders/particles/particles_draw.frag \
+		images/negx.jpg \
+		images/posx.jpg \
+		images/negz.jpg \
+		images/posz.jpg \
+		images/negy.jpg \
+		images/posy.jpg
 	/Users/connorjohnson/Qt5.14.2/5.14.2/clang_64/bin/rcc -name resources resources.qrc -o qrc_resources.cpp
 
 compiler_moc_predefs_make_all: moc_predefs.h
@@ -1745,7 +1756,9 @@ SceneviewScene.o: scenegraph/SceneviewScene.cpp scenegraph/SceneviewScene.h \
 		L_System/Utils.h \
 		gl/datatype/FBO.h \
 		gl/textures/TextureParameters.h \
-		lib/ResourceLoader.h
+		lib/ResourceLoader.h \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qfile.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o SceneviewScene.o scenegraph/SceneviewScene.cpp
 
 drawer.o: shapes/drawer.cpp shapes/drawer.h \
@@ -1849,12 +1862,19 @@ drawer.o: shapes/drawer.cpp shapes/drawer.h \
 		gl/datatype/FBO.h \
 		gl/textures/TextureParameters.h \
 		lib/ResourceLoader.h \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
 		glm/gtx/transform.hpp \
 		glm/gtc/matrix_transform.hpp \
 		glm/gtc/matrix_transform.inl \
 		glm/gtx/transform.inl \
 		gl/textures/Texture2D.h \
-		gl/textures/Texture.h
+		gl/textures/Texture.h \
+		ui/Settings.h \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QObject \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		lib/RGBA.h \
+		gl/GLDebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o drawer.o shapes/drawer.cpp
 
 Settings.o: ui/Settings.cpp ui/Settings.h \
@@ -2259,7 +2279,8 @@ Texture.o: gl/textures/Texture.cpp gl/textures/Texture.h \
 
 Texture2D.o: gl/textures/Texture2D.cpp gl/textures/Texture2D.h \
 		gl/textures/Texture.h \
-		glew-1.10.0/include/GL/glew.h
+		glew-1.10.0/include/GL/glew.h \
+		gl/GLDebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o Texture2D.o gl/textures/Texture2D.cpp
 
 TextureParameters.o: gl/textures/TextureParameters.cpp gl/textures/TextureParameters.h \
@@ -2547,13 +2568,17 @@ RGBA.o: lib/RGBA.cpp lib/RGBA.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o RGBA.o lib/RGBA.cpp
 
 ResourceLoader.o: lib/ResourceLoader.cpp lib/ResourceLoader.h \
-		glew-1.10.0/include/GL/glew.h \
 		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QFile \
 		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/QImage \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtGui.framework/Headers/qimage.h \
+		glew-1.10.0/include/GL/glew.h \
 		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QString \
 		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qstring.h \
 		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QTextStream \
-		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qtextstream.h \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/QGLWidget \
+		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtOpenGL.framework/Headers/qgl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ResourceLoader.o lib/ResourceLoader.cpp
 
 qrc_resources.o: qrc_resources.cpp 
