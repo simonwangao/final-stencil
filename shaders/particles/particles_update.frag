@@ -79,7 +79,7 @@ void main() {
         pos = vec4(0, 0, 0, 0);
         vel = vec4(0, 0, 0, 0);
      } else {
-        pos = texture(prevPos, uv) + vec4(1.0, 0.0, 0.0, 0.0);
+        pos = texture(prevVel, uv) + vec4(1.0, 0.0, 0.0, 0.0);
         vel = vec4(0, 0, 0, 0);
     }
 //        vel = updateVelocity(index);

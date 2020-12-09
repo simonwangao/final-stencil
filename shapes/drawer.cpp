@@ -12,13 +12,11 @@ Drawer::Drawer() :
     m_numParticles(50), m_evenPass(true), m_firstPass(true),
     m_particlesFBO1(nullptr), m_particlesFBO2(nullptr)
 {
-
-    loadPhongShader();
     loadParticleUpdateShader();
     loadParticleDrawShader();
-    CS123::GL::checkError();
-    loadSkyBoxShader();
     initializeParticleShaders();
+    loadPhongShader();
+    loadSkyBoxShader();
     createLights();
 
     // setting up global data
@@ -119,20 +117,6 @@ void Drawer::render(SupportCanvas3D *context) {
     setClearColor();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // draw skybox
-    m_skyBoxShader->bind();
-    setTreeSceneUniforms(context);
-    //setLights();
-    initializeSkybox();
-    m_skyBoxShader->unbind();
-
-    m_phongShader->bind();
-    setTreeSceneUniforms(context);
-    setLights();
-    draw(m_data); // prime function here
-    glBindTexture(GL_TEXTURE_2D, 0);
-    m_phongShader->unbind();
-
     m_particleDrawProgram->bind();
     setParticleSceneUniforms(context);
     m_particleUpdateProgram->unbind();
@@ -142,6 +126,20 @@ void Drawer::render(SupportCanvas3D *context) {
         renderParticles(context);
         context->update();
     }
+
+    // draw skybox
+    m_skyBoxShader->bind();
+    setTreeSceneUniforms(context);
+//    setLights();
+    initializeSkybox();
+    m_skyBoxShader->unbind();
+
+    m_phongShader->bind();
+    setTreeSceneUniforms(context);
+    setLights();
+    draw(m_data); // prime function here
+    glBindTexture(GL_TEXTURE_2D, 0);
+    m_phongShader->unbind();
 }
 
 void Drawer::setTreeSceneUniforms(SupportCanvas3D *context) {
@@ -156,9 +154,6 @@ void Drawer::setParticleSceneUniforms(SupportCanvas3D *context) {
     Camera *camera = context->getCamera();
     m_particleDrawProgram->setUniform("p", camera->getProjectionMatrix());
     m_particleDrawProgram->setUniform("v", camera->getViewMatrix());
-
-    m_skyBoxShader->setUniform("projection" , camera->getProjectionMatrix());
-    m_skyBoxShader->setUniform("view", camera->getViewMatrix());
 }
 
 void Drawer::setLights()
@@ -254,6 +249,8 @@ void Drawer::renderParticles(SupportCanvas3D * context) {
 
     // TODO [Task 17] Draw the particles from nextFBO
     nextFBO->unbind();
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
 
     m_particleDrawProgram->bind();
     setParticleViewport(context);
