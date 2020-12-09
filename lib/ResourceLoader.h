@@ -3,6 +3,8 @@
 
 #include <exception>
 #include <string>
+#include <QFile>
+#include <QImage>
 
 #include "GL/glew.h"
 
@@ -25,6 +27,15 @@ class ResourceLoader
 public:
     static std::string loadResourceFileToString(const std::string &resourcePath);
     static GLuint createShaderProgram(const char * vertex_file_path,const char * fragment_file_path);
+
+    // Returns the skybox ID
+    GLuint loadSkybox();
+
+    // Returns the cubeMap ID
+    GLuint loadCubeMap(QList<QFile *> files);
+
+    //QGLShaderProgram * newShaderProgram(const QGLContext *context, QString vertShader, QString fragShader, QString *errors = 0);
+
 private:
     static GLuint createShader(GLenum shaderType, const char *filepath);
 };

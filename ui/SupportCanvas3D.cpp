@@ -139,6 +139,10 @@ void SupportCanvas3D::setSceneFromSettings() {
             Turtle newTree = Turtle();
             newTree.parse(newTree.interpretString());
 
+            //for (auto pair : newTree.interpretString()) {
+            //    std::cout << pair.first <<' '<<pair.second<<std::endl;
+            //}
+
             m_currentScene = new Drawer();
             ((Drawer*) m_currentScene)->setData(newTree.getSegmentData());
 
