@@ -16,9 +16,9 @@ Drawer::Drawer() :
     loadPhongShader();
     loadParticleUpdateShader();
     loadParticleDrawShader();
+    CS123::GL::checkError();
     initializeParticleShaders();
     createLights();
-    CS123::GL::checkError();
 
     // setting up global data
     m_global_data.ka = 0.8;
@@ -114,12 +114,15 @@ void Drawer::render(SupportCanvas3D *context) {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     m_phongShader->bind();
-    setSceneUniforms(context);
+    setTreeSceneUniforms(context);
     setLights();
     draw(m_data); // prime function here
     glBindTexture(GL_TEXTURE_2D, 0);
     m_phongShader->unbind();
 
+    m_particleDrawProgram->bind();
+    setParticleSceneUniforms(context);
+    m_particleUpdateProgram->unbind();
     glDisable(GL_CULL_FACE);
     if (settings.burnTree) {
         renderParticles(context);
@@ -127,13 +130,16 @@ void Drawer::render(SupportCanvas3D *context) {
     }
 }
 
-void Drawer::setSceneUniforms(SupportCanvas3D *context) {
+void Drawer::setTreeSceneUniforms(SupportCanvas3D *context) {
     Camera *camera = context->getCamera();
     m_phongShader->setUniform("useLighting", true);
     m_phongShader->setUniform("useArrowOffsets", false);
     m_phongShader->setUniform("p" , camera->getProjectionMatrix());
     m_phongShader->setUniform("v", camera->getViewMatrix());
+}
 
+void Drawer::setParticleSceneUniforms(SupportCanvas3D *context) {
+    Camera *camera = context->getCamera();
     m_particleDrawProgram->setUniform("p", camera->getProjectionMatrix());
     m_particleDrawProgram->setUniform("v", camera->getViewMatrix());
 }
@@ -245,19 +251,13 @@ void Drawer::renderParticles(SupportCanvas3D * context) {
     m_particleDrawProgram->setUniform("vel", 1);
 
     glBindVertexArray(m_particlesVAO);
-    glDrawArrays(GL_TRIANGLES, 0, 3 * m_numParticles);
+    glDrawArrays(GL_TRIANGLES, 0, m_numParticles);
     glBindVertexArray(0);
-
-    glActiveTexture(GL_TEXTURE0);
 
     m_firstPass = false;
     m_evenPass = !m_evenPass;
 }
 
 void Drawer::setParticleViewport(SupportCanvas3D *context) {
-//    int maxDim = std::max(context->width(), context->height());
-//    int x = (context->width() - maxDim) / 2.0f;
-//    int y = (context->height() - maxDim) / 2.0f;
-//    glViewport(x, y, maxDim, maxDim);
-    glViewport(0, 0, context->width(), context->height());
+    glViewport(0, 0, context->width() * context->m_ratio, context->height() * context->m_ratio);
 }

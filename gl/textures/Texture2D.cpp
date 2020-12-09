@@ -1,4 +1,5 @@
 #include "Texture2D.h"
+#include "gl/GLDebug.h"
 
 #include <utility>
 

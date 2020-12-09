@@ -66,7 +66,8 @@ private:
     void loadParticleUpdateShader();
     void loadParticleDrawShader();
     void createLights();
-    void setSceneUniforms(SupportCanvas3D *context);
+    void setTreeSceneUniforms(SupportCanvas3D *context);
+    void setParticleSceneUniforms(SupportCanvas3D *context);
     void setLights();
     void renderParticles(SupportCanvas3D *context);
     void initializeParticleShaders();

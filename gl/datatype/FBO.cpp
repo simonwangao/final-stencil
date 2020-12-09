@@ -7,6 +7,7 @@
 #include "gl/textures/DepthBuffer.h"
 #include "gl/textures/Texture2D.h"
 #include "gl/textures/TextureParametersBuilder.h"
+#include <iostream>
 
 using namespace CS123::GL;
 

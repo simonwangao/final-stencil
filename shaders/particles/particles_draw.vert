@@ -17,7 +17,7 @@ const vec4 TRI_VERTS[NUM_VERTICES_PER_PARTICLE] = vec4[NUM_VERTICES_PER_PARTICLE
     // vec4(p1.x, p1.y, 0, 0),
     // vec4(p2.x, p2.y, 0, 0),
     // vec4(p3.x, p3.y, 0, 0)
-    vec4(0, 0.1, 0, 0), vec4(0, 0, 0, 0), vec4(0.1, 0, 0, 0)
+    vec4(0, 0.05, 0, 0), vec4(0, 0, 0, 0), vec4(0.05, 0, 0, 0)
 );
 
 // Convert from HSL to RGB

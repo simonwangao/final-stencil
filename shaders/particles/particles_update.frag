@@ -45,44 +45,45 @@ vec2 calculateInitialVelocity(int index) {
 }
 
 vec4 initPosition(int index) {
-    const vec4 spawn = vec4(0, 0, 0, 1);
+    const vec4 spawn = vec4(10, 0, 0, 1);
     return vec4(vec3(spawn), calculateLifetime(index));
 }
 
 vec4 initVelocity(int index) {
-    return vec4(10, 10, 0, 0);
+    return vec4(0.0, 0.0, 0.0, 0.0);
 }
 
-vec4 updatePosition(int index) {
-    // TODO [Task 16]
-    // - sample prevPos and prevVel at uv
-    // - xyz: pos + vel * dt
-    // - w component is lifetime, so keep it from the previous position
-    vec4 text = texture(prevPos, uv);
-    vec4 velText = texture(prevVel, uv);
-    return vec4(text.xyz + velText.xyz * dt, text.w);
-}
+//vec4 updatePosition(int index) {
+//    // TODO [Task 16]
+//    // - sample prevPos and prevVel at uv
+//    // - xyz: pos + vel * dt
+//    // - w component is lifetime, so keep it from the previous position
+//    vec4 text = texture(prevPos, uv);
+//    vec4 velText = texture(prevVel, uv);
+//    return vec4(text.xyz + vec3(1.0, 0.0, 0.0), text.w);
+//}
 
-vec4 updateVelocity(int index) {
-    const float G = 0.1;
-    // TODO [Task 16]
-    // - sample prevVel at uv
-    // - only force is gravity in y direction.  Add G * dt.
-    // - w component is age, so add dt
-    vec4 text = texture(prevVel, uv);
-    return vec4(text.x, text.y + G * dt, text.z, text.w + dt);
-}
+//vec4 updateVelocity(int index) {
+//    const float G = 0.1;
+//    // TODO [Task 16]
+//    // - sample prevVel at uv
+//    // - only force is gravity in y direction.  Add G * dt.
+//    // - w component is age, so add dt
+//    vec4 text = texture(prevVel, uv);
+//    return vec4(text.x, text.y + G * dt, text.z, text.w + dt);
+//}
 
 void main() {
     int index = int(uv.x * numParticles);
-    pos = initPosition(index);
-    vel = initVelocity(index);
-//    if (firstPass > 0.5) {
-//        pos = initPosition(index);
-//        vel = initVelocity(index);
-//    } else {
-////        pos = updatePosition(index);
-////        vel = updateVelocity(index);
+    if (firstPass > 0.5) {
+        pos = vec4(0, 0, 0, 0);
+        vel = vec4(0, 0, 0, 0);
+     } else {
+        pos = texture(prevPos, uv) + vec4(1.0, 0.0, 0.0, 0.0);
+        vel = vec4(0, 0, 0, 0);
+    }
+//        vel = updateVelocity(index);
+//    }
 
 //        if (pos.w < vel.w) {
 //            pos = initPosition(index);

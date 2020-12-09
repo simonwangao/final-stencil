@@ -61,13 +61,13 @@ void SupportCanvas3D::initializeGL() {
     m_oldRotN = settings.cameraRotN;
 
     initializeGlew();
-
+    m_currentScene = new Drawer();
+    m_ratio = static_cast<QGuiApplication *>(QCoreApplication::instance())->devicePixelRatio();
     initializeOpenGLSettings();
     initializeScenes();
     setSceneFromSettings();
 
     settingsChanged();
-
 }
 
 void SupportCanvas3D::initializeGlew() {
@@ -112,6 +112,7 @@ void SupportCanvas3D::paintGL() {
     }
 
     float ratio = static_cast<QGuiApplication *>(QCoreApplication::instance())->devicePixelRatio();
+    m_ratio = static_cast<QGuiApplication *>(QCoreApplication::instance())->devicePixelRatio();
     glViewport(0, 0, width() * ratio, height() * ratio);
     getCamera()->setAspectRatio(static_cast<float>(width()) / static_cast<float>(height()));
     m_currentScene->render(this);
@@ -138,10 +139,7 @@ void SupportCanvas3D::setSceneFromSettings() {
 
             Turtle newTree = Turtle();
             newTree.parse(newTree.interpretString());
-
-            m_currentScene = new Drawer();
-            ((Drawer*) m_currentScene)->setData(newTree.getSegmentData());
-
+            ((Drawer *) m_currentScene)->setData(newTree.getSegmentData());
             break;
     }
     m_settingsDirty = false;
