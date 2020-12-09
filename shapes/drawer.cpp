@@ -4,6 +4,7 @@
 #include <iostream>
 #include "gl/textures/Texture2D.h"
 #include "Settings.h"
+#include "gl/GLDebug.h"
 
 using namespace CS123::GL;
 
@@ -17,6 +18,7 @@ Drawer::Drawer() :
     loadParticleDrawShader();
     initializeParticleShaders();
     createLights();
+    CS123::GL::checkError();
 
     // setting up global data
     m_global_data.ka = 0.8;
@@ -118,6 +120,7 @@ void Drawer::render(SupportCanvas3D *context) {
     glBindTexture(GL_TEXTURE_2D, 0);
     m_phongShader->unbind();
 
+    glDisable(GL_CULL_FACE);
     if (settings.burnTree) {
         renderParticles(context);
         context->update();
@@ -131,8 +134,8 @@ void Drawer::setSceneUniforms(SupportCanvas3D *context) {
     m_phongShader->setUniform("p" , camera->getProjectionMatrix());
     m_phongShader->setUniform("v", camera->getViewMatrix());
 
-    m_particleUpdateProgram->setUniform("p", camera->getProjectionMatrix());
-    m_particleUpdateProgram->setUniform("v", camera->getViewMatrix());
+    m_particleDrawProgram->setUniform("p", camera->getProjectionMatrix());
+    m_particleDrawProgram->setUniform("v", camera->getViewMatrix());
 }
 
 void Drawer::setLights()
@@ -161,7 +164,6 @@ void Drawer::draw(const std::vector<SegmentData>& segmentData) {
 
         // set up the material here ?
         CS123SceneMaterial material;
-
 
         material.cAmbient = glm::vec4(0.3, 0.3, 0.2, 1.);
         material.cDiffuse = glm::vec4(1., 1., 1., 1.);
@@ -214,7 +216,6 @@ void Drawer::renderParticles(SupportCanvas3D * context) {
     float firstPass = m_firstPass ? 1.0f : 0.0f;
 
     // TODO [Task 14] Move the particles from prevFBO to nextFBO while updating them
-    glActiveTexture(GL_TEXTURE0);
     nextFBO->bind();
     m_particleUpdateProgram->bind();
     glActiveTexture(GL_TEXTURE0);
@@ -227,7 +228,6 @@ void Drawer::renderParticles(SupportCanvas3D * context) {
     m_particleUpdateProgram->setUniform("prevPos", 0);
     m_particleUpdateProgram->setUniform("prevVel", 1);
     m_quad->draw();
-
 
     // TODO [Task 17] Draw the particles from nextFBO
     nextFBO->unbind();
@@ -245,7 +245,7 @@ void Drawer::renderParticles(SupportCanvas3D * context) {
     m_particleDrawProgram->setUniform("vel", 1);
 
     glBindVertexArray(m_particlesVAO);
-    glDrawArrays(GL_TRIANGLES, m_particlesVAO, m_numParticles);
+    glDrawArrays(GL_TRIANGLES, 0, 3 * m_numParticles);
     glBindVertexArray(0);
 
     glActiveTexture(GL_TEXTURE0);
@@ -255,8 +255,9 @@ void Drawer::renderParticles(SupportCanvas3D * context) {
 }
 
 void Drawer::setParticleViewport(SupportCanvas3D *context) {
-    int maxDim = std::max(context->width(), context->height());
-    int x = (context->width() - maxDim) / 2.0f;
-    int y = (context->height() - maxDim) / 2.0f;
-    glViewport(x, y, maxDim, maxDim);
+//    int maxDim = std::max(context->width(), context->height());
+//    int x = (context->width() - maxDim) / 2.0f;
+//    int y = (context->height() - maxDim) / 2.0f;
+//    glViewport(x, y, maxDim, maxDim);
+    glViewport(0, 0, context->width(), context->height());
 }

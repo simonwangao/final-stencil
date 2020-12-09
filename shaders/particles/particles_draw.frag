@@ -8,9 +8,9 @@ out vec4 fragColor;
 void main() {
     fragColor = vec4(1);
     // TODO [Task 19] Only color fragment if length(uv - 0.5) < 0.5, else discard
-    if (length(uv - 0.5) < 20) {
-        fragColor = vec4(color, 1);
-    } else {
-        discard;
-    }
+//    if (length(uv - 0.5) < 20) {
+//        fragColor = vec4(color, 1);
+//    } else {
+//        discard;
+//    }
 }

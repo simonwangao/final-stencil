@@ -4,6 +4,9 @@ uniform sampler2D pos;
 uniform sampler2D vel;
 uniform int numParticles;
 
+uniform mat4 p;
+uniform mat4 v;
+
 out vec2 uv;
 out vec3 color;
 
@@ -14,7 +17,7 @@ const vec4 TRI_VERTS[NUM_VERTICES_PER_PARTICLE] = vec4[NUM_VERTICES_PER_PARTICLE
     // vec4(p1.x, p1.y, 0, 0),
     // vec4(p2.x, p2.y, 0, 0),
     // vec4(p3.x, p3.y, 0, 0)
-    vec4(0, 50, 0, 0), vec4(0, 0, 0, 0), vec4(50, 0, 0, 0)
+    vec4(0, 0.1, 0, 0), vec4(0, 0, 0, 0), vec4(0.1, 0, 0, 0)
 );
 
 // Convert from HSL to RGB
@@ -83,23 +86,23 @@ void main() {
     vec4 posTime = vec4(0,0,0,1);
     vec4 velAge = vec4(0);
     // TODO [Task 18] sample pos and vel textures
-    posTime = texelFetch(pos, ivec2(particleID, 0), 0);
+    posTime = p * v * texelFetch(pos, ivec2(particleID, 0), 0);
     velAge = texelFetch(vel, ivec2(particleID, 0), 0);
 
     // Calculate diameter based on age and lifetime
-    float diameter = 0.02;
-    diameter *= min(min(1.0, velAge.w / (0.1 * posTime.w)),
-                    min(1.0, abs(posTime.w - velAge.w) / (0.1 * posTime.w)));
+//    float diameter = 0.02;
+//    diameter *= min(min(1.0, velAge.w / (0.1 * posTime.w)),
+//                    min(1.0, abs(posTime.w - velAge.w) / (0.1 * posTime.w)));
 
     // Calculate color based on particleID
     color = pickRainbowColor(float(particleID)/numParticles);
 
     // the offset to the points of the triangle
-    vec4 triPos = diameter * TRI_VERTS[triID];
+    vec4 triPos = TRI_VERTS[triID];
 
     // anchor point in clip space
     vec4 anchorPoint = vec4(posTime.xyz, 1.0);
 
     // Center the particle around anchorPoint
-    gl_Position = anchorPoint + triPos - diameter * vec4(0.5, 0.5, 0.0, 0.0);
+    gl_Position = anchorPoint + triPos;
 }

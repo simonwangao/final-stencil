@@ -6,6 +6,7 @@ uniform sampler2D prevVel;
 uniform int numParticles;
 uniform mat4 p;
 uniform mat4 v;
+uniform mat4 m;
 
 // output from quad.vert
 in vec2 uv;
@@ -44,12 +45,12 @@ vec2 calculateInitialVelocity(int index) {
 }
 
 vec4 initPosition(int index) {
-    const vec4 spawn = vec4(0);
-    return p * v * vec4(vec3(spawn), calculateLifetime(index));
+    const vec4 spawn = vec4(0, 0, 0, 1);
+    return vec4(vec3(spawn), calculateLifetime(index));
 }
 
 vec4 initVelocity(int index) {
-    return p * v * vec4(calculateInitialVelocity(index), 0, 0);
+    return vec4(10, 10, 0, 0);
 }
 
 vec4 updatePosition(int index) {
@@ -74,16 +75,18 @@ vec4 updateVelocity(int index) {
 
 void main() {
     int index = int(uv.x * numParticles);
-    if (firstPass > 0.5) {
-        pos = initPosition(index);
-        vel = initVelocity(index);
-    } else {
-        pos = updatePosition(index);
-        vel = updateVelocity(index);
+    pos = initPosition(index);
+    vel = initVelocity(index);
+//    if (firstPass > 0.5) {
+//        pos = initPosition(index);
+//        vel = initVelocity(index);
+//    } else {
+////        pos = updatePosition(index);
+////        vel = updateVelocity(index);
 
-        if (pos.w < vel.w) {
-            pos = initPosition(index);
-            vel = initVelocity(index);
-        }
-    }
+//        if (pos.w < vel.w) {
+//            pos = initPosition(index);
+//            vel = initVelocity(index);
+//        }
+//    }
 }
