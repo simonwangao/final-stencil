@@ -3,3 +3,4 @@ final.pro.user
 *.o
 .qmake.stash
 .vscode
+*.app
