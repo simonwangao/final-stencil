@@ -23,20 +23,20 @@ const string lbracket = "[";   // Push the current state of the turtle to stack
 const string rbracket = "]";   // Pop the current state of the turtle from stack
 
 // parameters
-const int l_t = 5;                 // Branch levels of the tree
+const int l_t = 4;                 // Branch levels of the tree
 const float l_max = 4.;             // The max length allowed of a branch
 const float l_min = 2.;             // The min length allowed of a branch
 const float alpha_max = 30.;        // The max branching angle allowed of a branch
 const float alpha_min = 15.;        // The min branching angle allowed of a branch
 const float w = 4.;                 // The width of the initial branch
-const float d = 0.8;              // The decrease of the width
+const float d = 1.;              // The decrease of the width
 const int l_l = 0;                  // Leafing levels of the tree
 const int l_n = 0;                  // Leaf number per branch
 const float len0 = 0.95;             // length reduction for the stem
 const float len1 = 0.6;             // length reduction for the branches
 const int PARAM1 = 2;              // used for shape primitive
 const int PARAM2 = 40;              // used for shape primitive
-const float START_DIAMETER = 1;    // starting diameter of the cylinder
+const float START_DIAMETER = 0.5;    // starting diameter of the cylinder
 const float SKYBOX_LENGTH = 20.;    // length of the edge of the skybox
 
 struct BranchFeats {
