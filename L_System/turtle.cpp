@@ -63,8 +63,10 @@ vector<pair<string, float>> Turtle::interpretChar(char pred, vector<char> succs)
     output.push_back({F, vals.l});
 
     if (pred == 'b') {
-        m_charToBranch[pred].alphaX += 240;
-        m_charToBranch[pred].alphaZ += 240;
+        float rotate_val = ((floorf((float) l_t / 2.0f) + 1.0f) / l_t) * 360.f;
+        std::cout << rotate_val << std::endl;
+        m_charToBranch[pred].alphaX += rotate_val;
+        m_charToBranch[pred].alphaZ += rotate_val;
     } else {
         //
     }
