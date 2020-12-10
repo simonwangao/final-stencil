@@ -37,6 +37,7 @@ public:
 
     void setData(const std::vector<SegmentData>& data);
     void render(SupportCanvas3D *context);
+    void settingsChanged();
     void draw(const std::vector<SegmentData>& data);
 
 protected:

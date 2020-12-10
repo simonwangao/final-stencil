@@ -117,19 +117,6 @@ void Drawer::render(SupportCanvas3D *context) {
     setClearColor();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    m_particleDrawProgram->bind();
-    setParticleSceneUniforms(context);
-    m_particleUpdateProgram->unbind();
-
-    glDisable(GL_CULL_FACE);
-    if (settings.burnTree) {
-        renderParticles(context);
-        context->update();
-    }
-
-    std::cout << "bad for me" << std::endl;
-    CS123::GL::checkError();
-
     // draw skybox
     m_skyBoxShader->bind();
     setSkyBoxUniforms(context);
@@ -143,6 +130,16 @@ void Drawer::render(SupportCanvas3D *context) {
     draw(m_data); // prime function here
     glBindTexture(GL_TEXTURE_2D, 0);
     m_phongShader->unbind();
+
+    m_particleDrawProgram->bind();
+    setParticleSceneUniforms(context);
+    m_particleUpdateProgram->unbind();
+
+    glDisable(GL_CULL_FACE);
+    if (settings.burnTree) {
+        renderParticles(context);
+        context->update();
+    }
 }
 
 void Drawer::setSkyBoxUniforms(SupportCanvas3D *context) {
@@ -259,8 +256,6 @@ void Drawer::renderParticles(SupportCanvas3D * context) {
 
     // TODO [Task 17] Draw the particles from nextFBO
     nextFBO->unbind();
-    glClear(GL_COLOR_BUFFER_BIT);
-    glClear(GL_DEPTH_BUFFER_BIT);
 
     m_particleDrawProgram->bind();
     setParticleViewport(context);
@@ -348,4 +343,8 @@ unsigned int Drawer::loadCubemap(const vector<std::string>& faces) {
     glTexParameteri(GL_TEXTURE_CUBE_MAP, GL_TEXTURE_WRAP_R, GL_CLAMP_TO_EDGE);
 
     return textureID;
+}
+
+void Drawer::settingsChanged() {
+    m_firstPass = true;
 }
