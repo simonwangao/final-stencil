@@ -127,12 +127,16 @@ void Drawer::render(SupportCanvas3D *context) {
         context->update();
     }
 
+    std::cout << "bad for me" << std::endl;
+    CS123::GL::checkError();
+
     // draw skybox
     m_skyBoxShader->bind();
     setTreeSceneUniforms(context);
 //    setLights();
     initializeSkybox();
     m_skyBoxShader->unbind();
+
 
     m_phongShader->bind();
     setTreeSceneUniforms(context);
