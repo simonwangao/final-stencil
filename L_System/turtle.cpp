@@ -28,11 +28,7 @@ string Turtle::createTreePattern() {
     string newPattern = "";
 
     for (int i = 0; i < l_t; i++) {
-        if (i % 3) {
-            newPattern.append("b");
-        } else {
-           newPattern.append("a");
-        }
+          newPattern.append("a");
     }
 
     // return changed string
@@ -47,6 +43,11 @@ vector<pair<string, float>> Turtle::interpretChar(char pred, vector<char> succs)
     output.push_back({down, vals.alphaZ});
     output.push_back({F, vals.l});
 
+    if (pred == 'a') {
+        m_charToBranch[pred].l *= len0;
+    }
+
+
     int num_succs = succs.size();
     for (int i = 0; i < num_succs; i++) {
         output.push_back({lbracket, 0});
@@ -57,17 +58,27 @@ vector<pair<string, float>> Turtle::interpretChar(char pred, vector<char> succs)
     }
 
     output.push_back({plus, vals.alphaY});
-    output.push_back({left, -vals.alphaX});
+    output.push_back({left, vals.alphaX});
     output.push_back({down, vals.alphaZ});
     output.push_back({F, vals.l});
 
-    /*for (int i = 0; i < num_succs; i++) {
+    if (pred == 'b') {
+        m_charToBranch[pred].alphaX += 240;
+        m_charToBranch[pred].alphaZ += 240;
+    } else {
+        //
+    }
+
+
+    for (int i = 0; i < num_succs; i++) {
         output.push_back({lbracket, 0});
         vector<pair<string, float>> subResult = interpretChar(succs[i], {});
         output.reserve(subResult.size());
         output.insert(output.end(), subResult.begin(), subResult.end());
         output.push_back({rbracket, 0});
-    }*/
+    }
+
+    //m_charToBranch[pred].l *= len0;
 
 
     return output;
