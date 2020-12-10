@@ -73,6 +73,7 @@ private:
     void createLights();
     void setTreeSceneUniforms(SupportCanvas3D *context);
     void setParticleSceneUniforms(SupportCanvas3D *context);
+    void setSkyBoxUniforms(SupportCanvas3D *context);
     void setLights();
     void renderParticles(SupportCanvas3D *context);
     void initializeParticleShaders();

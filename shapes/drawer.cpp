@@ -58,20 +58,20 @@ void Drawer::loadSkyBoxShader() {
     std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/skybox.frag");
     m_skyBoxShader = std::make_unique<CS123Shader>(vertexSource, fragmentSource);
 
-    // load images
+    // load images (y seems to be upside down here)
     m_textures_faces.push_back(":/skybox/images/posx.jpg");
     m_textures_faces.push_back(":/skybox/images/negx.jpg");
-    m_textures_faces.push_back(":/skybox/images/posy.jpg");
+    //m_textures_faces.push_back(":/skybox/images/posy.jpg");
     m_textures_faces.push_back(":/skybox/images/negy.jpg");
+    m_textures_faces.push_back(":/skybox/images/posy.jpg");
     m_textures_faces.push_back(":/skybox/images/posz.jpg");
     m_textures_faces.push_back(":/skybox/images/negz.jpg");
 
     m_cubemapTexture = loadCubemap(m_textures_faces);
 
     m_skybox_cube = std::make_unique<OpenGLShape>();
-    m_skybox_cube->setVertexData(&skyboxVertices[0], sizeof(skyboxVertices) / sizeof(float), VBO::GEOMETRY_LAYOUT::LAYOUT_TRIANGLES, 36);
+    m_skybox_cube->setVertexData(&skyboxVertices[0], sizeof(skyboxVertices), VBO::GEOMETRY_LAYOUT::LAYOUT_TRIANGLES, 36);
     m_skybox_cube->setAttribute(ShaderAttrib::POSITION, 3, 0, VBOAttribMarker::DATA_TYPE::FLOAT, false);
-    //m_skybox_cube->setAttribute(ShaderAttrib::NORMAL, 3, 3*sizeof(GLfloat), VBOAttribMarker::DATA_TYPE::FLOAT, false);
     m_skybox_cube->buildVAO();
 }
 
@@ -132,8 +132,7 @@ void Drawer::render(SupportCanvas3D *context) {
 
     // draw skybox
     m_skyBoxShader->bind();
-    setTreeSceneUniforms(context);
-//    setLights();
+    setSkyBoxUniforms(context);
     initializeSkybox();
     m_skyBoxShader->unbind();
 
@@ -144,6 +143,13 @@ void Drawer::render(SupportCanvas3D *context) {
     draw(m_data); // prime function here
     glBindTexture(GL_TEXTURE_2D, 0);
     m_phongShader->unbind();
+}
+
+void Drawer::setSkyBoxUniforms(SupportCanvas3D *context) {
+    Camera *camera = context->getCamera();
+    m_skyBoxShader->setUniform("view", camera->getViewMatrix());
+    m_skyBoxShader->setUniform("projection", camera->getProjectionMatrix());
+    m_skyBoxShader->setUniform("scale", SKYBOX_LENGTH);
 }
 
 void Drawer::setTreeSceneUniforms(SupportCanvas3D *context) {
@@ -285,7 +291,6 @@ void Drawer::initializeSkybox() {
 
     GLuint VAO = m_skybox_cube->getHandle();
     GLuint VBO;
-    //glGenVertexArrays(1, &VAO);
 
     glBindVertexArray(VAO);
     glGenBuffers(1, &VBO);
@@ -312,7 +317,11 @@ void Drawer::initializeSkybox() {
 unsigned int Drawer::loadCubemap(const vector<std::string>& faces) {
     unsigned int textureID;
     glGenTextures(1, &textureID);
+    if (textureID) {
+        glDeleteTextures(1, &textureID);
+    }
     glBindTexture(GL_TEXTURE_CUBE_MAP, textureID);
+    glGenerateMipmap(GL_TEXTURE_2D);
 
     int width, height;
     unsigned char *data;
@@ -321,13 +330,14 @@ unsigned int Drawer::loadCubemap(const vector<std::string>& faces) {
         QImage image;
         image.load(QString(faces[i].c_str()));
         //image = image.mirrored(false, true);
-        data = image.bits();
-        width = image.width();
-        height = image.height();
+        QImage oglFormat = QGLWidget::convertToGLFormat(image);
+        data = oglFormat.bits();
+        width = oglFormat.width();
+        height = oglFormat.height();
 
         glTexImage2D(
             GL_TEXTURE_CUBE_MAP_POSITIVE_X + i,
-            0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data
+            0, GL_RGB, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data
         );
     }
 

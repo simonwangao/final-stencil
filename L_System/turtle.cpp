@@ -106,15 +106,17 @@ void Turtle::parse(const std::vector<std::pair<std::string, float>>& str) {
     for (auto pair : str) {
         std::string command = pair.first;
 
-//        std::cout << pair.second << std::endl;
-        //std::cout << pair.second << std::endl;
         if (command == F) {
             // move forward
             // new segment, need to put in the list
             SegmentData data;
             data.startLoc = m_loc;
             data.length = pair.second;
-            data.matrix = m_matrix;
+
+            // move to the bottom of the skybox
+            glm::mat4 mat = glm::translate(glm::vec3(0., -SKYBOX_LENGTH / 2., 0.));
+            data.matrix = mat * m_matrix;
+
             data.direction = m_direction;
             data.depth = m_depth;
             m_segments.push_back(data);
