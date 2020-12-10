@@ -25,7 +25,7 @@ const string rbracket = "]";   // Pop the current state of the turtle from stack
 
 // parameters
 const int l_t = 3;                 // Branch levels of the tree
-const float l_max = 4.;             // The max length allowed of a branch
+const float l_max = 3.;             // The max length allowed of a branch
 const float l_min = 2.;             // The min length allowed of a branch
 const float alpha_max = 60.;        // The max branching angle allowed of a branch
 const float alpha_min = 15.;        // The min branching angle allowed of a branch
