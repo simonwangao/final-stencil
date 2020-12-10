@@ -66,14 +66,23 @@ vector<pair<string, float>> Turtle::interpretChar(char pred, vector<char> succs)
     output.push_back({F, vals.l});
 
     if (pred == 'b') {
-        float rotate_val = ((floorf((float) l_t / 2.0f) + 1.0f) / l_t) * 360.f;
-        std::cout << rotate_val << std::endl;
-        m_charToBranch[pred].alphaX += rotate_val;
-        m_charToBranch[pred].alphaZ += rotate_val;
-    } else {
-        //
-    }
 
+       float rotate_val = ((floorf((float) l_t / 2.0f) + 1.0f) / l_t) * 360.f;
+       /*std::cout << rotate_val << std::endl;
+       m_charToBranch[pred].alphaX += rotate_val;
+       m_charToBranch[pred].alphaZ += rotate_val;*/
+
+        //float rotate_val = 360.f / (float) l_t;
+
+        glm::mat3 rotation = glm::mat3(glm::rotate(glm::radians(rotate_val), glm::vec3(0, 1, 0)));
+        glm::vec3 rotated = rotation * glm::vec3(vals.alphaX, vals.alphaY, vals.alphaZ);
+
+        m_charToBranch[pred].alphaX = rotated.x;
+        m_charToBranch[pred].alphaY = rotated.y;
+        m_charToBranch[pred].alphaZ = rotated.z;
+
+
+    }
 
     for (int i = 0; i < num_succs; i++) {
         output.push_back({lbracket, 0});
@@ -82,8 +91,6 @@ vector<pair<string, float>> Turtle::interpretChar(char pred, vector<char> succs)
         output.insert(output.end(), subResult.begin(), subResult.end());
         output.push_back({rbracket, 0});
     }
-
-    //m_charToBranch[pred].l *= len0;
 
 
     return output;
@@ -192,7 +199,7 @@ void Turtle::parse(const std::vector<std::pair<std::string, float>>& str) {
             // translate back to origin and then translate back
             glm::mat4 back2origin = glm::translate(-m_loc.xyz());
 
-            glm::mat4 rotator = glm::inverse(back2origin) * glm::rotate(pair.second * (float)M_PI / 180.f, glm::vec3(1, 0, 0)) * back2origin;
+            glm::mat4 rotator = glm::inverse(back2origin) * glm::rotate(glm::radians(pair.second), glm::vec3(1, 0, 0)) * back2origin;
             m_direction = rotator * m_direction;
             m_matrix = rotator * m_matrix;
 
@@ -201,7 +208,7 @@ void Turtle::parse(const std::vector<std::pair<std::string, float>>& str) {
             // translate back to origin and then translate back
             glm::mat4 back2origin = glm::translate(-m_loc.xyz());
 
-            glm::mat4 rotator = glm::inverse(back2origin) * glm::rotate(pair.second * (float)M_PI / 180.f, glm::vec3(-1, 0, 0)) * back2origin;
+            glm::mat4 rotator = glm::inverse(back2origin) * glm::rotate(glm::radians(pair.second), glm::vec3(-1, 0, 0)) * back2origin;
             m_direction = rotator * m_direction;
             m_matrix = rotator * m_matrix;
 
@@ -210,7 +217,7 @@ void Turtle::parse(const std::vector<std::pair<std::string, float>>& str) {
             // translate back to origin and then translate back
             glm::mat4 back2origin = glm::translate(-m_loc.xyz());
 
-            glm::mat4 rotator = glm::inverse(back2origin) * glm::rotate(pair.second * (float)M_PI / 180.f, glm::vec3(0, 0, 1)) * back2origin;
+            glm::mat4 rotator = glm::inverse(back2origin) * glm::rotate(glm::radians(pair.second), glm::vec3(0, 0, 1)) * back2origin;
             m_direction = rotator * m_direction;
             m_matrix = rotator * m_matrix;
 
@@ -219,7 +226,7 @@ void Turtle::parse(const std::vector<std::pair<std::string, float>>& str) {
             // translate back to origin and then translate back
             glm::mat4 back2origin = glm::translate(-m_loc.xyz());
 
-            glm::mat4 rotator = glm::inverse(back2origin) * glm::rotate(pair.second * (float)M_PI / 180.f, glm::vec3(0, 0, -1)) * back2origin;
+            glm::mat4 rotator = glm::inverse(back2origin) * glm::rotate(glm::radians(pair.second), glm::vec3(0, 0, -1)) * back2origin;
             m_direction = rotator * m_direction;
             m_matrix = rotator * m_matrix;
 

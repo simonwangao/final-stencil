@@ -41,9 +41,6 @@ unordered_map<char, BranchFeats> createBranchTypes() {
 
     float len1 = randomLen();
     float wid = 2.f;
-    float angleX = randomAngle();
-    float angleY = randomAngle();
-    float angleZ = randomAngle();
     addBranchChar('a', BranchFeats(len1, wid, 0, 0, 0), charToBranch);
 
     float len2 = randomLen();
