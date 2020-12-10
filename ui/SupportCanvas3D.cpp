@@ -61,7 +61,11 @@ void SupportCanvas3D::initializeGL() {
     m_oldRotN = settings.cameraRotN;
 
     initializeGlew();
+    Turtle newTree = Turtle();
+    newTree.parse(newTree.interpretString());
+
     m_currentScene = new Drawer();
+    ((Drawer*) m_currentScene)->setData(newTree.getSegmentData());
     m_ratio = static_cast<QGuiApplication *>(QCoreApplication::instance())->devicePixelRatio();
     initializeOpenGLSettings();
     initializeScenes();
@@ -134,19 +138,12 @@ void SupportCanvas3D::setSceneFromSettings() {
             setSceneToSceneview();
             break;
         case SCENEMODE_DRAWER:
-            // delete in de-constructor
-            //m_currentScene = new Drawer();
 
-            Turtle newTree = Turtle();
+            /*Turtle newTree = Turtle();
             newTree.parse(newTree.interpretString());
-            ((Drawer *) m_currentScene)->setData(newTree.getSegmentData());
-
-            //for (auto pair : newTree.interpretString()) {
-            //    std::cout << pair.first <<' '<<pair.second<<std::endl;
-            //}
 
             m_currentScene = new Drawer();
-            ((Drawer*) m_currentScene)->setData(newTree.getSegmentData());
+            ((Drawer*) m_currentScene)->setData(newTree.getSegmentData());*/
 
             break;
     }
@@ -156,19 +153,6 @@ void SupportCanvas3D::setSceneFromSettings() {
 void SupportCanvas3D::setSceneToSceneview() {
     assert(m_sceneviewScene.get());
     m_currentScene = m_sceneviewScene.get();
-}
-
-void SupportCanvas3D::renderTrees() {
-
-    //m_canvas3D->update();
-    QApplication::processEvents();
-
-    Turtle newTree = Turtle();
-    newTree.parse(newTree.interpretString());
-
-    Drawer *renderer = new Drawer();
-    renderer->setData(newTree.getSegmentData());
-    //renderer->render(m_canvas3D);
 }
 
 void SupportCanvas3D::copyPixels(int width, int height, RGBA *data) {

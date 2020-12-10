@@ -99,8 +99,6 @@ private:
     void setSceneFromSettings();
     void setSceneToSceneview();
 
-    void renderTrees();
-
 
     glm::vec4      m_cameraEye;
     bool           m_isDragging;
