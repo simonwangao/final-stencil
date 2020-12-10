@@ -185,7 +185,7 @@ void Drawer::draw(const std::vector<SegmentData>& segmentData) {
         // to the center of the cylinder
         glm::mat4 mat(1.); // identity matrix
         // scaling
-        float diameter = START_DIAMETER * glm::pow(d, (float)data.depth);
+        float diameter = data.width;
         mat = glm::scale(glm::vec3(diameter, data.length, diameter)) * mat;
         mat = glm::translate(glm::vec3(0., data.length / 2., 0.)) * mat; // move "to the ground" (y >= 0)
         mat = data.matrix * mat;

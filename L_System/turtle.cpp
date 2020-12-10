@@ -41,10 +41,12 @@ vector<pair<string, float>> Turtle::interpretChar(char pred, vector<char> succs)
     output.push_back({plus, vals.alphaY});
     output.push_back({left, vals.alphaX});
     output.push_back({down, vals.alphaZ});
+    output.push_back({W, vals.w});
     output.push_back({F, vals.l});
 
     if (pred == 'a') {
         m_charToBranch[pred].l *= len0;
+        m_charToBranch[pred].w *= d;
     }
 
 
@@ -60,6 +62,7 @@ vector<pair<string, float>> Turtle::interpretChar(char pred, vector<char> succs)
     output.push_back({plus, vals.alphaY});
     output.push_back({left, vals.alphaX});
     output.push_back({down, vals.alphaZ});
+    output.push_back({W, vals.w});
     output.push_back({F, vals.l});
 
     if (pred == 'b') {
@@ -119,12 +122,17 @@ void Turtle::parse(const std::vector<std::pair<std::string, float>>& str) {
     for (auto pair : str) {
         std::string command = pair.first;
 
+        if (command == W) {
+            m_width = pair.second;
+        }
+
         if (command == F) {
             // move forward
             // new segment, need to put in the list
             SegmentData data;
             data.startLoc = m_loc;
             data.length = pair.second;
+            data.width = m_width;
 
             // move to the bottom of the skybox
             glm::mat4 mat = glm::translate(glm::vec3(0., -SKYBOX_LENGTH / 2., 0.));

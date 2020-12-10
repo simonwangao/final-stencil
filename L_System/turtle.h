@@ -18,6 +18,7 @@ using std::pair;
 struct SegmentData {
     glm::vec4 startLoc;     // start location of the segment
     float length;           // length of the segment
+    float width;            // width of segment
     glm::vec4 direction;    // direction of the segment
     glm::mat4 matrix;       // the matrix to transfer the original primitive
     int depth;              // depth of the branch
@@ -49,6 +50,7 @@ private:
     glm::vec4 m_loc;        // location of the turtle
     glm::vec4 m_direction;  // direction of the turtle, a normalized vector
     glm::mat4 m_matrix;     // the transform matrix to this step
+    float m_width;          // current width
     int m_depth;            // depth of the branch
 
     string m_initial;
