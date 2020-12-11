@@ -15,6 +15,7 @@
 #include "Settings.h"
 #include <QFile>
 #include <QSettings>
+#include <iostream>
 
 Settings settings;
 
@@ -146,8 +147,6 @@ int Settings::getSceneMode() {
 }
 
 int Settings::getCameraMode() {
-    if (this->useOrbitCamera)
-        return CAMERAMODE_ORBIT;
-    else
-        return CAMERAMODE_CAMTRANS;
+    return CAMERAMODE_ORBIT;
+
 }

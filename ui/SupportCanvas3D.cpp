@@ -35,6 +35,7 @@ Camera *SupportCanvas3D::getCamera() {
             return m_defaultPerspectiveCamera.get();
 
         case CAMERAMODE_ORBIT:
+            std::cout << "orbit camera" << std::endl;
             return m_defaultOrbitingCamera.get();
 
         default:

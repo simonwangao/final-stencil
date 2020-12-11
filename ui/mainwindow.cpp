@@ -48,24 +48,14 @@ MainWindow::MainWindow(QWidget *parent) :
     actions.back()->setShortcut(QKeySequence(key));
 
     SETUP_ACTION(BurningTreeDock,     "CTRL+1");
-    SETUP_ACTION(camtransDock,      "CTRL+2");
 
 
-    //ui->menuToolbars->addActions(actions);
-    tabifyDockWidget(ui->BurningTreeDock, ui->camtransDock);
-    //tabifyDockWidget(ui->brushDock, ui->shapesDock);
-    //tabifyDockWidget(ui->brushDock, ui->camtransDock);
-    //tabifyDockWidget(ui->brushDock, ui->rayDock);
     ui->BurningTreeDock->raise();
 #undef SETUP_ACTION
 
     dataBind();
 
-    // Reset the contents of both canvas widgets (make a new 500x500 image for the 2D one)
-    //fileNew();
-
     ui->BurningTreeDock->show();
-    ui->camtransDock->show();
     show();
 
 }
@@ -96,19 +86,12 @@ void MainWindow::dataBind() {
     BIND(BoolBinding::bindCheckbox(ui->BurningButton, settings.burnTree))
 
     // Camtrans dock
-    BIND(BoolBinding::bindCheckbox(ui->cameraOrbitCheckbox, settings.useOrbitCamera))
-    BIND(FloatBinding::bindDial(ui->transX, settings.cameraPosX, -2, 2, true))
-    BIND(FloatBinding::bindDial(ui->transY, settings.cameraPosY, -2, 2, true))
-    BIND(FloatBinding::bindDial(ui->transZ, settings.cameraPosZ, -2, 2, true))
-    BIND(FloatBinding::bindDial(ui->rotU,   settings.cameraRotU, -20, 20, true))
-    BIND(FloatBinding::bindDial(ui->rotV,   settings.cameraRotV, -20, 20, true))
-    BIND(FloatBinding::bindDial(ui->rotW,   settings.cameraRotN, -180, 180, false))
     BIND(FloatBinding::bindSliderAndTextbox(
-              ui->cameraFovSlider, ui->cameraFovTextbox, settings.cameraFov, 1, 179))
+              ui->cameraFovSlider_2, ui->cameraFovTextbox_2, settings.cameraFov, 1, 179))
     BIND(FloatBinding::bindSliderAndTextbox(
-              ui->cameraNearSlider, ui->cameraNearTextbox, settings.cameraNear, 0.1, 50))
+              ui->cameraNearSlider_2, ui->cameraNearTextbox_2, settings.cameraNear, 0.1, 50))
     BIND(FloatBinding::bindSliderAndTextbox(
-              ui->cameraFarSlider, ui->cameraFarTextbox, settings.cameraFar, 0.1, 50))
+              ui->cameraFarSlider_2, ui->cameraFarTextbox_2, settings.cameraFar, 0.1, 50))
     initializeCamtransFrustum(); // always set the viewing frustum to reasonable settings when we start the program
 
 
@@ -146,7 +129,7 @@ void MainWindow::updateAspectRatio() {
     // 3D canvas isn't visible (the 3D canvas isn't resized when it isn't visible)
     QSize activeTabSize = ui->centralWidget->size();
     float aspectRatio = static_cast<float>(activeTabSize.width()) / static_cast<float>(activeTabSize.height());
-    ui->cameraAspectRatio->setText(QString("Aspect ratio: %1").arg(aspectRatio));
+    ui->cameraAspectRatio_2->setText(QString("Aspect ratio: %1").arg(aspectRatio));
 }
 
 
@@ -157,16 +140,8 @@ void MainWindow::settingsChanged() {
 void MainWindow::setAllEnabled(bool enabled) {
     QList<QWidget *> widgets;
     widgets += ui->BurningTreeDock;
-    widgets += ui->camtransDock;
 
     QList<QAction *> actions;
-    /*actions += ui->actionNew;
-    actions += ui->actionOpen;
-    actions += ui->actionSave;
-    actions += ui->actionRevert;
-    actions += ui->actionCopy3Dto2D;
-    actions += ui->actionClear;
-    actions += ui->actionQuit;*/
 
     foreach (QWidget *widget, widgets)
         widget->setEnabled(enabled);
@@ -207,17 +182,17 @@ void MainWindow::resetUpVector() {
 }
 
 void MainWindow::resetSliders() {
-    ui->cameraFovTextbox->setText(QString::number(55, 'f', 1));
-    ui->cameraNearTextbox->setText(QString::number(.1, 'f', 1));
-    ui->cameraFarTextbox->setText(QString::number(50, 'f', 1));
+    ui->cameraFovTextbox_2->setText(QString::number(55, 'f', 1));
+    ui->cameraNearTextbox_2->setText(QString::number(.1, 'f', 1));
+    ui->cameraFarTextbox_2->setText(QString::number(50, 'f', 1));
     QCoreApplication::processEvents();
     update();
 }
 
 void MainWindow::initializeCamtransFrustum() {
-    ui->cameraFovTextbox->setText(QString::number(55, 'f', 1));
-    ui->cameraNearTextbox->setText(QString::number(.1, 'f', 1));
-    ui->cameraFarTextbox->setText(QString::number(50, 'f', 1));
+    ui->cameraFovTextbox_2->setText(QString::number(55, 'f', 1));
+    ui->cameraNearTextbox_2->setText(QString::number(.1, 'f', 1));
+    ui->cameraFarTextbox_2->setText(QString::number(50, 'f', 1));
     update();
 }
 
