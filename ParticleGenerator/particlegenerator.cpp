@@ -1,13 +1,15 @@
 #include "particlegenerator.h"
 #include <iostream>
+#include "SupportCanvas3D.h"
+#include "gl/textures/Texture2D.h"
 
 ParticleGenerator::ParticleGenerator()
 {
 
 }
 
-ParticleGenerator::ParticleGenerator(glm::mat4 modelMat) :
-    m_modelMat(modelMat), m_numParticles(500), m_evenPass(true), m_firstPass(true),
+ParticleGenerator::ParticleGenerator(glm::mat4 modelMat, int numParticles) :
+    m_modelMat(modelMat), m_numParticles(16384), m_evenPass(true), m_firstPass(true),
     m_particlesFBO1(nullptr), m_particlesFBO2(nullptr)
 {
     loadParticleUpdateShader();
@@ -52,4 +54,69 @@ void ParticleGenerator::initializeParticleShaders() {
     GLint maxRenderBufferSize;
     glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE_EXT, &maxRenderBufferSize);
     std::cout << "Max FBO size: " << maxRenderBufferSize << std::endl;
+}
+
+void ParticleGenerator::draw(Camera *camera, int width, int height, float ratio) {
+    m_particleDrawProgram->bind();
+    setParticleSceneUniforms(camera);
+    m_particleUpdateProgram->unbind();
+
+    glDisable(GL_CULL_FACE);
+    renderParticles(width, height, ratio);
+}
+
+void ParticleGenerator::renderParticles(int width, int height, float ratio) {
+    auto prevFBO = m_evenPass ? m_particlesFBO1 : m_particlesFBO2;
+    auto nextFBO = m_evenPass ? m_particlesFBO2 : m_particlesFBO1;
+    float firstPass = m_firstPass ? 1.0f : 0.0f;
+
+    // TODO [Task 14] Move the particles from prevFBO to nextFBO while updating them
+    nextFBO->bind();
+    m_particleUpdateProgram->bind();
+
+    glActiveTexture(GL_TEXTURE0);
+    prevFBO->getColorAttachment(0).bind();
+
+    glActiveTexture(GL_TEXTURE1);
+    prevFBO->getColorAttachment(1).bind();
+
+    m_particleUpdateProgram->setUniform("firstPass", firstPass);
+    m_particleUpdateProgram->setUniform("numParticles", m_numParticles);
+    glUniform1i(glGetUniformLocation(m_particleUpdateProgram->getID(), "prevPos"), 0);
+    glUniform1i(glGetUniformLocation(m_particleUpdateProgram->getID(), "prevVel"), 1);
+    m_quad->draw();
+
+    // TODO [Task 17] Draw the particles from nextFBO
+    nextFBO->unbind();
+//    glClear(GL_COLOR_BUFFER_BIT);
+//    glClear(GL_DEPTH_BUFFER_BIT);
+
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+
+    m_particleDrawProgram->bind();
+    glViewport(0, 0, width * ratio, height * ratio);
+
+    glActiveTexture(GL_TEXTURE0);
+    nextFBO->getColorAttachment(0).bind();
+    glActiveTexture(GL_TEXTURE1);
+    nextFBO->getColorAttachment(1).bind();
+
+    m_particleDrawProgram->setUniform("numParticles", m_numParticles);
+    glUniform1i(glGetUniformLocation(m_particleDrawProgram->getID(), "pos"), 0);
+    glUniform1i(glGetUniformLocation(m_particleDrawProgram->getID(), "vel"), 1);
+
+    glBindVertexArray(m_particlesVAO);
+    glDrawArrays(GL_TRIANGLES, 0, 3 * m_numParticles);
+    glBindVertexArray(0);
+
+    glBlendFunc(GL_ONE, GL_ZERO);
+
+    m_firstPass = false;
+    m_evenPass = !m_evenPass;
+}
+
+void ParticleGenerator::setParticleSceneUniforms(Camera *camera) {
+    m_particleDrawProgram->setUniform("p", camera->getProjectionMatrix());
+    m_particleDrawProgram->setUniform("v", camera->getViewMatrix());
+    m_particleDrawProgram->setUniform("m", m_modelMat);
 }

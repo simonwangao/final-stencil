@@ -49,12 +49,16 @@ vec3 calculateInitialVelocity(int index) {
 //}
 
 vec4 initPosition(int index) {
-    const vec3 spawn = vec3(0);
-    return vec4(spawn, calculateLifetime(index));
+    float theta = 2 * PI * hash(index * 345.12848);
+    float y = hash(index * 934.2934);
+    return vec4(0.5 * sin(theta), y - 0.5, 0.5 * cos(theta), calculateLifetime(index));
 }
 
-vec4 initVelocity(int index) {
-    return vec4(calculateInitialVelocity(index), 0);
+vec4 initVelocity(vec4 initPos) {
+    float x_scale = hash(initPos.x * 495.8383);
+    float y_vel = hash(initPos.y * 917.3408);
+    float z_scale = hash(initPos.z * 293.1633);
+    return vec4(initPos.x * x_scale, y_vel / 2, initPos.z * z_scale, 0.0);
 }
 
 vec4 updatePosition(int index) {
@@ -68,7 +72,7 @@ vec4 updatePosition(int index) {
 }
 
 vec4 updateVelocity(int index) {
-    const float G = 0.0;
+    const float G = 0.01;
     const float C = .05;
     // TODO [Task 16]
     // - sample prevVel at uv
@@ -77,22 +81,24 @@ vec4 updateVelocity(int index) {
     vec4 posText = texture(prevPos, uv);
     vec4 velText = texture(prevVel, uv);
     // apply a force back towards the center proportional to displacement
-    vec3 newVel = vec3(velText.x + (-posText.x * C), velText.y + G * dt, velText.z + (-posText.z * C));
+    vec3 newVel = vec3(velText.x * 0.9, velText.y + G * dt, velText.z * 0.9);
     return vec4(newVel, velText.w + dt);
 }
 
 void main() {
     int index = int(uv.x * numParticles);
     if (firstPass > 0.5) {
-        pos = initPosition(index);
-        vel = initVelocity(index);
+        vec4 initPos = initPosition(index);
+        pos = initPos;
+        vel = initVelocity(initPos);
     } else {
         pos = updatePosition(index);
         vel = updateVelocity(index);
 
         if (pos.w < vel.w) {
-            pos = initPosition(index);
-            vel = initVelocity(index);
+            vec4 initPos = initPosition(index);
+            pos = initPos;
+            vel = initVelocity(initPos);
         }
     }
 }

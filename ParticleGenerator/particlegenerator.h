@@ -8,17 +8,21 @@
 #include "gl/openglshape.h"
 #include "gl/shaders/ShaderAttribLocations.h"
 #include "gl/datatype/FBO.h"
+#include "camera/Camera.h"
 
 class ParticleGenerator
 {
 public:
     ParticleGenerator();
-    ParticleGenerator(glm::mat4 modelMat);
+    ParticleGenerator(glm::mat4 modelMat, int numParticles);
+    void draw(Camera *camera, int width, int height, float ratio);
 
 private:
     void loadParticleUpdateShader();
     void loadParticleDrawShader();
     void initializeParticleShaders();
+    void setParticleSceneUniforms(Camera *camera);
+    void renderParticles(int width, int height, float ratio);
 
     std::unique_ptr<CS123::GL::Shader> m_particleUpdateProgram;
     std::unique_ptr<CS123::GL::Shader> m_particleDrawProgram;

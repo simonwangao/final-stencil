@@ -6,6 +6,7 @@ uniform int numParticles;
 
 uniform mat4 p;
 uniform mat4 v;
+uniform mat4 m;
 
 out vec2 uv;
 out vec3 color;
@@ -58,9 +59,9 @@ void main() {
     // the offset to the points of the triangle
     vec4 triPos = diameter * TRI_VERTS[triID];
 
-    // anchor point in clip space
+    // anchor point in world space
     vec4 anchorPoint = vec4(posTime.xyz, 1.0);
 
     // Center the particle around anchorPoint
-    gl_Position = (anchorPoint + triPos - diameter * vec4(0.5, 0.5, 0.0, 0.0));
+    gl_Position = p * v * m * (anchorPoint + triPos);
 }
