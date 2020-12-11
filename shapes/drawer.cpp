@@ -9,7 +9,7 @@
 using namespace CS123::GL;
 
 Drawer::Drawer() :
-    m_numParticles(500), m_evenPass(true), m_firstPass(true),
+    m_numParticles(16384), m_evenPass(true), m_firstPass(true),
     m_particlesFBO1(nullptr), m_particlesFBO2(nullptr)
 {
     m_shapePtr = std::make_unique<Cylinder>(PARAM1, PARAM2);
@@ -17,7 +17,7 @@ Drawer::Drawer() :
     loadParticleUpdateShader();
     loadParticleDrawShader();
     initializeParticleShaders();
-
+    initializeParticleGenerators();
 
     loadPhongShader();
     loadSkyBoxShader();
@@ -36,12 +36,18 @@ Drawer::~Drawer() {
 }
 
 void Drawer::setData(const std::vector<SegmentData>& data) {
+    for (unsigned long i = 0; i < m_data.size(); i++) {
+        delete(m_data[i].particleGenerator);
+    }
     m_data = data;
     initializeParticleGenerators();
 }
 
 void Drawer::initializeParticleGenerators(){
-
+    std::cout << m_data.size() << std::endl;
+    for (unsigned long i = 0; i < m_data.size(); i++) {
+        m_data[i].particleGenerator = new ParticleGenerator(m_data[i].matrix);
+    }
 }
 
 void Drawer::loadPhongShader() {
@@ -60,6 +66,33 @@ void Drawer::loadParticleDrawShader() {
     std::string vertexSource = ResourceLoader::loadResourceFileToString(":/shaders/particles_draw.vert");
     std::string fragmentSource = ResourceLoader::loadResourceFileToString(":/shaders/particles_draw.frag");
     m_particleDrawProgram = std::make_unique<Shader>(vertexSource, fragmentSource);
+}
+
+void Drawer::initializeParticleShaders() {
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
+
+    std::vector<GLfloat> quadData;
+    quadData = {-1, 1, 0, 0, 1, \
+                -1, -1, 0, 0, 0, \
+                 1, 1, 0, 1, 1, \
+                 1, -1, 0, 1, 0};
+    m_quad = std::make_unique<OpenGLShape>();
+    m_quad->setVertexData(&quadData[0], quadData.size(), VBO::GEOMETRY_LAYOUT::LAYOUT_TRIANGLE_STRIP, 4);
+    m_quad->setAttribute(ShaderAttrib::POSITION, 3, 0, VBOAttribMarker::DATA_TYPE::FLOAT, false);
+    m_quad->setAttribute(ShaderAttrib::TEXCOORD0, 2, 3*sizeof(GLfloat), VBOAttribMarker::DATA_TYPE::FLOAT, false);
+    m_quad->buildVAO();
+
+    glGenVertexArrays(1, &m_particlesVAO);
+
+    m_particlesFBO1 = std::make_shared<FBO>(2, FBO::DEPTH_STENCIL_ATTACHMENT::NONE, m_numParticles, 1, TextureParameters::WRAP_METHOD::CLAMP_TO_EDGE, \
+                                            TextureParameters::FILTER_METHOD::NEAREST, GL_FLOAT);
+    m_particlesFBO2 = std::make_shared<FBO>(2, FBO::DEPTH_STENCIL_ATTACHMENT::NONE, m_numParticles, 1, TextureParameters::WRAP_METHOD::CLAMP_TO_EDGE, \
+                                            TextureParameters::FILTER_METHOD::NEAREST, GL_FLOAT);
+
+    GLint maxRenderBufferSize;
+    glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE_EXT, &maxRenderBufferSize);
+    std::cout << "Max FBO size: " << maxRenderBufferSize << std::endl;
 }
 
 void Drawer::loadSkyBoxShader() {
@@ -201,33 +234,6 @@ void Drawer::draw(const std::vector<SegmentData>& segmentData) {
     return ;
 }
 
-void Drawer::initializeParticleShaders() {
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_BLEND);
-
-    std::vector<GLfloat> quadData;
-    quadData = {-1, 1, 0, 0, 1, \
-                -1, -1, 0, 0, 0, \
-                 1, 1, 0, 1, 1, \
-                 1, -1, 0, 1, 0};
-    m_quad = std::make_unique<OpenGLShape>();
-    m_quad->setVertexData(&quadData[0], quadData.size(), VBO::GEOMETRY_LAYOUT::LAYOUT_TRIANGLE_STRIP, 4);
-    m_quad->setAttribute(ShaderAttrib::POSITION, 3, 0, VBOAttribMarker::DATA_TYPE::FLOAT, false);
-    m_quad->setAttribute(ShaderAttrib::TEXCOORD0, 2, 3*sizeof(GLfloat), VBOAttribMarker::DATA_TYPE::FLOAT, false);
-    m_quad->buildVAO();
-
-    glGenVertexArrays(1, &m_particlesVAO);
-
-    m_particlesFBO1 = std::make_shared<FBO>(2, FBO::DEPTH_STENCIL_ATTACHMENT::NONE, m_numParticles, 1, TextureParameters::WRAP_METHOD::CLAMP_TO_EDGE, \
-                                            TextureParameters::FILTER_METHOD::NEAREST, GL_FLOAT);
-    m_particlesFBO2 = std::make_shared<FBO>(2, FBO::DEPTH_STENCIL_ATTACHMENT::NONE, m_numParticles, 1, TextureParameters::WRAP_METHOD::CLAMP_TO_EDGE, \
-                                            TextureParameters::FILTER_METHOD::NEAREST, GL_FLOAT);
-
-    GLint maxRenderBufferSize;
-    glGetIntegerv(GL_MAX_RENDERBUFFER_SIZE_EXT, &maxRenderBufferSize);
-    std::cout << "Max FBO size: " << maxRenderBufferSize << std::endl;
-}
-
 void Drawer::renderParticles(SupportCanvas3D * context) {
     auto prevFBO = m_evenPass ? m_particlesFBO1 : m_particlesFBO2;
     auto nextFBO = m_evenPass ? m_particlesFBO2 : m_particlesFBO1;
@@ -254,7 +260,7 @@ void Drawer::renderParticles(SupportCanvas3D * context) {
     glClear(GL_COLOR_BUFFER_BIT);
     glClear(GL_DEPTH_BUFFER_BIT);
 
-    glBlendFunc(GL_ONE, GL_ONE);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE);
 
     m_particleDrawProgram->bind();
     setParticleViewport(context);
@@ -350,5 +356,5 @@ void Drawer::settingsChanged() {
     // reset any parameters used in drawing things here
     m_firstPass = true;
     m_evenPass = true;
-    m_numParticles = 500;
+    m_numParticles = 16384;
 }
