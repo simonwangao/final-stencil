@@ -347,4 +347,5 @@ unsigned int Drawer::loadCubemap(const vector<std::string>& faces) {
 
 void Drawer::settingsChanged() {
     m_firstPass = true;
+
 }

@@ -60,18 +60,23 @@ void SupportCanvas3D::initializeGL() {
     m_oldRotV = settings.cameraRotV;
     m_oldRotN = settings.cameraRotN;
 
-    initializeGlew();
-    Turtle newTree = Turtle();
-    newTree.parse(newTree.interpretString());
+    initializeGlew();  
 
     m_currentScene = new Drawer();
-    ((Drawer*) m_currentScene)->setData(newTree.getSegmentData());
+    makeRandomCactus();
+
     m_ratio = static_cast<QGuiApplication *>(QCoreApplication::instance())->devicePixelRatio();
     initializeOpenGLSettings();
     initializeScenes();
-    setSceneFromSettings();
 
     settingsChanged();
+}
+
+void SupportCanvas3D::makeRandomCactus() {
+    Turtle newTree = Turtle();
+    newTree.parse(newTree.interpretString());
+    ((Drawer*) m_currentScene)->setData(newTree.getSegmentData());
+
 }
 
 void SupportCanvas3D::initializeGlew() {
@@ -111,9 +116,6 @@ void SupportCanvas3D::initializeScenes() {
 }
 
 void SupportCanvas3D::paintGL() {
-    if (m_settingsDirty) {
-        setSceneFromSettings();
-    }
 
     float ratio = static_cast<QGuiApplication *>(QCoreApplication::instance())->devicePixelRatio();
     m_ratio = static_cast<QGuiApplication *>(QCoreApplication::instance())->devicePixelRatio();
@@ -126,29 +128,37 @@ void SupportCanvas3D::settingsChanged() {
     m_settingsDirty = true;
     if (m_currentScene != nullptr) {
         // Just calling this function so that the scene is always updated.
-        setSceneFromSettings();
-        m_currentScene->settingsChanged();
+        m_settingsDirty = false;
+        if (settings.randomCactus != randomCactus) {
+            randomCactus = settings.randomCactus;
+
+            if (randomCactus) {
+                makeRandomCactus();
+            } else {
+                m_currentScene->settingsChanged();
+            }
+        }
     }
     update(); /* repaint the scene */
 }
 
-void SupportCanvas3D::setSceneFromSettings() {
+/*void SupportCanvas3D::setSceneFromSettings() {
     switch(settings.getSceneMode()) {
         case SCENEMODE_SCENEVIEW:
             setSceneToSceneview();
             break;
         case SCENEMODE_DRAWER:
 
-            /*Turtle newTree = Turtle();
+            Turtle newTree = Turtle();
             newTree.parse(newTree.interpretString());
 
             m_currentScene = new Drawer();
-            ((Drawer*) m_currentScene)->setData(newTree.getSegmentData());*/
+            ((Drawer*) m_currentScene)->setData(newTree.getSegmentData());
 
             break;
     }
     m_settingsDirty = false;
-}
+}*/
 
 void SupportCanvas3D::setSceneToSceneview() {
     assert(m_sceneviewScene.get());

@@ -93,10 +93,11 @@ protected:
 
 private:
 
+    void makeRandomCactus();
     void initializeGlew();
     void initializeOpenGLSettings();
     void initializeScenes();
-    void setSceneFromSettings();
+    //void setSceneFromSettings();
     void setSceneToSceneview();
 
 
@@ -105,10 +106,13 @@ private:
 
     bool m_settingsDirty;
 
+    bool randomCactus;
+
     std::unique_ptr<CamtransCamera> m_defaultPerspectiveCamera;
     std::unique_ptr<OrbitingCamera> m_defaultOrbitingCamera;
     OpenGLScene *m_currentScene;
     std::unique_ptr<SceneviewScene> m_sceneviewScene;
+
 };
 
 #endif // SUPPORTCANVAS3D_H
