@@ -5,6 +5,7 @@ uniform sampler2D prevPos;
 uniform sampler2D prevVel;
 uniform int numParticles;
 uniform mat4 model;
+uniform vec3 velDir;
 
 // output from quad.vert
 in vec2 uv;
@@ -52,7 +53,7 @@ vec3 calculateInitialVelocity(int index) {
 vec4 initPosition(int index) {
     float theta = 2 * PI * hash(index * 446.12848);
     float y = hash(index * 934.2934);
-    return model * vec4(0.54 * sin(theta), y - 0.5, 0.54 * cos(theta), calculateLifetime(index));
+    return vec4(0.54 * sin(theta), y - 0.5, 0.54 * cos(theta), calculateLifetime(index));
 }
 
 vec4 initVelocity(int index) {
@@ -70,7 +71,7 @@ vec4 updatePosition(int index) {
 }
 
 vec4 updateVelocity(int index) {
-    const float G = 0.22;
+    const float G = 0.12;
     const float C = .05;
     // TODO [Task 16]
     // - sample prevVel at uv
@@ -79,23 +80,22 @@ vec4 updateVelocity(int index) {
     vec4 posText = texture(prevPos, uv);
     vec4 velText = texture(prevVel, uv);
     // apply a force back towards the center proportional to displacement
-    vec3 newVel = vec3(velText.x * 0.99, velText.y + G * dt, velText.z * 0.99);
+    vec4 oldVelWorld = model * velText;
+    vec3 newVel = vec3(transpose(inverse(model)) * vec4(oldVelWorld.x * 0.98, oldVelWorld.y + (G * dt), oldVelWorld.z * 0.98, 0));
     return vec4(newVel, velText.w + dt);
 }
 
 void main() {
     int index = int(uv.x * numParticles);
     if (firstPass > 0.5) {
-        vec4 initPos = initPosition(index);
-        pos = initPos;
+        pos = initPosition(index);
         vel = initVelocity(index);
     } else {
         pos = updatePosition(index);
         vel = updateVelocity(index);
 
         if (pos.w < vel.w) {
-            vec4 initPos = initPosition(index);
-            pos = initPos;
+            pos = initPosition(index);
             vel = initVelocity(index);
         }
     }
