@@ -84,6 +84,7 @@ void ParticleGenerator::renderParticles(int width, int height, float ratio) {
     m_particleUpdateProgram->setUniform("numParticles", m_numParticles);
     glUniform1i(glGetUniformLocation(m_particleUpdateProgram->getID(), "prevPos"), 0);
     glUniform1i(glGetUniformLocation(m_particleUpdateProgram->getID(), "prevVel"), 1);
+    m_particleUpdateProgram->setUniform("model", m_modelMat);
     m_quad->draw();
 
     // TODO [Task 17] Draw the particles from nextFBO

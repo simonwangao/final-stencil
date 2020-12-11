@@ -4,6 +4,7 @@ uniform float firstPass;
 uniform sampler2D prevPos;
 uniform sampler2D prevVel;
 uniform int numParticles;
+uniform mat4 model;
 
 // output from quad.vert
 in vec2 uv;
@@ -29,7 +30,7 @@ float hash(float n) { return fract(sin(n)*753.5453123); }
 // Helper functions to procedurally generate lifetimes and initial velocities
 // based on particle index
 float calculateLifetime(int index) {
-    const float MAX_LIFETIME = 4.0;
+    const float MAX_LIFETIME = 6.0;
     const float MIN_LIFETIME = 2.0;
     return MIN_LIFETIME + (MAX_LIFETIME - MIN_LIFETIME) * hash(index * 2349.2693);
 }
@@ -37,7 +38,7 @@ float calculateLifetime(int index) {
 vec3 calculateInitialVelocity(int index) {
     float theta = PI * hash(index * 872.0238);
     const float MIN_VEL = 0.16;
-    const float MAX_VEL = 0.4;
+    const float MAX_VEL = 0.3;
     float velMag = MIN_VEL + (MAX_VEL - MIN_VEL) * hash(index * 98723.345);
     return velMag * vec3(cos(theta), sin(theta), cos(theta));
 }
@@ -49,9 +50,9 @@ vec3 calculateInitialVelocity(int index) {
 //}
 
 vec4 initPosition(int index) {
-    float theta = 3 * PI * hash(index * 345.12848);
+    float theta = 2 * PI * hash(index * 446.12848);
     float y = hash(index * 934.2934);
-    return vec4(0.5 * sin(theta), y - 0.5, 0.5 * cos(theta), calculateLifetime(index));
+    return model * vec4(0.54 * sin(theta), y - 0.5, 0.54 * cos(theta), calculateLifetime(index));
 }
 
 vec4 initVelocity(int index) {
@@ -69,7 +70,7 @@ vec4 updatePosition(int index) {
 }
 
 vec4 updateVelocity(int index) {
-    const float G = 0.01;
+    const float G = 0.22;
     const float C = .05;
     // TODO [Task 16]
     // - sample prevVel at uv
@@ -78,7 +79,7 @@ vec4 updateVelocity(int index) {
     vec4 posText = texture(prevPos, uv);
     vec4 velText = texture(prevVel, uv);
     // apply a force back towards the center proportional to displacement
-    vec3 newVel = vec3(velText.x * 0.9, velText.y + G * dt, velText.z * 0.9);
+    vec3 newVel = vec3(velText.x * 0.99, velText.y + G * dt, velText.z * 0.99);
     return vec4(newVel, velText.w + dt);
 }
 
