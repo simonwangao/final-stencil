@@ -12,10 +12,11 @@ Drawer::Drawer() :
     m_numParticles(500), m_evenPass(true), m_firstPass(true),
     m_particlesFBO1(nullptr), m_particlesFBO2(nullptr)
 {
+    m_shapePtr = std::make_unique<Cylinder>(PARAM1, PARAM2);
+
     loadParticleUpdateShader();
     loadParticleDrawShader();
     initializeParticleShaders();
-    initializeParticleGenerators();
     loadPhongShader();
     loadSkyBoxShader();
     createLights();
@@ -26,7 +27,6 @@ Drawer::Drawer() :
     m_global_data.ks = 0.5;
 
     m_count = 0;
-    m_shapePtr = std::make_unique<Cylinder>(PARAM1, PARAM2);
 }
 
 
@@ -35,9 +35,10 @@ Drawer::~Drawer() {
 
 void Drawer::setData(const std::vector<SegmentData>& data) {
     m_data = data;
+    initializeParticleGenerators();
 }
 
-void Drawer::initializeParticleGenerators() {
+void Drawer::initializeParticleGenerators(){
 
 }
 
@@ -202,7 +203,7 @@ void Drawer::draw(const std::vector<SegmentData>& segmentData) {
         m_phongShader->applyMaterial(material);
 
         // set as model matrix (transforming on GPU)
-        m_phongShader->setUniform("m", data.m_mat);
+        m_phongShader->setUniform("m", mat);
 
         m_shapePtr->draw();
     }
