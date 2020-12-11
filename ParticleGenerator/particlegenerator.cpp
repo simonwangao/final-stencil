@@ -9,7 +9,7 @@ ParticleGenerator::ParticleGenerator()
 }
 
 ParticleGenerator::ParticleGenerator(glm::mat4 modelMat, int numParticles) :
-    m_modelMat(modelMat), m_numParticles(16384), m_evenPass(true), m_firstPass(true),
+    m_modelMat(modelMat), m_numParticles(numParticles), m_evenPass(true), m_firstPass(true),
     m_particlesFBO1(nullptr), m_particlesFBO2(nullptr)
 {
     loadParticleUpdateShader();
@@ -30,7 +30,7 @@ void ParticleGenerator::loadParticleDrawShader() {
 }
 
 void ParticleGenerator::initializeParticleShaders() {
-    glEnable(GL_DEPTH_TEST);
+//    glDisable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
 
     std::vector<GLfloat> quadData;

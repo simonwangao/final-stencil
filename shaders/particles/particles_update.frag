@@ -49,16 +49,13 @@ vec3 calculateInitialVelocity(int index) {
 //}
 
 vec4 initPosition(int index) {
-    float theta = 2 * PI * hash(index * 345.12848);
+    float theta = 3 * PI * hash(index * 345.12848);
     float y = hash(index * 934.2934);
     return vec4(0.5 * sin(theta), y - 0.5, 0.5 * cos(theta), calculateLifetime(index));
 }
 
-vec4 initVelocity(vec4 initPos) {
-    float x_scale = hash(initPos.x * 495.8383);
-    float y_vel = hash(initPos.y * 917.3408);
-    float z_scale = hash(initPos.z * 293.1633);
-    return vec4(initPos.x * x_scale, y_vel / 2, initPos.z * z_scale, 0.0);
+vec4 initVelocity(int index) {
+    return vec4(calculateInitialVelocity(index), 0);
 }
 
 vec4 updatePosition(int index) {
@@ -90,7 +87,7 @@ void main() {
     if (firstPass > 0.5) {
         vec4 initPos = initPosition(index);
         pos = initPos;
-        vel = initVelocity(initPos);
+        vel = initVelocity(index);
     } else {
         pos = updatePosition(index);
         vel = updateVelocity(index);
@@ -98,7 +95,7 @@ void main() {
         if (pos.w < vel.w) {
             vec4 initPos = initPosition(index);
             pos = initPos;
-            vel = initVelocity(initPos);
+            vel = initVelocity(index);
         }
     }
 }
