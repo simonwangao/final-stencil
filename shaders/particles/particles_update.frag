@@ -52,7 +52,7 @@ vec3 calculateInitialVelocity(int index) {
 vec4 initPosition(int index) {
     float theta = 2 * PI * hash(index * 446.12848);
     float y = hash(index * 934.2934);
-    return model * vec4(0.54 * sin(theta), y - 0.5, 0.54 * cos(theta), calculateLifetime(index));
+    return vec4(0.54 * sin(theta), y - 0.5, 0.54 * cos(theta), calculateLifetime(index));
 }
 
 vec4 initVelocity(int index) {
