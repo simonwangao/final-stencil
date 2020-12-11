@@ -57,11 +57,8 @@ vector<pair<string, float>> Turtle::interpretChar(char pred, vector<char> succs)
             m_charToBranch[pred].alphaX = branchingAngle;
             m_charToBranch[pred].alphaY = branchingAngle;
             m_charToBranch[pred].alphaZ = branchingAngle;
-        } else {
-            m_charToBranch[pred].w = stemWidth;
         }
     }
-
 
     output.push_back({plus, vals.alphaY});
     output.push_back({left, vals.alphaX});
@@ -73,7 +70,6 @@ vector<pair<string, float>> Turtle::interpretChar(char pred, vector<char> succs)
         m_charToBranch[pred].l *= len0;
         m_charToBranch[pred].w *= d;
     }
-
 
     int num_succs = succs.size();
     for (int i = 0; i < num_succs; i++) {

@@ -134,41 +134,24 @@ void SupportCanvas3D::paintGL() {
 void SupportCanvas3D::settingsChanged() {
     m_settingsDirty = true;
     if (m_currentScene != nullptr) {
-        // Just calling this function so that the scene is always updated.
-        m_settingsDirty = false;
         if (settings.randomCactus != randomCactus) {
             randomCactus = settings.randomCactus;
 
             if (randomCactus) {
                 makeRandomCactus();
-                update();
-            } else {
-                makeCactusParameters(settings.size, settings.branchingAngle, settings.branchingLen, settings.stemWidth, settings.branchWidth);
-                update();
             }
             m_currentScene->settingsChanged();
+            m_settingsDirty = false;
         }
+        if (!randomCactus) {
+            makeCactusParameters(settings.size, settings.branchingAngle, settings.branchingLen, settings.stemWidth, settings.branchWidth);
+        }
+        m_currentScene->settingsChanged();
+        m_settingsDirty = false;
     }
     update(); /* repaint the scene */
 }
 
-/*void SupportCanvas3D::setSceneFromSettings() {
-    switch(settings.getSceneMode()) {
-        case SCENEMODE_SCENEVIEW:
-            setSceneToSceneview();
-            break;
-        case SCENEMODE_DRAWER:
-
-            Turtle newTree = Turtle();
-            newTree.parse(newTree.interpretString());
-
-            m_currentScene = new Drawer();
-            ((Drawer*) m_currentScene)->setData(newTree.getSegmentData());
-
-            break;
-    }
-    m_settingsDirty = false;
-}*/
 
 void SupportCanvas3D::setSceneToSceneview() {
     assert(m_sceneviewScene.get());

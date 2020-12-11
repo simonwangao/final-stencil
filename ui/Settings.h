@@ -148,7 +148,7 @@ struct Settings {
     float stemWidth;
     float branchWidth;
     bool randomCactus;
-
+    bool render;
 
     bool burnTree; // Enable or disable burning of trees
 

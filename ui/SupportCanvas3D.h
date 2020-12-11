@@ -98,7 +98,6 @@ private:
     void initializeGlew();
     void initializeOpenGLSettings();
     void initializeScenes();
-    //void setSceneFromSettings();
     void setSceneToSceneview();
 
 
@@ -108,6 +107,7 @@ private:
     bool m_settingsDirty;
 
     bool randomCactus;
+    bool render;
 
     std::unique_ptr<CamtransCamera> m_defaultPerspectiveCamera;
     std::unique_ptr<OrbitingCamera> m_defaultOrbitingCamera;
