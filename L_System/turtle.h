@@ -7,6 +7,7 @@
 #include <utility>
 #include <glm.hpp>
 #include <unordered_map>
+#include "ParticleGenerator/particlegenerator.h"
 
 #include "L_System/Utils.h"
 
@@ -22,6 +23,7 @@ struct SegmentData {
     glm::vec4 direction;    // direction of the segment
     glm::mat4 matrix;       // the matrix to transfer the original primitive
     int depth;              // depth of the branch
+    ParticleGenerator particleGenerator; // particle generator for this segment of the tree
 };
 
 struct StackData {

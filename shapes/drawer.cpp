@@ -9,7 +9,7 @@
 using namespace CS123::GL;
 
 Drawer::Drawer() :
-    m_numParticles(50), m_evenPass(true), m_firstPass(true),
+    m_numParticles(16384), m_evenPass(true), m_firstPass(true),
     m_particlesFBO1(nullptr), m_particlesFBO2(nullptr)
 {
     loadParticleUpdateShader();

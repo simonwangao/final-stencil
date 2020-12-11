@@ -17,7 +17,7 @@ const vec4 TRI_VERTS[NUM_VERTICES_PER_PARTICLE] = vec4[NUM_VERTICES_PER_PARTICLE
     // vec4(p1.x, p1.y, 0, 0),
     // vec4(p2.x, p2.y, 0, 0),
     // vec4(p3.x, p3.y, 0, 0)
-    vec4(0, 0.05, 0, 0), vec4(0, 0, 0, 0), vec4(0.05, 0, 0, 0)
+    vec4(0, 2, 0, 0), vec4(0, 0, 0, 0), vec4(2, 0, 0, 0)
 );
 
 // Convert from HSL to RGB
@@ -71,8 +71,19 @@ vec3 HSLtoRGB(float h, float s, float l) {
     return vec3(r, g, b);
 }
 
-vec3 pickRainbowColor(float x) {
-    return HSLtoRGB(x, 0.5, 0.5);
+vec3 pickRainbowColor(float x, float age) {
+//    return HSLtoRGB(24.0 / 360.0, max(0.0, (1 - y)), 0.5);
+    if (age <= 0.2) {
+        return vec3(1.0, 1.0, 1.0); //white
+    } else if (age < 1.2) {
+        return vec3(0.941, 0.316, 0.234); //red
+    } else if (age < 2.6) {
+        return vec3(.976, .585, .179); //orange
+    } else if (age < 3.0) {
+        return vec3(1.0, .903, .179); //yellow
+    } else {
+        return vec3(.5, .5, .5); //grey
+    }
 }
 
 void main() {
@@ -83,26 +94,24 @@ void main() {
     // Pass the tex coords to the fragment shader
     uv = TRI_VERTS[triID].xy;
 
-    vec4 posTime = vec4(0,0,0,1);
-    vec4 velAge = vec4(0);
     // TODO [Task 18] sample pos and vel textures
-    posTime = p * v * texelFetch(pos, ivec2(particleID, 0), 0);
-    velAge = texelFetch(vel, ivec2(particleID, 0), 0);
+    vec4 posTime = texelFetch(pos, ivec2(particleID, 0), 0);
+    vec4 velAge = texelFetch(vel, ivec2(particleID, 0), 0);
 
     // Calculate diameter based on age and lifetime
-//    float diameter = 0.02;
-//    diameter *= min(min(1.0, velAge.w / (0.1 * posTime.w)),
-//                    min(1.0, abs(posTime.w - velAge.w) / (0.1 * posTime.w)));
+    float diameter = 0.02;
+    diameter *= min(min(1.0, velAge.w / (0.1 * posTime.w)),
+                    min(1.0, abs(posTime.w - velAge.w) / (0.1 * posTime.w)));
 
     // Calculate color based on particleID
-    color = pickRainbowColor(float(particleID)/numParticles);
+    color = pickRainbowColor(float(particleID)/numParticles, velAge.w);
 
     // the offset to the points of the triangle
-    vec4 triPos = TRI_VERTS[triID];
+    vec4 triPos = diameter * TRI_VERTS[triID];
 
     // anchor point in clip space
     vec4 anchorPoint = vec4(posTime.xyz, 1.0);
 
     // Center the particle around anchorPoint
-    gl_Position = anchorPoint + triPos;
+    gl_Position = anchorPoint + triPos - diameter * vec4(0.5, 0.5, 0.0, 0.0);
 }

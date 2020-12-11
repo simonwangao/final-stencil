@@ -53,6 +53,7 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ui/mainwindow.cpp \
+		ParticleGenerator/particlegenerator.cpp \
 		camera/CamtransCamera.cpp \
 		camera/OrbitingCamera.cpp \
 		camera/QuaternionCamera.cpp \
@@ -94,6 +95,7 @@ SOURCES       = ui/mainwindow.cpp \
 		moc_view.cpp \
 		moc_Databinding.cpp
 OBJECTS       = mainwindow.o \
+		particlegenerator.o \
 		CamtransCamera.o \
 		OrbitingCamera.o \
 		QuaternionCamera.o \
@@ -327,6 +329,7 @@ DIST          = shaders/normals/normals.vert \
 		../../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/yacc.prf \
 		../../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/lex.prf \
 		final.pro ui/mainwindow.h \
+		ParticleGenerator/particlegenerator.h \
 		camera/Camera.h \
 		camera/CamtransCamera.h \
 		camera/OrbitingCamera.h \
@@ -369,6 +372,7 @@ DIST          = shaders/normals/normals.vert \
 		lib/ResourceLoader.h \
 		lib/CS123SceneData.h \
 		lib/common.h ui/mainwindow.cpp \
+		ParticleGenerator/particlegenerator.cpp \
 		camera/CamtransCamera.cpp \
 		camera/OrbitingCamera.cpp \
 		camera/QuaternionCamera.cpp \
@@ -827,8 +831,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Qt5.14.2/5.14.2/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ui/mainwindow.h camera/Camera.h camera/CamtransCamera.h camera/OrbitingCamera.h camera/QuaternionCamera.h gl/openglshape.h scenegraph/OpenGLScene.h scenegraph/RayScene.h scenegraph/Scene.h scenegraph/SceneviewScene.h scenegraph/ShapesScene.h shapes/drawer.h ui/Settings.h L_System/Utils.h L_System/turtle.h ui/SupportCanvas3D.h ui_mainwindow.h glew-1.10.0/include/GL/glew.h ui/view.h ui/viewformat.h ui/Databinding.h gl/shaders/Shader.h gl/GLDebug.h gl/shaders/ShaderAttribLocations.h gl/datatype/VBOAttribMarker.h gl/datatype/VBO.h gl/datatype/IBO.h gl/datatype/VAO.h gl/datatype/FBO.h gl/textures/Texture.h gl/textures/Texture2D.h gl/textures/TextureParameters.h gl/textures/TextureParametersBuilder.h gl/textures/RenderBuffer.h gl/textures/DepthBuffer.h gl/shaders/CS123Shader.h gl/util/FullScreenQuad.h shapes/Shape.h shapes/Cylinder.h lib/RGBA.h lib/ResourceLoader.h lib/CS123SceneData.h lib/common.h $(DISTDIR)/
-	$(COPY_FILE) --parents ui/mainwindow.cpp camera/CamtransCamera.cpp camera/OrbitingCamera.cpp camera/QuaternionCamera.cpp gl/openglshape.cpp scenegraph/OpenGLScene.cpp scenegraph/Scene.cpp scenegraph/SceneviewScene.cpp shapes/drawer.cpp ui/Settings.cpp L_System/turtle.cpp main.cpp glew-1.10.0/src/glew.c ui/SupportCanvas3D.cpp ui/view.cpp ui/viewformat.cpp ui/Databinding.cpp L_System/Utils.cpp gl/shaders/Shader.cpp gl/GLDebug.cpp gl/datatype/VBOAttribMarker.cpp gl/datatype/VBO.cpp gl/datatype/IBO.cpp gl/datatype/VAO.cpp gl/datatype/FBO.cpp gl/textures/Texture.cpp gl/textures/Texture2D.cpp gl/textures/TextureParameters.cpp gl/textures/TextureParametersBuilder.cpp gl/textures/RenderBuffer.cpp gl/textures/DepthBuffer.cpp gl/shaders/CS123Shader.cpp gl/util/FullScreenQuad.cpp shapes/Shape.cpp shapes/Cylinder.cpp lib/RGBA.cpp lib/ResourceLoader.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ui/mainwindow.h ParticleGenerator/particlegenerator.h camera/Camera.h camera/CamtransCamera.h camera/OrbitingCamera.h camera/QuaternionCamera.h gl/openglshape.h scenegraph/OpenGLScene.h scenegraph/RayScene.h scenegraph/Scene.h scenegraph/SceneviewScene.h scenegraph/ShapesScene.h shapes/drawer.h ui/Settings.h L_System/Utils.h L_System/turtle.h ui/SupportCanvas3D.h ui_mainwindow.h glew-1.10.0/include/GL/glew.h ui/view.h ui/viewformat.h ui/Databinding.h gl/shaders/Shader.h gl/GLDebug.h gl/shaders/ShaderAttribLocations.h gl/datatype/VBOAttribMarker.h gl/datatype/VBO.h gl/datatype/IBO.h gl/datatype/VAO.h gl/datatype/FBO.h gl/textures/Texture.h gl/textures/Texture2D.h gl/textures/TextureParameters.h gl/textures/TextureParametersBuilder.h gl/textures/RenderBuffer.h gl/textures/DepthBuffer.h gl/shaders/CS123Shader.h gl/util/FullScreenQuad.h shapes/Shape.h shapes/Cylinder.h lib/RGBA.h lib/ResourceLoader.h lib/CS123SceneData.h lib/common.h $(DISTDIR)/
+	$(COPY_FILE) --parents ui/mainwindow.cpp ParticleGenerator/particlegenerator.cpp camera/CamtransCamera.cpp camera/OrbitingCamera.cpp camera/QuaternionCamera.cpp gl/openglshape.cpp scenegraph/OpenGLScene.cpp scenegraph/Scene.cpp scenegraph/SceneviewScene.cpp shapes/drawer.cpp ui/Settings.cpp L_System/turtle.cpp main.cpp glew-1.10.0/src/glew.c ui/SupportCanvas3D.cpp ui/view.cpp ui/viewformat.cpp ui/Databinding.cpp L_System/Utils.cpp gl/shaders/Shader.cpp gl/GLDebug.cpp gl/datatype/VBOAttribMarker.cpp gl/datatype/VBO.cpp gl/datatype/IBO.cpp gl/datatype/VAO.cpp gl/datatype/FBO.cpp gl/textures/Texture.cpp gl/textures/Texture2D.cpp gl/textures/TextureParameters.cpp gl/textures/TextureParametersBuilder.cpp gl/textures/RenderBuffer.cpp gl/textures/DepthBuffer.cpp gl/shaders/CS123Shader.cpp gl/util/FullScreenQuad.cpp shapes/Shape.cpp shapes/Cylinder.cpp lib/RGBA.cpp lib/ResourceLoader.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ui/mainwindow.ui $(DISTDIR)/
 
 
@@ -1204,6 +1208,9 @@ mainwindow.o: ui/mainwindow.cpp ui/mainwindow.h \
 		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/QAction \
 		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtWidgets.framework/Headers/qaction.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ui/mainwindow.cpp
+
+particlegenerator.o: ParticleGenerator/particlegenerator.cpp ParticleGenerator/particlegenerator.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o particlegenerator.o ParticleGenerator/particlegenerator.cpp
 
 CamtransCamera.o: camera/CamtransCamera.cpp camera/CamtransCamera.h \
 		camera/Camera.h \
@@ -1874,13 +1881,7 @@ drawer.o: shapes/drawer.cpp shapes/drawer.h \
 		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		lib/RGBA.h \
-		gl/GLDebug.h \
-		glm/gtc/type_ptr.hpp \
-		glm/gtc/quaternion.hpp \
-		glm/gtc/constants.hpp \
-		glm/gtc/constants.inl \
-		glm/gtc/quaternion.inl \
-		glm/gtc/type_ptr.inl
+		gl/GLDebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o drawer.o shapes/drawer.cpp
 
 Settings.o: ui/Settings.cpp ui/Settings.h \

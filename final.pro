@@ -22,6 +22,7 @@ win32 {
 }
 
 SOURCES += ui/mainwindow.cpp \
+    ParticleGenerator/particlegenerator.cpp \
     camera/CamtransCamera.cpp \
     camera/OrbitingCamera.cpp \
     camera/QuaternionCamera.cpp \
@@ -60,6 +61,7 @@ SOURCES += ui/mainwindow.cpp \
     lib/ResourceLoader.cpp
 
 HEADERS += ui/mainwindow.h \
+    ParticleGenerator/particlegenerator.h \
     camera/Camera.h \
     camera/CamtransCamera.h \
     camera/OrbitingCamera.h \
