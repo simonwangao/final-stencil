@@ -145,6 +145,17 @@ void Turtle::parse(const std::vector<std::pair<std::string, float>>& str) {
             glm::mat4 mat = glm::translate(glm::vec3(0., -SKYBOX_LENGTH / 2., 0.));
             data.matrix = mat * m_matrix;
 
+            // already finished the rotation and translation,
+            // need to do the scaling here
+            // note that need to do the translation from center of the bottom circle
+            // to the center of the cylinder
+            mat = glm::mat4(1.); // identity matrix
+            // scaling
+            float diameter = data.width;
+            mat = glm::scale(glm::vec3(diameter, data.length, diameter)) * mat;
+            mat = glm::translate(glm::vec3(0., data.length / 2., 0.)) * mat; // move "to the ground" (y >= 0)
+            data.matrix *= mat;
+
             data.direction = m_direction;
             data.depth = m_depth;
             m_segments.push_back(data);

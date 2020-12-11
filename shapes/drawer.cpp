@@ -179,17 +179,6 @@ void Drawer::draw(const std::vector<SegmentData>& segmentData) {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     for (SegmentData data : segmentData) {
-        // already finished the rotation and translation,
-        // need to do the scaling here
-        // note that need to do the translation from center of the bottom circle
-        // to the center of the cylinder
-        glm::mat4 mat(1.); // identity matrix
-        // scaling
-        float diameter = data.width;
-        mat = glm::scale(glm::vec3(diameter, data.length, diameter)) * mat;
-        mat = glm::translate(glm::vec3(0., data.length / 2., 0.)) * mat; // move "to the ground" (y >= 0)
-        mat = data.matrix * mat;
-
         // set up the material here ?
         CS123SceneMaterial material;
 
@@ -203,7 +192,7 @@ void Drawer::draw(const std::vector<SegmentData>& segmentData) {
         m_phongShader->applyMaterial(material);
 
         // set as model matrix (transforming on GPU)
-        m_phongShader->setUniform("m", mat);
+        m_phongShader->setUniform("m", data.matrix);
 
         m_shapePtr->draw();
     }
