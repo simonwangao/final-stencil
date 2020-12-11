@@ -84,6 +84,7 @@ void MainWindow::dataBind() {
     BIND(FloatBinding::bindSliderAndTextbox(ui->BranchWidthControl, ui->BranchInput,settings.branchWidth, 0, 1))
     BIND(BoolBinding::bindCheckbox(ui->RandomCactus, settings.randomCactus))
     BIND(BoolBinding::bindCheckbox(ui->BurningButton, settings.burnTree))
+    BIND(IntBinding::bindSliderAndTextbox(ui->NumParticlesSlider, ui->NumParticlesInput, settings.numParticles, 0, 16000))
 
     // Camtrans dock
     BIND(FloatBinding::bindSliderAndTextbox(

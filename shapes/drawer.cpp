@@ -275,5 +275,7 @@ unsigned int Drawer::loadCubemap(const vector<std::string>& faces) {
 
 void Drawer::settingsChanged() {
     // reset any parameters used in drawing things here
-    m_numParticles = 16384;
+    if (settings.burnTree) {
+        m_numParticles = settings.numParticles;
+    }
 }
