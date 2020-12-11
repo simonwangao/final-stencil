@@ -171,6 +171,7 @@ void Drawer::draw(const std::vector<SegmentData>& segmentData) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
     QImage image = m_shapePtr->m_image;
 
+    /*
     glTexImage2D(GL_TEXTURE_2D,
                  0,
                  GL_RGBA,
@@ -181,6 +182,7 @@ void Drawer::draw(const std::vector<SegmentData>& segmentData) {
                  GL_UNSIGNED_BYTE,
                  image.bits());
     glGenerateMipmap(GL_TEXTURE_2D);
+    */
 
     for (SegmentData data : segmentData) {
         // set up the material here ?
