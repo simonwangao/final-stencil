@@ -17,6 +17,8 @@ Drawer::Drawer() :
     loadParticleUpdateShader();
     loadParticleDrawShader();
     initializeParticleShaders();
+
+
     loadPhongShader();
     loadSkyBoxShader();
     createLights();
