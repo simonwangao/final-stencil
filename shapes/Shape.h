@@ -5,9 +5,10 @@
 #include <glm/glm.hpp>
 #include "GL/glew.h"
 
-#include<memory>
+#include <memory>
 #include <vector>
 #include <cmath>
+#include <QImage>
 
 const float RADIUS = 0.5f;
 
@@ -45,6 +46,9 @@ public:
     virtual void setParams(int param1, int param2, float param3);
     virtual std::vector<GLfloat> getFaceVertexData(int param1, int param2);
     std::vector<GLfloat> getVertexData();
+
+    QImage m_image;
+    GLuint getHandle();
 
 protected:
     /** builds the VAO, pretty much the same as from lab 1 */

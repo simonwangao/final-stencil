@@ -161,6 +161,27 @@ void Drawer::setLights()
 void Drawer::draw(const std::vector<SegmentData>& segmentData) {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
+    // set up texture
+    GLuint m_textureID;
+    glGenTextures(1, &m_textureID);
+    glBindTexture(GL_TEXTURE_2D, m_textureID);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+    QImage image = m_shapePtr->m_image;
+
+    glTexImage2D(GL_TEXTURE_2D,
+                 0,
+                 GL_RGBA,
+                 image.width(),
+                 image.height(),
+                 0,
+                 GL_RGBA,
+                 GL_UNSIGNED_BYTE,
+                 image.bits());
+    glGenerateMipmap(GL_TEXTURE_2D);
+
     for (SegmentData data : segmentData) {
         // set up the material here ?
         CS123SceneMaterial material;
@@ -175,8 +196,14 @@ void Drawer::draw(const std::vector<SegmentData>& segmentData) {
 
         // set as model matrix (transforming on GPU)
         m_phongShader->setUniform("m", data.matrix);
+        m_phongShader->setUniform("diffuse_color", material.cDiffuse.xyz());
+
+        glBindVertexArray(m_shapePtr->getHandle());
+        glBindTexture(GL_TEXTURE_2D, m_textureID);
 
         m_shapePtr->draw();
+
+        glBindTexture(GL_TEXTURE_2D, 0);
     }
 
     return ;

@@ -21,6 +21,7 @@
 #include "L_System/turtle.h"
 #include "ui/SupportCanvas3D.h"
 #include "gl/datatype/FBO.h"
+#include "ParticleGenerator/particlegenerator.h"
 
 namespace CS123 { namespace GL {
 

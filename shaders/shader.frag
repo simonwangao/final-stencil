@@ -1,4 +1,4 @@
-#version 400 core
+﻿#version 400 core
 
 in vec3 color;
 in vec2 texc;

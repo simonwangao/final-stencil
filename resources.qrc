@@ -25,4 +25,7 @@
         <file>images/posy.jpg</file>
         <file>images/posz.jpg</file>
     </qresource>
+    <qresource prefix="/texture">
+        <file>images/cactus.jpg</file>
+    </qresource>
 </RCC>

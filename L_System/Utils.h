@@ -37,7 +37,7 @@ const float len1 = 0.6;             // length reduction for the branches
 const int PARAM1 = 2;              // used for shape primitive
 const int PARAM2 = 40;              // used for shape primitive
 const float START_DIAMETER = 0.5;    // starting diameter of the cylinder
-const float SKYBOX_LENGTH = 20.;    // length of the edge of the skybox
+const float SKYBOX_LENGTH = 25.;    // length of the edge of the skybox
 
 struct BranchFeats {
     float l; // length of branch

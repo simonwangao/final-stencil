@@ -1,8 +1,17 @@
 ﻿#include "Cylinder.h"
+#include "gl/datatype/VAO.h"
+#include <iostream>
+
+const float EPSILON = 1e-2;
+
+inline bool equal(float a, float b) {
+    return glm::abs(a - b) < EPSILON;
+}
 
 Cylinder::Cylinder() {
     m_param1 = 0;
     m_param2 = 0;
+    loadTextureImage();
 }
 
 Cylinder::~Cylinder() {
@@ -12,6 +21,7 @@ Cylinder::Cylinder(int param1, int param2) :
     m_param1(param1),
     m_param2(param2)
 {
+    loadTextureImage();
     setParams(param1, param2, 0.f);
 }
 
@@ -41,6 +51,19 @@ void Cylinder::setParams(int param1, int param2, float param3) {
     // get the faces of the Cylinder
     std::vector<GLfloat> faces = getFaceVertexData(m_param1, m_param2);
     m_vertexData.insert(m_vertexData.end(), faces.begin(), faces.end());
+
+    // add texture uv
+    assert (m_vertexData.size() % 6 == 0);
+    std::vector<GLfloat> tmp;
+    for (size_t i = 0; i < m_vertexData.size(); i += 6) {
+        for (int j = 0; j < 6; j++)
+            tmp.push_back(m_vertexData[i + j]);
+        glm::vec4 point = glm::vec4(m_vertexData[i], m_vertexData[i + 1], m_vertexData[i + 2], 1.);
+        glm::vec2 uv = getCylinderTexture(point, m_image.width(), m_image.height(), m_repeatU, m_repeatV);
+        tmp.push_back(uv[0]);
+        tmp.push_back(uv[1]);
+    }
+    m_vertexData = tmp;
 
     buildVAO();
 }
@@ -113,4 +136,37 @@ std::vector<GLfloat> Cylinder::getFaceVertexData(int param1, int param2) {
     }
 
     return result;
+}
+
+glm::vec2 Cylinder::getCylinderTexture(const glm::vec4& point, int w, int h, float repeatU, float repeatV) {
+    // point is at object space
+    // find uv first
+    glm::vec2 uv;
+
+    // up
+    if (equal(point[1], 0.5))
+        uv = glm::vec2(point[0] + 0.5, point[2] + 0.5);
+    // down
+    else if (equal(point[1], -0.5))
+        uv = glm::vec2(point[0] + 0.5, -point[2] + 0.5);
+    else {
+        // body
+        uv[1] = -point[1] + 0.5;
+        float theta = atan2(point[2], point[0]);
+        if (theta < 0.)
+            uv[0] = -theta / (2 * M_PI);
+        else
+            uv[0] = 1. - theta / (2 * M_PI);
+    }
+    uv[0] = uv[0] < 0. ? 0. : uv[0];
+    uv[0] = uv[0] > 1. ? 1. : uv[0];
+    uv[1] = uv[1] < 0. ? 0. : uv[1];
+    uv[1] = uv[1] > 1. ? 1. : uv[1];
+    return uv;
+}
+
+void Cylinder::loadTextureImage() {
+    std::string path = ":/texture/images/cactus.jpg";
+    m_image.load(QString(path.c_str()));
+    //m_image = QGLWidget::convertToGLFormat(m_image);
 }
