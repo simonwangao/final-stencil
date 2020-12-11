@@ -1,4 +1,4 @@
-#include "mainwindow.h"
+﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "Databinding.h"
 #include "Settings.h"
@@ -91,7 +91,7 @@ void MainWindow::dataBind() {
     BIND(FloatBinding::bindSliderAndTextbox(
               ui->cameraNearSlider_2, ui->cameraNearTextbox_2, settings.cameraNear, 0.1, 50))
     BIND(FloatBinding::bindSliderAndTextbox(
-              ui->cameraFarSlider_2, ui->cameraFarTextbox_2, settings.cameraFar, 0.1, 50))
+              ui->cameraFarSlider_2, ui->cameraFarTextbox_2, settings.cameraFar, 0.1, 100))
     initializeCamtransFrustum(); // always set the viewing frustum to reasonable settings when we start the program
 
 
@@ -192,7 +192,7 @@ void MainWindow::resetSliders() {
 void MainWindow::initializeCamtransFrustum() {
     ui->cameraFovTextbox_2->setText(QString::number(55, 'f', 1));
     ui->cameraNearTextbox_2->setText(QString::number(.1, 'f', 1));
-    ui->cameraFarTextbox_2->setText(QString::number(50, 'f', 1));
+    ui->cameraFarTextbox_2->setText(QString::number(80, 'f', 1));
     update();
 }
 
