@@ -1874,7 +1874,13 @@ drawer.o: shapes/drawer.cpp shapes/drawer.h \
 		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/QObject \
 		../../../../Qt5.14.2/5.14.2/clang_64/lib/QtCore.framework/Headers/qobject.h \
 		lib/RGBA.h \
-		gl/GLDebug.h
+		gl/GLDebug.h \
+		glm/gtc/type_ptr.hpp \
+		glm/gtc/quaternion.hpp \
+		glm/gtc/constants.hpp \
+		glm/gtc/constants.inl \
+		glm/gtc/quaternion.inl \
+		glm/gtc/type_ptr.inl
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o drawer.o shapes/drawer.cpp
 
 Settings.o: ui/Settings.cpp ui/Settings.h \

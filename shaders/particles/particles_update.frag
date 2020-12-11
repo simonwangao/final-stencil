@@ -4,9 +4,6 @@ uniform float firstPass;
 uniform sampler2D prevPos;
 uniform sampler2D prevVel;
 uniform int numParticles;
-uniform mat4 p;
-uniform mat4 v;
-uniform mat4 m;
 
 // output from quad.vert
 in vec2 uv;
@@ -32,62 +29,70 @@ float hash(float n) { return fract(sin(n)*753.5453123); }
 // Helper functions to procedurally generate lifetimes and initial velocities
 // based on particle index
 float calculateLifetime(int index) {
-    const float MAX_LIFETIME = 5.0;
-    const float MIN_LIFETIME = 0.5;
+    const float MAX_LIFETIME = 4.0;
+    const float MIN_LIFETIME = 2.0;
     return MIN_LIFETIME + (MAX_LIFETIME - MIN_LIFETIME) * hash(index * 2349.2693);
 }
 
-vec2 calculateInitialVelocity(int index) {
+vec3 calculateInitialVelocity(int index) {
     float theta = PI * hash(index * 872.0238);
-    const float MAX_VEL = 0.3;
-    float velMag = MAX_VEL * hash(index * 98723.345);
-    return velMag * vec2(cos(theta), sin(theta));
+    const float MIN_VEL = 0.16;
+    const float MAX_VEL = 0.4;
+    float velMag = MIN_VEL + (MAX_VEL - MIN_VEL) * hash(index * 98723.345);
+    return velMag * vec3(cos(theta), sin(theta), cos(theta));
 }
 
+// set initial position to be the positions along the sides of the unit cylinder
+//vec3 calculateInitialPosition(int index) {
+//    float theta = PI * hash(index * 239.0943);
+
+//}
+
 vec4 initPosition(int index) {
-    const vec4 spawn = vec4(10, 0, 0, 1);
-    return vec4(vec3(spawn), calculateLifetime(index));
+    const vec3 spawn = vec3(0);
+    return vec4(spawn, calculateLifetime(index));
 }
 
 vec4 initVelocity(int index) {
-    return vec4(0.0, 0.0, 0.0, 0.0);
+    return vec4(calculateInitialVelocity(index), 0);
 }
 
-//vec4 updatePosition(int index) {
-//    // TODO [Task 16]
-//    // - sample prevPos and prevVel at uv
-//    // - xyz: pos + vel * dt
-//    // - w component is lifetime, so keep it from the previous position
-//    vec4 text = texture(prevPos, uv);
-//    vec4 velText = texture(prevVel, uv);
-//    return vec4(text.xyz + vec3(1.0, 0.0, 0.0), text.w);
-//}
+vec4 updatePosition(int index) {
+    // TODO [Task 16]
+    // - sample prevPos and prevVel at uv
+    // - xyz: pos + vel * dt
+    // - w component is lifetime, so keep it from the previous position
+    vec4 text = texture(prevPos, uv);
+    vec4 velText = texture(prevVel, uv);
+    return vec4(text.xyz + velText.xyz * dt, text.w);
+}
 
-//vec4 updateVelocity(int index) {
-//    const float G = 0.1;
-//    // TODO [Task 16]
-//    // - sample prevVel at uv
-//    // - only force is gravity in y direction.  Add G * dt.
-//    // - w component is age, so add dt
-//    vec4 text = texture(prevVel, uv);
-//    return vec4(text.x, text.y + G * dt, text.z, text.w + dt);
-//}
+vec4 updateVelocity(int index) {
+    const float G = 0.0;
+    const float C = .05;
+    // TODO [Task 16]
+    // - sample prevVel at uv
+    // - only force is gravity in y direction.  Add G * dt.
+    // - w component is age, so add dt
+    vec4 posText = texture(prevPos, uv);
+    vec4 velText = texture(prevVel, uv);
+    // apply a force back towards the center proportional to displacement
+    vec3 newVel = vec3(velText.x + (-posText.x * C), velText.y + G * dt, velText.z + (-posText.z * C));
+    return vec4(newVel, velText.w + dt);
+}
 
 void main() {
     int index = int(uv.x * numParticles);
     if (firstPass > 0.5) {
-        pos = vec4(0, 0, 0, 0);
-        vel = vec4(0, 0, 0, 0);
-     } else {
-        pos = texture(prevVel, uv) + vec4(1.0, 0.0, 0.0, 0.0);
-        vel = vec4(0, 0, 0, 0);
-    }
-//        vel = updateVelocity(index);
-//    }
+        pos = initPosition(index);
+        vel = initVelocity(index);
+    } else {
+        pos = updatePosition(index);
+        vel = updateVelocity(index);
 
-//        if (pos.w < vel.w) {
-//            pos = initPosition(index);
-//            vel = initVelocity(index);
-//        }
-//    }
+        if (pos.w < vel.w) {
+            pos = initPosition(index);
+            vel = initVelocity(index);
+        }
+    }
 }

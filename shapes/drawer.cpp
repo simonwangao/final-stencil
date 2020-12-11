@@ -117,20 +117,6 @@ void Drawer::render(SupportCanvas3D *context) {
     setClearColor();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // draw skybox
-    m_skyBoxShader->bind();
-    setSkyBoxUniforms(context);
-    initializeSkybox();
-    m_skyBoxShader->unbind();
-
-
-    m_phongShader->bind();
-    setTreeSceneUniforms(context);
-    setLights();
-    draw(m_data); // prime function here
-    glBindTexture(GL_TEXTURE_2D, 0);
-    m_phongShader->unbind();
-
     m_particleDrawProgram->bind();
     setParticleSceneUniforms(context);
     m_particleUpdateProgram->unbind();
@@ -140,6 +126,19 @@ void Drawer::render(SupportCanvas3D *context) {
         renderParticles(context);
         context->update();
     }
+
+    // draw skybox
+    m_skyBoxShader->bind();
+    setSkyBoxUniforms(context);
+    initializeSkybox();
+    m_skyBoxShader->unbind();
+
+    m_phongShader->bind();
+    setTreeSceneUniforms(context);
+    setLights();
+    draw(m_data); // prime function here
+    glBindTexture(GL_TEXTURE_2D, 0);
+    m_phongShader->unbind();
 }
 
 void Drawer::setSkyBoxUniforms(SupportCanvas3D *context) {
@@ -243,19 +242,23 @@ void Drawer::renderParticles(SupportCanvas3D * context) {
     // TODO [Task 14] Move the particles from prevFBO to nextFBO while updating them
     nextFBO->bind();
     m_particleUpdateProgram->bind();
+
     glActiveTexture(GL_TEXTURE0);
     prevFBO->getColorAttachment(0).bind();
+
     glActiveTexture(GL_TEXTURE1);
     prevFBO->getColorAttachment(1).bind();
 
     m_particleUpdateProgram->setUniform("firstPass", firstPass);
     m_particleUpdateProgram->setUniform("numParticles", m_numParticles);
-    m_particleUpdateProgram->setUniform("prevPos", 0);
-    m_particleUpdateProgram->setUniform("prevVel", 1);
+    glUniform1i(glGetUniformLocation(m_particleUpdateProgram->getID(), "prevPos"), 0);
+    glUniform1i(glGetUniformLocation(m_particleUpdateProgram->getID(), "prevVel"), 1);
     m_quad->draw();
 
     // TODO [Task 17] Draw the particles from nextFBO
     nextFBO->unbind();
+    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
 
     m_particleDrawProgram->bind();
     setParticleViewport(context);
@@ -266,11 +269,11 @@ void Drawer::renderParticles(SupportCanvas3D * context) {
     nextFBO->getColorAttachment(1).bind();
 
     m_particleDrawProgram->setUniform("numParticles", m_numParticles);
-    m_particleDrawProgram->setUniform("pos", 0);
-    m_particleDrawProgram->setUniform("vel", 1);
+    glUniform1i(glGetUniformLocation(m_particleDrawProgram->getID(), "pos"), 0);
+    glUniform1i(glGetUniformLocation(m_particleDrawProgram->getID(), "vel"), 1);
 
     glBindVertexArray(m_particlesVAO);
-    glDrawArrays(GL_TRIANGLES, 0, m_numParticles);
+    glDrawArrays(GL_TRIANGLES, 0, 3 * m_numParticles);
     glBindVertexArray(0);
 
     m_firstPass = false;
