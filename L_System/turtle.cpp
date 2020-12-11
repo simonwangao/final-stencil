@@ -152,7 +152,7 @@ void Turtle::parse(const std::vector<std::pair<std::string, float>>& str) {
         if (command == F) {
             // move forward
             // new segment, need to put in the list
-            SegmentData data;
+            SegmentData data = SegmentData();
             data.startLoc = m_loc;
             data.length = pair.second;
             data.width = m_width;
