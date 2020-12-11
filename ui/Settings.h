@@ -151,6 +151,7 @@ struct Settings {
     bool render;
 
     bool burnTree; // Enable or disable burning of trees
+    int numParticles;
 
 
 };

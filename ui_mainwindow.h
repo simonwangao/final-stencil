@@ -64,6 +64,9 @@ public:
     QSlider *cameraNearSlider_2;
     QSlider *cameraFarSlider_2;
     QPushButton *resetSliders_2;
+    QLabel *ParticlesLabel;
+    QSlider *NumParticlesSlider;
+    QLineEdit *NumParticlesInput;
     QMenuBar *menuBar;
 
     void setupUi(QMainWindow *MainWindow)
@@ -225,6 +228,16 @@ public:
         resetSliders_2 = new QPushButton(burningDockContents);
         resetSliders_2->setObjectName(QString::fromUtf8("resetSliders_2"));
         resetSliders_2->setGeometry(QRect(0, 503, 242, 32));
+        ParticlesLabel = new QLabel(burningDockContents);
+        ParticlesLabel->setObjectName(QString::fromUtf8("ParticlesLabel"));
+        ParticlesLabel->setGeometry(QRect(10, 310, 61, 16));
+        NumParticlesSlider = new QSlider(burningDockContents);
+        NumParticlesSlider->setObjectName(QString::fromUtf8("NumParticlesSlider"));
+        NumParticlesSlider->setGeometry(QRect(110, 310, 160, 22));
+        NumParticlesSlider->setOrientation(Qt::Horizontal);
+        NumParticlesInput = new QLineEdit(burningDockContents);
+        NumParticlesInput->setObjectName(QString::fromUtf8("NumParticlesInput"));
+        NumParticlesInput->setGeometry(QRect(270, 310, 61, 21));
         BurningTreeDock->setWidget(burningDockContents);
         MainWindow->addDockWidget(Qt::LeftDockWidgetArea, BurningTreeDock);
         menuBar = new QMenuBar(MainWindow);
@@ -254,6 +267,7 @@ public:
         cameraNearLabel_2->setText(QCoreApplication::translate("MainWindow", "Near", nullptr));
         cameraFarLabel_2->setText(QCoreApplication::translate("MainWindow", "Far", nullptr));
         resetSliders_2->setText(QCoreApplication::translate("MainWindow", "Reset FOV / Near / Far", nullptr));
+        ParticlesLabel->setText(QCoreApplication::translate("MainWindow", "Particles", nullptr));
     } // retranslateUi
 
 };
