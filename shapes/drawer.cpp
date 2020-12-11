@@ -186,7 +186,7 @@ void Drawer::draw(const std::vector<SegmentData>& segmentData) {
         // set up the material here ?
         CS123SceneMaterial material;
 
-        material.cAmbient = glm::vec4(0.3, 0.3, 0.2, 1.);
+        material.cAmbient = glm::vec4(0.12, 0.28, 0.08, 1.);
         material.cDiffuse = glm::vec4(1., 1., 1., 1.);
         material.cSpecular = glm::vec4(0., 0., 0., 1.);
         material.cAmbient *= m_global_data.ka;
