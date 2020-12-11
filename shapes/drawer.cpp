@@ -41,7 +41,7 @@ void Drawer::setData(const std::vector<SegmentData>& data) {
 void Drawer::initializeParticleGenerators(){
     std::cout << m_data.size() << std::endl;
     for (unsigned long i = 0; i < m_data.size(); i++) {
-        m_data[i].particleGenerator = new ParticleGenerator(m_data[i].matrix);
+        m_data[i].particleGenerator = new ParticleGenerator(m_data[i].matrix, m_numParticles);
     }
 }
 
@@ -114,7 +114,7 @@ void Drawer::render(SupportCanvas3D *context) {
     setClearColor();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    // draw skybox
+//    // draw skybox
     m_skyBoxShader->bind();
     setSkyBoxUniforms(context);
     initializeSkybox();
