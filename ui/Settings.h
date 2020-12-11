@@ -142,7 +142,16 @@ struct Settings {
     int currentTab;
 
     // Final
+    int size;
+    float branchingAngle;
+    float branchingLen;
+    float stemWidth;
+    float branchWidth;
+    bool randomCactus;
+
+
     bool burnTree; // Enable or disable burning of trees
+
 
 };
 

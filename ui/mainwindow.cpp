@@ -88,6 +88,12 @@ void MainWindow::dataBind() {
 }
 
     // Burning dock
+    BIND(IntBinding::bindSliderAndTextbox(ui->SizeControl, ui->SizeInput, settings.size, 0, 5))
+    BIND(FloatBinding::bindSliderAndTextbox(ui->AngleControl, ui->AngleInput, settings.branchingAngle, 0, 90))
+    BIND(FloatBinding::bindSliderAndTextbox(ui->LengthControl, ui->LenInput, settings.branchingLen, 0, 4))
+    BIND(FloatBinding::bindSliderAndTextbox(ui->StemWidthControl, ui->StemInput, settings.stemWidth, 0, 2))
+    BIND(FloatBinding::bindSliderAndTextbox(ui->BranchWidthControl, ui->BranchInput,settings.branchWidth, 0, 1))
+    BIND(BoolBinding::bindCheckbox(ui->RandomCactus, settings.randomCactus))
     BIND(BoolBinding::bindCheckbox(ui->BurningButton, settings.burnTree))
 
 
