@@ -14,6 +14,15 @@ Turtle::Turtle() {
 Turtle::~Turtle(){
 }
 
+void Turtle::setParameters(int s, float ang, float len, float stem, float branch) {
+    random = false;
+    size = s;
+    branchingAngle = ang;
+    branchingLen = len;
+    stemWidth = stem;
+    branchWidth = branch;
+}
+
 void Turtle::setUpRules() {
 
     m_charToBranch = createBranchTypes();
@@ -38,6 +47,22 @@ string Turtle::createTreePattern() {
 vector<pair<string, float>> Turtle::interpretChar(char pred, vector<char> succs) {
     vector<pair<string, float>> output;
     BranchFeats vals = m_charToBranch[pred];
+
+    int num_layers = l_t;
+    if (!random) {
+        num_layers = size;
+        if (pred == 'b') {
+            m_charToBranch[pred].l = branchingLen;
+            m_charToBranch[pred].w = branchWidth;
+            m_charToBranch[pred].alphaX = branchingAngle;
+            m_charToBranch[pred].alphaY = branchingAngle;
+            m_charToBranch[pred].alphaZ = branchingAngle;
+        } else {
+            m_charToBranch[pred].w = stemWidth;
+        }
+    }
+
+
     output.push_back({plus, vals.alphaY});
     output.push_back({left, vals.alphaX});
     output.push_back({down, vals.alphaZ});
@@ -67,12 +92,7 @@ vector<pair<string, float>> Turtle::interpretChar(char pred, vector<char> succs)
 
     if (pred == 'b') {
 
-       float rotate_val = ((floorf((float) l_t / 2.0f) + 1.0f) / l_t) * 360.f;
-       /*std::cout << rotate_val << std::endl;
-       m_charToBranch[pred].alphaX += rotate_val;
-       m_charToBranch[pred].alphaZ += rotate_val;*/
-
-        //float rotate_val = 360.f / (float) l_t;
+        float rotate_val = ((floorf((float) num_layers / 2.0f) + 1.0f) / num_layers) * 360.f;
 
         glm::mat3 rotation = glm::mat3(glm::rotate(glm::radians(rotate_val), glm::vec3(0, 1, 0)));
         glm::vec3 rotated = rotation * glm::vec3(vals.alphaX, vals.alphaY, vals.alphaZ);

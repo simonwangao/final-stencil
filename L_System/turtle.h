@@ -39,6 +39,8 @@ public:
     Turtle();
     ~Turtle();
 
+    void setParameters(int s, float ang, float len, float stem, float branch);
+
     void setUpRules();
     string createTreePattern();
 
@@ -57,6 +59,14 @@ private:
     int m_depth;            // depth of the branch
 
     string m_initial;
+
+    bool random = true;
+
+    int size;
+    float branchingAngle;
+    float branchingLen;
+    float stemWidth;
+    float branchWidth;
 
     // map of character to branch characteristics
     unordered_map<char, BranchFeats> m_charToBranch;

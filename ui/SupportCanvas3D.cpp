@@ -79,6 +79,13 @@ void SupportCanvas3D::makeRandomCactus() {
 
 }
 
+void SupportCanvas3D::makeCactusParameters(int size, float branchingAngle, float branchingLen, float stemWidth, float branchWidth) {
+    Turtle newTree = Turtle();
+    newTree.setParameters(size, branchingAngle, branchingLen, stemWidth, branchWidth);
+    newTree.parse(newTree.interpretString());
+    ((Drawer*) m_currentScene)->setData(newTree.getSegmentData());
+}
+
 void SupportCanvas3D::initializeGlew() {
     glewExperimental = GL_TRUE;
     GLenum err = glewInit();
@@ -134,9 +141,12 @@ void SupportCanvas3D::settingsChanged() {
 
             if (randomCactus) {
                 makeRandomCactus();
+                update();
             } else {
-                m_currentScene->settingsChanged();
+                makeCactusParameters(settings.size, settings.branchingAngle, settings.branchingLen, settings.stemWidth, settings.branchWidth);
+                update();
             }
+            m_currentScene->settingsChanged();
         }
     }
     update(); /* repaint the scene */

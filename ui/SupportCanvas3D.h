@@ -94,6 +94,7 @@ protected:
 private:
 
     void makeRandomCactus();
+    void makeCactusParameters(int size, float branchingAngle, float branchingLen, float stemWidth, float branchWidth);
     void initializeGlew();
     void initializeOpenGLSettings();
     void initializeScenes();

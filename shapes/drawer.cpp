@@ -68,7 +68,6 @@ void Drawer::loadSkyBoxShader() {
     // load images (y seems to be upside down here)
     m_textures_faces.push_back(":/skybox/images/posx.jpg");
     m_textures_faces.push_back(":/skybox/images/negx.jpg");
-    //m_textures_faces.push_back(":/skybox/images/posy.jpg");
     m_textures_faces.push_back(":/skybox/images/negy.jpg");
     m_textures_faces.push_back(":/skybox/images/posy.jpg");
     m_textures_faces.push_back(":/skybox/images/posz.jpg");
@@ -346,6 +345,8 @@ unsigned int Drawer::loadCubemap(const vector<std::string>& faces) {
 }
 
 void Drawer::settingsChanged() {
+    // reset any parameters used in drawing things here
     m_firstPass = true;
-
+    m_evenPass = true;
+    m_numParticles = 500;
 }
