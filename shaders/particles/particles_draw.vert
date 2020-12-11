@@ -18,16 +18,16 @@ const vec4 TRI_VERTS[NUM_VERTICES_PER_PARTICLE] = vec4[NUM_VERTICES_PER_PARTICLE
     // vec4(p1.x, p1.y, 0, 0),
     // vec4(p2.x, p2.y, 0, 0),
     // vec4(p3.x, p3.y, 0, 0)
-    vec4(0, 2, 0, 0), vec4(0, 0, 0, 0), vec4(2, 0, 0, 0)
+    vec4(0, 4, 0, 0), vec4(0, 0, 0, 0), vec4(4, 0, 0, 0)
 );
 
-vec3 pickRainbowColor(float x, float age) {
+vec3 pickRainbowColor(float lifetime, float age) {
 //    return HSLtoRGB(24.0 / 360.0, max(0.0, (1 - y)), 0.5);
-    if (age <= 0.2) {
+    if (age / lifetime <= 0.2) {
         return vec3(1.0, 1.0, 1.0); //white
-    } else if (age < 1.2) {
+    } else if (age / lifetime < 1.2) {
         return vec3(0.941, 0.316, 0.234); //red
-    } else if (age < 2.6) {
+    } else if (age / lifetime < 2.6) {
         return vec3(.976, .585, .179); //orange
     } else if (age < 3.0) {
         return vec3(1.0, .903, .179); //yellow
@@ -54,7 +54,7 @@ void main() {
                     min(1.0, abs(posTime.w - velAge.w) / (0.1 * posTime.w)));
 
     // Calculate color based on particleID
-    color = pickRainbowColor(float(particleID)/numParticles, velAge.w);
+    color = pickRainbowColor(posTime.w, velAge.w);
 
     // the offset to the points of the triangle
     vec4 triPos = diameter * TRI_VERTS[triID];
