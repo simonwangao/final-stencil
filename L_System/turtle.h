@@ -24,6 +24,7 @@ struct SegmentData {
     glm::mat4 matrix;       // the matrix to transfer the original primitive
     int depth;              // depth of the branch
     ParticleGenerator particleGenerator; // particle generator for this segment of the tree
+    glm::mat4 m_mat;
 };
 
 struct StackData {

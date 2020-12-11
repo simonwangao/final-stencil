@@ -65,11 +65,13 @@ private:
     std::unique_ptr<OpenGLShape> m_skybox_cube;
     std::vector<std::string> m_textures_faces;
     unsigned int m_cubemapTexture;
+    std::unique_ptr<Shape> m_shapePtr;
 
     static std::vector<GLfloat> vertexTimesMatrix(const glm::mat4& matrix, const std::vector<GLfloat>& vertexData);
     void loadPhongShader();
     void loadParticleUpdateShader();
     void loadParticleDrawShader();
+    void initializeParticleGenerators();
     void loadSkyBoxShader();
     void createLights();
     void setTreeSceneUniforms(SupportCanvas3D *context);

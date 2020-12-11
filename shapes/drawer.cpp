@@ -9,12 +9,13 @@
 using namespace CS123::GL;
 
 Drawer::Drawer() :
-    m_numParticles(16384), m_evenPass(true), m_firstPass(true),
+    m_numParticles(500), m_evenPass(true), m_firstPass(true),
     m_particlesFBO1(nullptr), m_particlesFBO2(nullptr)
 {
     loadParticleUpdateShader();
     loadParticleDrawShader();
     initializeParticleShaders();
+    initializeParticleGenerators();
     loadPhongShader();
     loadSkyBoxShader();
     createLights();
@@ -25,6 +26,7 @@ Drawer::Drawer() :
     m_global_data.ks = 0.5;
 
     m_count = 0;
+    m_shapePtr = std::make_unique<Cylinder>(PARAM1, PARAM2);
 }
 
 
@@ -33,6 +35,10 @@ Drawer::~Drawer() {
 
 void Drawer::setData(const std::vector<SegmentData>& data) {
     m_data = data;
+}
+
+void Drawer::initializeParticleGenerators() {
+
 }
 
 void Drawer::loadPhongShader() {
@@ -171,9 +177,6 @@ void Drawer::setLights()
 void Drawer::draw(const std::vector<SegmentData>& segmentData) {
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
-    // create the tessellation of the cylinder
-    std::unique_ptr<Shape> shapePtr = std::make_unique<Cylinder>(PARAM1, PARAM2);
-
     for (SegmentData data : segmentData) {
         // already finished the rotation and translation,
         // need to do the scaling here
@@ -199,17 +202,17 @@ void Drawer::draw(const std::vector<SegmentData>& segmentData) {
         m_phongShader->applyMaterial(material);
 
         // set as model matrix (transforming on GPU)
-        m_phongShader->setUniform("m", mat);
+        m_phongShader->setUniform("m", data.m_mat);
 
-        shapePtr->draw();
+        m_shapePtr->draw();
     }
 
     return ;
 }
 
 void Drawer::initializeParticleShaders() {
-
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
 
     std::vector<GLfloat> quadData;
     quadData = {-1, 1, 0, 0, 1, \
@@ -260,6 +263,8 @@ void Drawer::renderParticles(SupportCanvas3D * context) {
     glClear(GL_COLOR_BUFFER_BIT);
     glClear(GL_DEPTH_BUFFER_BIT);
 
+    glBlendFunc(GL_ONE, GL_ONE);
+
     m_particleDrawProgram->bind();
     setParticleViewport(context);
 
@@ -275,6 +280,8 @@ void Drawer::renderParticles(SupportCanvas3D * context) {
     glBindVertexArray(m_particlesVAO);
     glDrawArrays(GL_TRIANGLES, 0, 3 * m_numParticles);
     glBindVertexArray(0);
+
+    glBlendFunc(GL_ONE, GL_ZERO);
 
     m_firstPass = false;
     m_evenPass = !m_evenPass;
